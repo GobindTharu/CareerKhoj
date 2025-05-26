@@ -18,13 +18,13 @@ const Home = () => {
               to="/resume"
               className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
             >
-              Build Your Resume
+              Build Your Resume 
             </Link>
             <Link
               to="/jobs"
               className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition"
             >
-              Find Jobs
+              Find Jobs 
             </Link>
           </div>
         </div>
@@ -34,7 +34,7 @@ const Home = () => {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-800 text-center mb-12">
-            Why Choose CareerKhoj?
+            Why Choose CareerKhoj ?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center p-6 bg-gray-50 rounded-lg shadow-md">
