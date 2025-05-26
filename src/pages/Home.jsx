@@ -1,3 +1,4 @@
+// Home.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +16,7 @@ const Home = () => {
           </p>
           <div className="flex justify-center space-x-4">
             <Link
-              to="/src/components/ResumeForm.jsx"
+              to="/simple-form"
               className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
             >
               Build Your Resume
@@ -38,7 +39,7 @@ const Home = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center p-6 bg-gray-50 rounded-lg shadow-md">
-              <div className="text-4 Здравствуйте! Чем могу помочь?xl mb-4">📄</div>
+              <div className="text-4xl mb-4">📄</div>
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Smart Resume Builder</h3>
               <p className="text-gray-600">
                 Create professional resumes with intuitive templates and download them as PDFs.
@@ -117,7 +118,7 @@ const Home = () => {
                 Create a resume that showcases your skills and experience with easy-to-use tools, downloadable as a PDF, and shareable on LinkedIn.
               </p>
               <Link
-                to="/.components/ResumeBuilder"
+                to="/builder"
                 className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
               >
                 Start Building

@@ -1,32 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const ResumeForm = () => {
+const ResumeForm = (props) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    education: '',  
-    skills: '',
-    experience: '',
+    name: "",
+    email: "",
+    education: "",
+    skills: "",
+    experience: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleNext = () => {
+  const handleNext = (e) => {
+    e.preventDefault(); // Prevent form submission on Next button click
     setStep((prev) => Math.min(prev + 1, 4));
   };
 
-  const handleBack = () => {
+  const handleBack = (e) => {
+    e.preventDefault(); // Prevent form submission on Back button click
     setStep((prev) => Math.max(prev - 1, 1));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Placeholder for backend integration
-    alert('Resume data saved! Ready to generate PDF.');
-    console.log('Form Data:', formData);
+    console.log("Final form data:", formData);
+    alert("Resume data saved! Redirecting to template selection...");
+    if (props.onSubmit) {
+      props.onSubmit(formData); // Call parent handler if exists
+    }
+    navigate("/choose-template"); // Redirect to ChooseTemplate page
+  };
+
+  // Prevent Enter key from submitting form on steps 1-3
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && step < 4) {
+      e.preventDefault();
+    }
   };
 
   const renderStep = () => {
@@ -61,7 +76,7 @@ const ResumeForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 className="mt-1 p-3 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                placeholder="e.g., susan.gautam@example.com"
+                placeholder="e.g., susangautam@example.com"
                 required
               />
             </div>
@@ -133,18 +148,18 @@ const ResumeForm = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="max-w-3xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
       {/* Progress Indicator */}
-      <div className="flex justify-between mb-6">
-        {['Personal', 'Education', 'Skills', 'Experience'].map((label, index) => (
+      <div className="flex justify-between mb-8">
+        {["Personal", "Education", "Skills", "Experience"].map((label, index) => (
           <div key={index} className="flex-1 text-center">
             <div
               className={`w-10 h-10 mx-auto rounded-full flex items-center justify-center text-sm font-medium transition ${
                 step > index + 1
-                  ? 'bg-blue-600 text-white'
+                  ? "bg-blue-600 text-white"
                   : step === index + 1
-                  ? 'bg-blue-400 text-white'
-                  : 'bg-gray-200 text-gray-600'
+                  ? "bg-blue-400 text-white"
+                  : "bg-gray-200 text-gray-600"
               }`}
             >
               {index + 1}
@@ -155,7 +170,7 @@ const ResumeForm = () => {
       </div>
 
       {/* Form Content */}
-      <form onSubmit={step === 4 ? handleSubmit : (e) => e.preventDefault()} className="space-y-6">
+      <form onSubmit={handleSubmit} onKeyDown={handleKeyDown} className="space-y-6">
         {renderStep()}
         <div className="flex justify-between mt-8">
           <button
@@ -163,17 +178,17 @@ const ResumeForm = () => {
             onClick={handleBack}
             disabled={step === 1}
             className={`px-6 py-2 rounded-lg font-medium transition ${
-              step === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'
+              step === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200 hover:bg-gray-300"
             }`}
           >
             Back
           </button>
           <button
-            type={step === 4 ? 'submit' : 'button'}
+            type={step === 4 ? "submit" : "button"}
             onClick={step < 4 ? handleNext : undefined}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
           >
-            {step === 4 ? 'Save & Generate Resume' : 'Next'}
+            {step === 4 ? "Save & Continue" : "Next"}
           </button>
         </div>
       </form>
