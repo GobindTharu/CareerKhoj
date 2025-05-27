@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 
 export const JobSearchForm = () => (
   <div className="mt-8 bg-gray-100 text-black rounded-lg shadow-md w-full max-w-4xl mx-auto p-4">
