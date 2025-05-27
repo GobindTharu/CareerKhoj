@@ -20,7 +20,7 @@ export const JobCategories = () => {
   
   const CategoryCard = ({ title }) => (
     <div
-      className={`md:relative top-30 bg-gray-100 text-black text-center border rounded-lg p-9 shadow-sm `}
+      className={`md:relative top-32 bg-gray-100 text-black text-center border rounded-lg p-9 shadow-sm `}
     >
       <div className="text-2xl mb-2">📁</div>
       <h3 className="font-semibold text-sm">{title}</h3>

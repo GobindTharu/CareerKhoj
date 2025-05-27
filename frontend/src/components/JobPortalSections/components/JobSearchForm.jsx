@@ -23,7 +23,7 @@ export const JobSearchForm = () => (
       </button>
     </div>
     <div className="flex justify-center mt-4 gap-4">
-      <button className="border-1 border-gray-500  md:px-6 md:py-2 rounded-lg font-semibold hover:bg-gray-300 hover:text-blue-600 transition">
+      <button className="border-1 border-gray-500  px-10 py-2 rounded-lg font-semibold hover:bg-gray-300 hover:text-blue-600 transition">
         Find a Job
       </button>
       <button className="text-sm font-semibold bg-blue-700 text-amber-50 px-4 py-1 rounded">
