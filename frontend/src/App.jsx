@@ -2,10 +2,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "./Pages/Home/Dashboard";
 import ResumeBuilder from "./Pages/Home/ResumeBuilder";
-import ResumeForm from "./components/ResumeTempletes/ResumeForm";
-import ChooseTemplate from "./components/ResumeTempletes/ChooseTemplate";
+import ResumeForm from "./components/ResumeSections/ResumeTempletes/ResumeForm";
+import ChooseTemplate from "./components/ResumeSections/ResumeTempletes/ChooseTemplate";
+import HomePage from "./Pages/HomePage";
 
 const ResumeFormWrapper = () => {
   const [submittedData, setSubmittedData] = React.useState(null);
@@ -41,7 +41,7 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gray-100">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/choose-template" element={<ChooseTemplate />} />
           {/* Use the wrapper here so your onSubmit works */}
           <Route path="/simple-form" element={<ResumeFormWrapper />} />

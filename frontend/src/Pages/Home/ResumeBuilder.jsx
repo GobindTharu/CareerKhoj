@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import ResumeForm from "../../components/ResumeTempletes/ResumeForm";
-import ResumeTemplate1 from "../../components/ResumeTempletes/ResumeTemplate1";
-import ResumeTemplate2 from "../../components/ResumeTempletes/ResumeTemplate2";
-import ResumeTemplate3 from "../../components/ResumeTempletes/ResumeTemplate3";
-import ResumeTemplate4 from "../../components/ResumeTempletes/ResumeTemplate4";
-import ResumeTemplate5 from "../../components/ResumeTempletes/ResumeTemplate5";
+import ResumeForm from "../../components/ResumeSections/ResumeTempletes/ResumeForm";
+import ResumeTemplate1 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate1";
+import ResumeTemplate2 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate2";
+import ResumeTemplate3 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate3";
+import ResumeTemplate4 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate4";
+import ResumeTemplate5 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate5";
 
 const ResumeBuilder = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);

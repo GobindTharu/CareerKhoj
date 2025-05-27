@@ -2,16 +2,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const Resume = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-400 text-white py-20">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            CareerKhoj: Your Personal Career Launchpad
-          </h1>
-          <p className="text-lg md:text-xl mb-8">
+          <p className="text-lg md:text-xl mb-8 pt-22">
             Build professional resumes, explore job opportunities, and showcase your portfolio — all in one place.
           </p>
           <div className="flex justify-center space-x-4">
@@ -21,12 +18,7 @@ const Home = () => {
             >
               Build Your Resume
             </Link>
-            <Link
-              to="/jobs"
-              className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition"
-            >
-              Find Jobs
-            </Link>
+            
           </div>
         </div>
       </section>
@@ -131,4 +123,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Resume;
