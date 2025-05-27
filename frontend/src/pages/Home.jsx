@@ -2,8 +2,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 const Home = () => {
   return (
+
+
     <div className="min-h-screen bg-gray-100">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-400 text-white py-20">
@@ -11,6 +14,7 @@ const Home = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             CareerKhoj: Your Personal Career Launchpad
           </h1>
+          
           <p className="text-lg md:text-xl mb-8">
             Build professional resumes, explore job opportunities, and showcase your portfolio — all in one place.
           </p>
