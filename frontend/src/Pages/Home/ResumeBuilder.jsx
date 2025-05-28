@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import ResumeForm from '../components/ResumeForm';
-import ResumeTemplate1 from '../components/ResumeTemplate1';
-import ResumeTemplate2 from '../components/ResumeTemplate2';
-import ResumeTemplate3 from '../components/ResumeTemplate3';
-import ResumeTemplate4 from '../components/ResumeTemplate4';
-import ResumeTemplate5 from '../components/ResumeTemplate5';
+import React, { useState } from "react";
+import ResumeForm from "../../components/ResumeSections/ResumeTempletes/ResumeForm";
+import ResumeTemplate1 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate1";
+import ResumeTemplate2 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate2";
+import ResumeTemplate3 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate3";
+import ResumeTemplate4 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate4";
+import ResumeTemplate5 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate5";
 
 const ResumeBuilder = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState(null);
-  const [selectedTemplate, setSelectedTemplate] = useState('1');
+  const [selectedTemplate, setSelectedTemplate] = useState("1");
 
   const handleSubmit = (data) => {
-    console.log('Received form data in resume.jsx:', data); // Debug log
+    console.log("Received form data in resume.jsx:", data); // Debug log
     setIsLoading(true);
     // Simulate async submission (e.g., API call)
     setTimeout(() => {
@@ -29,11 +29,11 @@ const ResumeBuilder = () => {
   };
 
   const templates = {
-    '1': ResumeTemplate1,
-    '2': ResumeTemplate2,
-    '3': ResumeTemplate3,
-    '4': ResumeTemplate4,
-    '5': ResumeTemplate5,
+    1: ResumeTemplate1,
+    2: ResumeTemplate2,
+    3: ResumeTemplate3,
+    4: ResumeTemplate4,
+    5: ResumeTemplate5,
   };
 
   const SelectedTemplate = templates[selectedTemplate];
@@ -45,16 +45,21 @@ const ResumeBuilder = () => {
           Build Your Professional Resume
         </h2>
         <p className="text-lg text-gray-600 text-center mb-8">
-          Create a standout resume in minutes with our easy-to-use, guided form. Choose a template after submitting your details.
+          Create a standout resume in minutes with our easy-to-use, guided form.
+          Choose a template after submitting your details.
         </p>
         {isLoading ? (
           <div className="text-center py-8">
-            <p className="text-lg text-gray-600">Generating your resume preview...</p>
+            <p className="text-lg text-gray-600">
+              Generating your resume preview...
+            </p>
           </div>
         ) : isSubmitted && formData ? (
           <div className="bg-white shadow-lg rounded-lg p-8">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-semibold text-gray-800">Choose a Resume Template</h3>
+              <h3 className="text-xl font-semibold text-gray-800">
+                Choose a Resume Template
+              </h3>
               <div className="flex space-x-4">
                 <select
                   value={selectedTemplate}
@@ -74,7 +79,7 @@ const ResumeBuilder = () => {
                   Back to Form
                 </button>
                 <button
-                  onClick={() => alert('PDF generation placeholder')}
+                  onClick={() => alert("PDF generation placeholder")}
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
                 >
                   Download PDF
@@ -90,7 +95,9 @@ const ResumeBuilder = () => {
         )}
         {isSubmitted && !formData && (
           <div className="text-center py-8 text-red-600">
-            <p>Error: No data received. Please try submitting the form again.</p>
+            <p>
+              Error: No data received. Please try submitting the form again.
+            </p>
             <button
               onClick={handleEdit}
               className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
