@@ -1,8 +1,10 @@
 export const Stats = () => (
-  <div className="flex flex-wrap justify-center items-center gap-6 mt-8 mb-10">
+  <div className="flex flex-wrap justify-center items-center gap-6 mt-4 mb-10">
     <StatItem label="Countries" value="10+" />
-    <StatItem label="Companies" value="100+" />
-    <StatItem label="Active Employees" value="100K" />
+    <StatItem label="Companies" value="50+" />
+    <StatItem label="Recruiters" value="100+" />
+    <StatItem label="Jobs" value="50K+" />
+    <StatItem label="Active Employees" value="1000K+" />
   </div>
 );
 

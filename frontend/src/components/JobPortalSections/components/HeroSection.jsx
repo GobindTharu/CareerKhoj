@@ -7,7 +7,7 @@ import Resume from "../../../Pages/Home/Dashboard";
 
 const HeroSection = () => (
   <>
-    <div className=" bg-gradient-to-r from-indigo-700 to-purple-600 text-white py-16 px-8 text-center">
+    <div className=" flex flex-col gap-2 bg-gradient-to-r from-indigo-700 to-purple-600 text-white pt-22 px-8 text-center">
       <p className="text-sm mb-2">
         Find Job, Employment, and Career Opportunities
       </p>
