@@ -19,7 +19,7 @@ A full-stack web application built with the **MERN stack**: MongoDB, Express.js,
 **Frontend:**
 - React.js
 - Axios / Fetch API
-- Tailwind CSS / Bootstrap / Material UI
+- Tailwind CSS
 
 **Backend:**
 - Node.js
