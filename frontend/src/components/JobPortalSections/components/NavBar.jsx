@@ -8,6 +8,7 @@ import clsx from "clsx";
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const toggleRef = useRef(null);
 
   const menuList = [
     { name: "Home", link: "/" },
@@ -17,9 +18,15 @@ const NavBar = () => {
     { name: "Contact Us", link: "/contact-us" },
   ];
 
+  // Close menu on outside click (except toggle button or menu)
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        toggleRef.current &&
+        !toggleRef.current.contains(event.target)
+      ) {
         setIsMenuOpen(false);
       }
     };
@@ -38,6 +45,10 @@ const NavBar = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const handleToggle = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 border-b border-gray-200 shadow-sm">
@@ -60,10 +71,10 @@ const NavBar = () => {
           <LoginButton />
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <div className="lg:hidden">
+        {/* Single Toggle Button */}
+        <div className="lg:hidden" ref={toggleRef}>
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={handleToggle}
             className="focus:outline-none"
             aria-label="Toggle Menu"
             aria-expanded={isMenuOpen}
@@ -74,16 +85,21 @@ const NavBar = () => {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={
-                  isMenuOpen
-                    ? "M6 18L18 6M6 6l12 12"
-                    : "M4 6h16M4 12h16M4 18h16"
-                }
-              />
+              {isMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
             </svg>
           </button>
         </div>
