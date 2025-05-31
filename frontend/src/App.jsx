@@ -8,6 +8,8 @@ import Login from "./Pages/Auth/Login";
 import SignUp from "./Pages/Auth/SignUp";
 import ResumeBuilder from "./Pages/Home/ResumeBuilder";
 import HomePage from "./Pages/HomePage";
+import AuthGuard from "./guard/AuthGuard";
+import GuestGuard from "./guard/GuestGuard";
 
 const ResumeFormWrapper = () => {
   const [submittedData, setSubmittedData] = React.useState(null);
@@ -40,19 +42,59 @@ const ResumeFormWrapper = () => {
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-100">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/choose-template" element={<ChooseTemplate />} />
-          {/* Use the wrapper here so your onSubmit works */}
-          <Route path="/simple-form" element={<ResumeFormWrapper />} />
-          <Route path="/builder" element={<ResumeBuilder />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="min-h-screen bg-gray-100">
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AuthGuard>
+              <HomePage />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <GuestGuard>
+              <Login />
+            </GuestGuard>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <AuthGuard>
+              <SignUp />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/choose-template"
+          element={
+            <AuthGuard>
+              <ChooseTemplate />
+            </AuthGuard>
+          }
+        />
+        {/* Use the wrapper here so your onSubmit works */}
+        <Route
+          path="/simple-form"
+          element={
+            <AuthGuard>
+              <ResumeFormWrapper />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/resume-builder"
+          element={
+            <AuthGuard>
+              <ResumeBuilder />
+            </AuthGuard>
+          }
+        />
+      </Routes>
+    </div>
   );
 }
 

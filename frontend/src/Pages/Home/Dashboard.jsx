@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Resume = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-200">
       {/* Hero Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -24,7 +24,7 @@ const Resume = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-800 text-center mb-12">
             Why Choose CareerKhoj?
@@ -110,7 +110,7 @@ const Resume = () => {
                 Create a resume that showcases your skills and experience with easy-to-use tools, downloadable as a PDF, and shareable on LinkedIn.
               </p>
               <Link
-                to="/builder"
+                to="/resume-builder"
                 className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
               >
                 Start Building

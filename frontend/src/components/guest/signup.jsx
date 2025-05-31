@@ -6,6 +6,21 @@ import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
+
+  const { mutate } = useMutation({
+    mutationKey: ["signup-user"],
+    mutationFn: async (values) => {
+      return await axiosInstance.post("/user/register", values);
+    },
+    onSuccess: () => {
+      toast.success("Register Successful");
+      navigate("/login");
+    },
+    onError: () => {
+      toast.error("Failed to Register");
+    },
+  });
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -17,8 +32,6 @@ const SignupForm = () => {
     verificationMethod: "email",
     agreeToTerms: false,
   });
-
-  const [errors, setErrors] = useState({});
 
   const validate = () => {
     const newErrors = {};
@@ -46,20 +59,6 @@ const SignupForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const { mutate } = useMutation({
-    mutationKey: ["signup-user"],
-    mutationFn: async (values) => {
-      return await axiosInstance.post("/user/signup", values);
-    },
-    onSuccess: () => {
-      toast.success("Register Successful");
-      navigate("/login");
-    },
-    onError: () => {
-      toast.error("Failed to Register");
-    },
-  });
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -86,13 +85,12 @@ const SignupForm = () => {
         className="bg-gradient-to-r from-indigo-200 to-purple-200 w-full max-w-lg bg-white p-8 rounded-2xl shadow-xl space-y-6"
       >
         {/* LOgo Here Also */}
-        <div className="flex justify-center items-center gap-3">
-          <img src="/logo.png" alt="logo" className="w-10 h-10" />
-          <h1 className="text-2xl font-semibold font-serif text-gray-700">
+        <div className="flex justify-center items-center">
+          <h1 className="text-3xl font-semibold font-serif text-gray-700">
             CareerKhoj
           </h1>
         </div>
-{/* ...... */}
+        {/* ...... */}
         {[
           { name: "fullName", label: "Full Name" },
           { name: "email", label: "Email Address", type: "email" },
@@ -136,28 +134,7 @@ const SignupForm = () => {
             <option value="recruiter">Recruiter</option>
             <option value="jobseeker">Jobseeker</option>
           </select>
-          {errors.role && (
-            <p className="text-sm text-red-500">{errors.role}</p>
-          )}
-        </div>
-
-        {/* Verification Method */}
-        <div>
-          <label className="block mb-1 text-sm font-medium text-gray-700">
-            Verification Method
-          </label>
-          <select
-            name="verificationMethod"
-            value={formData.verificationMethod}
-            onChange={handleChange}
-            className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-          >
-            <option value="email">Email</option>
-            <option value="otp">OTP</option>
-          </select>
-          {errors.verificationMethod && (
-            <p className="text-sm text-red-500">{errors.verificationMethod}</p>
-          )}
+          {errors.role && <p className="text-sm text-red-500">{errors.role}</p>}
         </div>
 
         {/* Agree to Terms */}

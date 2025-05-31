@@ -21,10 +21,10 @@ const LoginForm = () => {
     },
     onSuccess: (res) => {
       const { accessToken, userDetails } = res.data;
-      const { firstName, role } = userDetails;
+      const { fullName, role } = userDetails;
 
       localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("firstName", firstName);
+      localStorage.setItem("fullName", fullName);
       localStorage.setItem("role", role);
 
       toast.success("Login successful");
@@ -37,8 +37,8 @@ const LoginForm = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.password) newErrors.password = "Password is required";
+    if (!formData.email) newErrors.email = "Email is required field";
+    if (!formData.password) newErrors.password = "Password is required field";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -64,8 +64,7 @@ const LoginForm = () => {
         {/* insert the logo here*/}
 
         {/* start */}
-        <div className="flex justify-center items-center gap-3 mb-4">
-          <img src="/logo.png" alt="logo" className="w-10 h-10" />
+        <div className="flex justify-center items-center">
           <h1 className="text-2xl font-semibold font-serif text-gray-700">
             CareerKhoj
           </h1>
