@@ -17,7 +17,7 @@ const NavBar = () => {
     { name: "Contact Us", link: "/contact-us" },
   ];
 
-  // Close menu on outside click (except toggle button or menu)
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -54,7 +54,7 @@ const NavBar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center h-16">
         {/* insert the logo here*/}
 
-        {/* start */}
+     
         <div className="flex justify-center items-center">
           <h1 className="text-3xl font-semibold font-serif text-gray-700">
             CareerKhoj
