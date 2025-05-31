@@ -17,8 +17,15 @@ const SignupForm = () => {
       toast.success("Register Successful");
       navigate("/login");
     },
-    onError: () => {
-      toast.error("Failed to Register");
+    onError: (error) => {
+      if (error?.response?.status === 409) {
+        setErrors((prev) => ({
+          ...prev,
+          email: "Email already exists. Please use a different email.",
+        }));
+      } else {
+        toast.error("Failed to Register");
+      }
     },
   });
 
@@ -138,14 +145,7 @@ const SignupForm = () => {
         </div>
 
         {/* Agree to Terms */}
-        <div className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            name="agreeToTerms"
-            checked={formData.agreeToTerms}
-            onChange={handleChange}
-            className="h-4 w-4 text-blue-600"
-          />
+        <div className="flex items-center justify-end gap-2">
           <label className="text-sm text-gray-700">
             I agree to the{" "}
             <a href="/terms" className="text-blue-600 underline">
@@ -156,6 +156,13 @@ const SignupForm = () => {
               Privacy Policy
             </a>
           </label>
+          <input
+            type="checkbox"
+            name="agreeToTerms"
+            checked={formData.agreeToTerms}
+            onChange={handleChange}
+            className="h-4 w-4 text-blue-600"
+          />
         </div>
         {errors.agreeToTerms && (
           <p className="text-sm text-red-500">{errors.agreeToTerms}</p>

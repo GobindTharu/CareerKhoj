@@ -5,7 +5,8 @@ import cookieParser from "cookie-parser";
 
 // components import
 import connectDb from "./db.connection.js";
-import { userController } from "./user/controllors/user.controller.js";
+import { userController } from "./user/controllers/user.controller.js";
+import { companyController } from "./company/company.controller.js";
 
 //? create app
 const app = express();
@@ -13,7 +14,7 @@ const app = express();
 //? to make understand middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser())
+app.use(cookieParser());
 
 dotenv.config({}); // Load the environment variables
 
@@ -30,6 +31,7 @@ await connectDb();
 
 //?  register Routers / Controller
 app.use(userController);
+app.use(companyController);
 
 //?Network
 const Port = process.env.PORT || 3000;

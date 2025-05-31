@@ -1,5 +1,14 @@
 import mongoose from "mongoose";
 
+const profileSchema = new mongoose.Schema({
+  profilePhoto: { type: String, default: "" },
+  bio: { type: String, default: "" },
+  skills: { type: String, default: "" },
+  resume: { type: String, default: "" },
+  resumeOriginalName: { type: String, default: "" },
+  company: { type: mongoose.Schema.Types.ObjectId, ref: "Company", default: null },
+});
+
 const userSchema = new mongoose.Schema(
   {
     fullName: {
@@ -29,6 +38,7 @@ const userSchema = new mongoose.Schema(
     phoneNumber: {
       type: String,
       trim: true,
+      default: "",
     },
     isVerified: {
       type: Boolean,
@@ -39,12 +49,8 @@ const userSchema = new mongoose.Schema(
       required: [true, "You must agree to the terms and conditions"],
     },
     profile: {
-      profilePhoto: { type: String, default: "" },
-      bio: { type: String },
-      skills: { type: String },
-      resume: { type: String },
-      resumeOriginalName: { type: String },
-      company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
+      type: profileSchema,
+      default: {},
     },
   },
   {
@@ -52,4 +58,5 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-export const UserTable = mongoose.model("User", userSchema);
+// Prevent model overwrite on dev hot reloads
+export const UserTable = mongoose.models.User || mongoose.model("User", userSchema);

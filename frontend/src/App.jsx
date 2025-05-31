@@ -63,9 +63,10 @@ function App() {
         <Route
           path="/signup"
           element={
-            <AuthGuard>
+            <GuestGuard>
+              {" "}
               <SignUp />
-            </AuthGuard>
+            </GuestGuard>
           }
         />
         <Route
@@ -76,7 +77,7 @@ function App() {
             </AuthGuard>
           }
         />
-        {/* Use the wrapper here so your onSubmit works */}
+       
         <Route
           path="/simple-form"
           element={
