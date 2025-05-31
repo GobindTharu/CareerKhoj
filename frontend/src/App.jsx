@@ -1,11 +1,15 @@
 // App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
-import Home from "./Pages/Home/Dashboard";
+import ChooseTemplate from "./components/ResumeSections/ResumeTempletes/ChooseTemplate";
+import ResumeForm from "./components/ResumeSections/ResumeTempletes/ResumeForm";
+import Login from "./Pages/Auth/Login";
+import SignUp from "./Pages/Auth/SignUp";
 import ResumeBuilder from "./Pages/Home/ResumeBuilder";
-import ResumeForm from "./components/ResumeTempletes/ResumeForm";
-import ChooseTemplate from "./components/ResumeTempletes/ChooseTemplate";
+import HomePage from "./Pages/HomePage";
+import AuthGuard from "./guard/AuthGuard";
+import GuestGuard from "./guard/GuestGuard";
 
 const ResumeFormWrapper = () => {
   const [submittedData, setSubmittedData] = React.useState(null);
@@ -38,17 +42,60 @@ const ResumeFormWrapper = () => {
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-100">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/choose-template" element={<ChooseTemplate />} />
-          {/* Use the wrapper here so your onSubmit works */}
-          <Route path="/simple-form" element={<ResumeFormWrapper />} />
-          <Route path="/builder" element={<ResumeBuilder />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="min-h-screen bg-gray-100">
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AuthGuard>
+              <HomePage />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <GuestGuard>
+              <Login />
+            </GuestGuard>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <GuestGuard>
+              {" "}
+              <SignUp />
+            </GuestGuard>
+          }
+        />
+        <Route
+          path="/choose-template"
+          element={
+            <AuthGuard>
+              <ChooseTemplate />
+            </AuthGuard>
+          }
+        />
+       
+        <Route
+          path="/simple-form"
+          element={
+            <AuthGuard>
+              <ResumeFormWrapper />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/resume-builder"
+          element={
+            <AuthGuard>
+              <ResumeBuilder />
+            </AuthGuard>
+          }
+        />
+      </Routes>
+    </div>
   );
 }
 
