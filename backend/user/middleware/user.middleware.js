@@ -113,7 +113,7 @@ export const isAuthenticated = async (req, res, next) => {
     if (!token) {
       return res.status(401).send({ message: "Unauthorized." });
     }
-
+    //  verify token
     const secretKey = process.env.SECRETE_KEY;
     const decode = jwt.verify(token, secretKey);
 
