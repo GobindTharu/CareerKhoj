@@ -4,18 +4,15 @@ const companySchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Company name is required"],
       trim: true,
       unique: true
     },
     description: {
       type: String,
-      required: [true, "Company description is required"],
       minlength: [10, "Description must be at least 10 characters long"],
     },
     industry: {
       type: String,
-      required: [true, "Industry is required"],
       enum: [
         "Information Technology",
         "Finance",
@@ -39,7 +36,6 @@ const companySchema = new mongoose.Schema(
     },
     location: {
       type: String,
-      required: [true, "Company location is required"],
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,

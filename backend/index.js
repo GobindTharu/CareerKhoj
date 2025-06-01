@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import connectDb from "./db.connection.js";
 import { userController } from "./user/controllers/user.controller.js";
 import { companyController } from "./company/company.controller.js";
+import { jobController } from "./jobs/job.controller.js";
 
 //? create app
 const app = express();
@@ -29,12 +30,13 @@ app.use(
 //? connect Database
 await connectDb();
 
-//?  register Routers / Controller
+//?  Routers / Controller
 app.use(userController);
 app.use(companyController);
+app.use(jobController);
 
 //?Network
-const Port = process.env.PORT || 3000;
+const Port = process.env.PORT || 5000;
 
 app.listen(Port, () => {
   console.log(`App is listening on port : ${Port}`);
