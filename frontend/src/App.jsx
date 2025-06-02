@@ -3,13 +3,13 @@ import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import ChooseTemplate from "./components/ResumeSections/ResumeTempletes/ChooseTemplate";
-import ResumeForm from "./components/ResumeSections/ResumeTempletes/ResumeForm";
 import Login from "./Pages/Auth/Login";
 import SignUp from "./Pages/Auth/SignUp";
-import ResumeBuilder from "./Pages/Home/ResumeBuilder";
-import HomePage from "./Pages/HomePage";
+import HomePage from "./Pages/Home";
 import AuthGuard from "./guard/AuthGuard";
 import GuestGuard from "./guard/GuestGuard";
+import AboutPage from "./Pages/AboutUs";
+import ResumeBuilder from "./components/ResumeSections/ResumeTempletes/ResumeBuilder";
 
 const ResumeFormWrapper = () => {
   const [submittedData, setSubmittedData] = React.useState(null);
@@ -77,7 +77,7 @@ function App() {
             </AuthGuard>
           }
         />
-       
+
         <Route
           path="/simple-form"
           element={
@@ -91,6 +91,14 @@ function App() {
           element={
             <AuthGuard>
               <ResumeBuilder />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/about-us"
+          element={
+            <AuthGuard>
+              <AboutPage />
             </AuthGuard>
           }
         />

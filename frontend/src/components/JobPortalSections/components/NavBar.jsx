@@ -12,13 +12,8 @@ const NavBar = () => {
   const menuList = [
     { name: "Home", link: "/" },
     { name: "Jobs", link: "/jobs" },
-<<<<<<< HEAD
-    { name: "Build Resume", link: "/build-resume" },
-    { name: "About Us", link: "/frontend/src/Pages/About.jsx" },
-=======
     { name: "Build Resume", link: "/resume-builder" },
     { name: "About Us", link: "/about-us" },
->>>>>>> 5a5e38249c33a1a96b9a68eb8dc753d4e3e36f3b
     { name: "Contact Us", link: "/contact-us" },
   ];
 

@@ -2,7 +2,9 @@ import React from "react";
 import { Stats } from "./Stats";
 import { JobSearchForm } from "./JobSearchForm";
 import { JobCategories } from "./JobCategory";
-import Resume from "../../../Pages/Home/Dashboard";
+import WhyChooseCareerKhoj from "./WhyChooseCareerKhoj";
+import { Link } from "react-router-dom";
+import HomeResumeLink from "./HomeResumeLink";
 
 const HeroSection = () => (
   <>
@@ -14,9 +16,8 @@ const HeroSection = () => (
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundBlendMode: "overlay",
-        backgroundAttachment: "fixed",  // <-- Added this line
+        backgroundAttachment: "fixed", // <-- Added this line
         color: "white",
-          
       }}
     >
       <p className="text-sm mb-2 text-transparent bg-clip-text bg-white">
@@ -37,9 +38,9 @@ const HeroSection = () => (
       <JobCategories />
     </div>
 
-    <Resume />
+    <HomeResumeLink />
+    <WhyChooseCareerKhoj />
   </>
 );
 
 export default HeroSection;
-
