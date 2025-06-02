@@ -14,7 +14,7 @@ const NavBar = () => {
     { name: "Home", link: "/" },
     { name: "Jobs", link: "/jobs" },
     { name: "Build Resume", link: "/build-resume" },
-    { name: "About Us", link: "/about-us" },
+    { name: "About Us", link: "/frontend/src/Pages/About.jsx" },
     { name: "Contact Us", link: "/contact-us" },
   ];
 
