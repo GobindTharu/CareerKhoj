@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { LoginButton } from "../buttons/loginButton";
-import Logo from "../buttons/logoButton";
+import { LogoutButton } from "../buttons/logoutButton";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 
@@ -13,12 +12,17 @@ const NavBar = () => {
   const menuList = [
     { name: "Home", link: "/" },
     { name: "Jobs", link: "/jobs" },
+<<<<<<< HEAD
     { name: "Build Resume", link: "/build-resume" },
     { name: "About Us", link: "/frontend/src/Pages/About.jsx" },
+=======
+    { name: "Build Resume", link: "/resume-builder" },
+    { name: "About Us", link: "/about-us" },
+>>>>>>> 5a5e38249c33a1a96b9a68eb8dc753d4e3e36f3b
     { name: "Contact Us", link: "/contact-us" },
   ];
 
-  // Close menu on outside click (except toggle button or menu)
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -53,8 +57,15 @@ const NavBar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center h-16">
-        <Logo />
+        {/* insert the logo here*/}
 
+     
+        <div className="flex justify-center items-center">
+          <h1 className="text-3xl font-semibold font-serif text-gray-700">
+            CareerKhoj
+          </h1>
+        </div>
+        {/* ends */}
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center gap-6">
           {menuList.map(({ name, link }) => (
@@ -68,7 +79,7 @@ const NavBar = () => {
 
         {/* Desktop Login */}
         <div className="hidden lg:flex items-center">
-          <LoginButton />
+          <LogoutButton />
         </div>
 
         {/* Single Toggle Button */}
@@ -129,7 +140,7 @@ const NavBar = () => {
         <div className="my-4 border-t border-gray-100" />
 
         <div className="w-full">
-          <LoginButton />
+          <LogoutButton />
         </div>
       </div>
     </nav>

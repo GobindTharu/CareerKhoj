@@ -1,6 +1,6 @@
 
 export const JobSearchForm = () => (
-  <div className="mt-8 bg-gray-100 text-black rounded-lg shadow-md w-full max-w-4xl mx-auto p-4">
+  <div className="mt-8 bg-gray-200 text-black rounded-lg shadow-md w-full max-w-4xl mx-auto p-4">
     <div className="flex flex-col md:flex-row gap-4 items-center py-12">
       <input
         type="text"
