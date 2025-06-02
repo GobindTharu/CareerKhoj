@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import ResumeForm from "../../components/ResumeSections/ResumeTempletes/ResumeForm";
-import ResumeTemplate1 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate1";
-import ResumeTemplate2 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate2";
-import ResumeTemplate3 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate3";
-import ResumeTemplate4 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate4";
-import ResumeTemplate5 from "../../components/ResumeSections/ResumeTempletes/ResumeTemplate5";
+
+import ResumeForm from "./ResumeForm";
+import ResumeTemplate1 from "./ResumeTemplate1";
+import ResumeTemplate2 from "./ResumeTemplate2";
+import ResumeTemplate3 from "./ResumeTemplate3";
+import ResumeTemplate4 from "./ResumeTemplate4";
+import ResumeTemplate5 from "./ResumeTemplate5";
+
 
 const ResumeBuilder = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -39,7 +41,7 @@ const ResumeBuilder = () => {
   const SelectedTemplate = templates[selectedTemplate];
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4">
           Build Your Professional Resume

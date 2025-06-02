@@ -24,11 +24,13 @@ dotenv.config({});
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"],
+    origin: ["http://localhost:5173", "http://localhost:5174"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
+
 
 //? connect Database
 await connectDb();

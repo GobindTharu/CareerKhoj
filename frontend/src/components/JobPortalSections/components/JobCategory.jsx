@@ -3,7 +3,7 @@ export const JobCategories = () => {
     const categories = [
       "Website & Software",
       "Education & Training",
-      "Graphic & UI/UX Design",
+      "Marketing & Sales",
       "Accounting & Finance",
       "Restaurant & Food",
       "Health & Hospital"
@@ -20,7 +20,7 @@ export const JobCategories = () => {
   
   const CategoryCard = ({ title }) => (
     <div
-      className={`md:relative top-16 bg-gray-100 text-black text-center border rounded-lg p-9 shadow-sm `}
+      className={`md:relative top-16 bg-gray-50 text-black text-center border rounded-lg p-9 shadow-sm `}
     >
       <div className="text-2xl mb-2">📁</div>
       <h3 className="font-semibold text-sm">{title}</h3>

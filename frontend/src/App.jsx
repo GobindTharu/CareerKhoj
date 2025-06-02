@@ -3,13 +3,14 @@ import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import ChooseTemplate from "./components/ResumeSections/ResumeTempletes/ChooseTemplate";
-import ResumeForm from "./components/ResumeSections/ResumeTempletes/ResumeForm";
 import Login from "./Pages/Auth/Login";
 import SignUp from "./Pages/Auth/SignUp";
-import ResumeBuilder from "./Pages/Home/ResumeBuilder";
-import HomePage from "./Pages/HomePage";
+import HomePage from "./Pages/Home";
 import AuthGuard from "./guard/AuthGuard";
 import GuestGuard from "./guard/GuestGuard";
+import AboutPage from "./Pages/AboutUs";
+import BuildResume from "./Pages/BuildResume";
+import Jobs from "./Pages/Jobs";
 
 const ResumeFormWrapper = () => {
   const [submittedData, setSubmittedData] = React.useState(null);
@@ -44,14 +45,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Routes>
-        <Route
-          path="/"
-          element={
-            <AuthGuard>
-              <HomePage />
-            </AuthGuard>
-          }
-        />
+        
         <Route
           path="/login"
           element={
@@ -70,6 +64,38 @@ function App() {
           }
         />
         <Route
+          path="/"
+          element={
+            <AuthGuard>
+              <HomePage />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/jobs"
+          element={
+            <AuthGuard>
+              <Jobs />
+            </AuthGuard>
+          }
+        />
+         <Route
+          path="/resume-builder"
+          element={
+            <AuthGuard>
+              <BuildResume />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/about-us"
+          element={
+            <AuthGuard>
+              <AboutPage />
+            </AuthGuard>
+          }
+        />
+        <Route
           path="/choose-template"
           element={
             <AuthGuard>
@@ -77,7 +103,7 @@ function App() {
             </AuthGuard>
           }
         />
-       
+
         <Route
           path="/simple-form"
           element={
@@ -86,14 +112,7 @@ function App() {
             </AuthGuard>
           }
         />
-        <Route
-          path="/resume-builder"
-          element={
-            <AuthGuard>
-              <ResumeBuilder />
-            </AuthGuard>
-          }
-        />
+       
       </Routes>
     </div>
   );
