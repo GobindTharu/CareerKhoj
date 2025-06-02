@@ -1,12 +1,12 @@
 import Footer from "../components/JobPortalSections/components/Footer";
-import HeroSection from "../components/JobPortalSections/components/HeroSection";
 import NavBar from "../components/JobPortalSections/components/NavBar";
+import ResumeBuilder from "../components/ResumeSections/ResumeTempletes/ResumeBuilder";
 
-export default function HomePage() {
+export default function BuildResume() {
   return (
     <>
       <NavBar />
-      <HeroSection />
+      <ResumeBuilder />
       <Footer />
     </>
   );

@@ -1,6 +1,8 @@
 // install framer-motion if not already installed
 import React from "react";
 import OpportunityFeatures from "./OpportunityFeatures";
+import TeamMember from "../../ResumeSections/ResumeTempletes/TeamMember";
+import VisionMission from "./VisionMission";
 
 const AboutUs = () => {
   return (
@@ -42,12 +44,13 @@ const AboutUs = () => {
       </div>
 
       {/* Values Section */}
-
+      <VisionMission />
       {/* Opportunity */}
       <OpportunityFeatures />
+      <TeamMember />
 
       {/* CTA Section */}
-      <div className="text-center">
+      <div className="pt-16 text-center">
         <h2 className="text-3xl sm:text-4xl font-bold text-green-600 m-4">
           Ready to Launch Your Career?
         </h2>

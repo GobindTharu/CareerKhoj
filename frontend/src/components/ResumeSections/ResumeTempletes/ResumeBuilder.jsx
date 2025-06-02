@@ -41,7 +41,7 @@ const ResumeBuilder = () => {
   const SelectedTemplate = templates[selectedTemplate];
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4">
           Build Your Professional Resume

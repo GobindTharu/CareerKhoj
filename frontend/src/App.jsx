@@ -9,7 +9,8 @@ import HomePage from "./Pages/Home";
 import AuthGuard from "./guard/AuthGuard";
 import GuestGuard from "./guard/GuestGuard";
 import AboutPage from "./Pages/AboutUs";
-import ResumeBuilder from "./components/ResumeSections/ResumeTempletes/ResumeBuilder";
+import BuildResume from "./Pages/BuildResume";
+import Jobs from "./Pages/Jobs";
 
 const ResumeFormWrapper = () => {
   const [submittedData, setSubmittedData] = React.useState(null);
@@ -44,14 +45,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Routes>
-        <Route
-          path="/"
-          element={
-            <AuthGuard>
-              <HomePage />
-            </AuthGuard>
-          }
-        />
+        
         <Route
           path="/login"
           element={
@@ -67,6 +61,38 @@ function App() {
               {" "}
               <SignUp />
             </GuestGuard>
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <AuthGuard>
+              <HomePage />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/jobs"
+          element={
+            <AuthGuard>
+              <Jobs />
+            </AuthGuard>
+          }
+        />
+         <Route
+          path="/resume-builder"
+          element={
+            <AuthGuard>
+              <BuildResume />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/about-us"
+          element={
+            <AuthGuard>
+              <AboutPage />
+            </AuthGuard>
           }
         />
         <Route
@@ -86,22 +112,7 @@ function App() {
             </AuthGuard>
           }
         />
-        <Route
-          path="/resume-builder"
-          element={
-            <AuthGuard>
-              <ResumeBuilder />
-            </AuthGuard>
-          }
-        />
-        <Route
-          path="/about-us"
-          element={
-            <AuthGuard>
-              <AboutPage />
-            </AuthGuard>
-          }
-        />
+       
       </Routes>
     </div>
   );
