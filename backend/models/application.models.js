@@ -9,7 +9,7 @@ const applicationSchema = new mongoose.Schema(
     },
     applicant: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Assuming the applicant is a registered jobseeker
+      ref: "User", 
       required: [true, "Applicant reference is required"],
     },
     status: {

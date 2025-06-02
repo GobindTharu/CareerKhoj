@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
-import { UserTable } from "../models/user.model.js";
 
 export const isAuthenticated = async (req, res, next) => {
-  let payload = null; // <-- Move declaration outside the try block
+  let payload = null; 
 
   try {
     const token = req.cookies.token;
@@ -13,7 +12,7 @@ export const isAuthenticated = async (req, res, next) => {
 
     const secretKey = process.env.SECRET_KEY;
 
-    payload = await jwt.verify(token, secretKey); // Decode token
+     payload = await jwt.verify(token, secretKey); 
     if (!payload) {
       return res.status(401).send({ message: "Unauthorized", success: false });
     }

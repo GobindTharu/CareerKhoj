@@ -1,6 +1,6 @@
 import express from "express";
-import { isAuthenticated } from "../user/middleware/user.middleware.js";
-import { JobTable } from "../user/models/job.models.js";
+import { JobTable } from "../models/job.models.js";
+import { isAuthenticated } from "../middleware/user.middleware.js";
 const router = express.Router();
 
 // Create Jobs by recruiter
@@ -38,12 +38,10 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
       });
     }
 
-    // Normalize requirements array
     const normalizedRequirements = requirements
       .split(",")
       .map((item) => item.trim().toLowerCase());
 
-    // Check for duplicate job based on essential fields
     const duplicateJobs = await JobTable.find({
       title: title.trim(),
       description: description.trim(),
@@ -53,10 +51,9 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
       category,
       company: companyId,
       experienceLevel: experience,
-      created_by: req.id, // prevent same recruiter from posting same job
+      created_by: req.id, 
     });
 
-    // Check if any of those have matching requirements and position
     const isDuplicate = duplicateJobs.some((job) => {
       const existingReq = (job.requirements || [])
         .map((r) => r.toLowerCase())
@@ -133,7 +130,7 @@ router.get("/job/jobseeker/list", isAuthenticated, async (req, res) => {
       success: true,
     });
   } catch (error) {
-    return res.status(400).json(error.message);
+    return res.status(500).json(error.message);
   }
 });
 
@@ -156,7 +153,7 @@ router.get("/job/get/:id", isAuthenticated, async (req, res) => {
       success: true,
     });
   } catch (error) {
-    return res.status(400).json(error.message);
+    return res.status(500).json(error.message);
   }
 });
 
@@ -177,7 +174,7 @@ router.get("/job/recruiter/list", isAuthenticated, async (req, res) => {
       success: true,
     });
   } catch (error) {
-    return res.status(400).json(error.message);
+    return res.status(500).json(error.message);
   }
 });
 

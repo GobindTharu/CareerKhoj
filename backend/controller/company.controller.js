@@ -1,6 +1,6 @@
 import express from "express";
-import { CompanyTable } from "../user/models/company.models.js";
-import { isAuthenticated } from "../user/middleware/user.middleware.js";
+import { CompanyTable } from "../models/company.models.js";
+import { isAuthenticated } from "../middleware/user.middleware.js";
 const router = express.Router();
 
 //  register company
@@ -28,7 +28,7 @@ router.post("/company/register", isAuthenticated, async (req, res) => {
       success: true,
     });
   } catch (error) {
-    return res.status(400).json(error.message);
+    return res.status(500).json(error.message);
   }
 });
 
@@ -46,7 +46,7 @@ router.get("/company/get", isAuthenticated, async (req, res) => {
     }
     return res.status(200).json({ companies, success: true });
   } catch (error) {
-    return res.status(400).json(error.message);
+    return res.status(500).json(error.message);
   }
 });
 
@@ -64,7 +64,7 @@ router.get("/company/get/:id", isAuthenticated, async (req, res) => {
     }
     return res.status(200).json({ company, success: true });
   } catch (error) {
-    return res.status(400).json(error.message);
+    return res.status(500).json(error.message);
   }
 });
 
@@ -76,7 +76,6 @@ router.put("/company/update/:id", isAuthenticated, async (req, res) => {
 
     const companyId = req.params.id;
 
-    // Check if the name already exists on a different document
     const existing = await CompanyTable.findOne({
       name: updatedCompany.name,
       _id: { $ne: companyId },
@@ -102,7 +101,7 @@ router.put("/company/update/:id", isAuthenticated, async (req, res) => {
 
     return res.status(200).json({ company, success: true });
   } catch (error) {
-    return res.status(400).json(error.message);
+    return res.status(500).json(error.message);
   }
 });
 
