@@ -5,9 +5,10 @@ import cookieParser from "cookie-parser";
 
 // components import
 import connectDb from "./db.connection.js";
-import { userController } from "./user/controllers/user.controller.js";
-import { companyController } from "./company/company.controller.js";
-import { jobController } from "./jobs/job.controller.js";
+import { userController } from "./controller/user.controller.js";
+import { companyController } from "./controller/company.controller.js";
+import { jobController } from "./controller/job.controller.js";
+import { applicationController } from "./controller/application.controller.js";
 
 //? create app
 const app = express();
@@ -17,7 +18,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-dotenv.config({}); // Load the environment variables
+// Load the environment variables
+dotenv.config({});
+
 
 app.use(
   cors({
@@ -34,6 +37,7 @@ await connectDb();
 app.use(userController);
 app.use(companyController);
 app.use(jobController);
+app.use(applicationController);
 
 //?Network
 const Port = process.env.PORT || 5000;

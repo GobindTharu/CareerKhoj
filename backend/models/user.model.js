@@ -59,4 +59,4 @@ const userSchema = new mongoose.Schema(
 );
 
 // Prevent model overwrite on dev hot reloads
-export const UserTable = mongoose.models.User || mongoose.model("User", userSchema);
+export const UserTable = mongoose.model("User", userSchema);
