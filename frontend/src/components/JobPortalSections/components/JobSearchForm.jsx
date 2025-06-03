@@ -1,6 +1,7 @@
 
 export const JobSearchForm = () => (
   <div className="mt-8 bg-gray-50 text-black rounded-lg shadow-md w-full max-w-4xl mx-auto p-4">
+    <h1 className="font-bold text-2xl">Search, Apply & <span className="text-blue-600"> Get Your Dream Job</span></h1>
     <div className="flex flex-col md:flex-row gap-4 items-center py-12">
       <input
         type="text"
@@ -10,11 +11,6 @@ export const JobSearchForm = () => (
       <input
         type="text"
         placeholder="Category"
-        className="flex-1 p-2 border rounded"
-      />
-      <input
-        type="text"
-        placeholder="Location"
         className="flex-1 p-2 border rounded"
       />
       <button className="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700">

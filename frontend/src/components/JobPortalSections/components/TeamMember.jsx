@@ -41,7 +41,7 @@ const TeamMember = () => {
                   alt={member.name}
                   className="w-28 h-28 rounded-full object-cover shadow-md group-hover:scale-105 transition-transform duration-300"
                 />
-                <h3 className="mt-4 text-xl font-semibold text-gray-800">{member.name}</h3>
+                <h3 className="mt-4 text-xl font-semibold text-gray-950">{member.name}</h3>
                 <p className="text-sm text-blue-600 mb-2">{member.role}</p>
                 <p className="text-gray-500 text-sm leading-relaxed">{member.bio}</p>
               </div>
