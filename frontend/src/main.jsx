@@ -5,6 +5,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter } from "react-router-dom";
+import store from "./redux/store.js";
+import { Provider } from "react-redux";
 
 const queryClient = new QueryClient();
 
@@ -12,8 +14,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <Toaster/>
-        <App />
+        <Toaster />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>

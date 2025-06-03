@@ -4,6 +4,7 @@ import { LogoutButton } from "../buttons/logoutButton";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { LoginButton } from "../buttons/LoginButton";
+import Profile from "./Profile";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,7 +48,8 @@ const NavBar = () => {
   const handleToggle = () => {
     setIsMenuOpen((prev) => !prev);
   };
-
+  const user = true;
+  
   return (
     <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center h-16">
@@ -69,11 +71,15 @@ const NavBar = () => {
             </Link>
           ))}
         </div>
-
         {/* Desktop Login */}
-        <div className="hidden lg:flex items-center">
-          <LoginButton/>
-        </div>
+
+        {user ? (
+          <div className="hidden lg:flex items-center">
+            <Profile />
+          </div>
+        ) : (
+          <LoginButton />
+        )}
 
         {/* Single Toggle Button */}
         <div className="lg:hidden" ref={toggleRef}>
