@@ -1,15 +1,15 @@
 // App.jsx
 import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import ChooseTemplate from "./components/ResumeSections/ResumeTempletes/ChooseTemplate";
-import Login from "./Pages/Auth/Login";
-import SignUp from "./Pages/Auth/SignUp";
-import HomePage from "./Pages/Home";
 import AuthGuard from "./guard/AuthGuard";
 import GuestGuard from "./guard/GuestGuard";
 import AboutPage from "./Pages/AboutUs";
+import Login from "./Pages/Auth/Login";
+import SignUp from "./Pages/Auth/SignUp";
 import BuildResume from "./Pages/BuildResume";
+import HomePage from "./Pages/Home";
 import Jobs from "./Pages/Jobs";
 
 const ResumeFormWrapper = () => {

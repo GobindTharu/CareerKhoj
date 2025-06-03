@@ -1,10 +1,6 @@
-import React from "react";
-import { Stats } from "./Stats";
-import { JobSearchForm } from "./JobSearchForm";
 import { JobCategories } from "./JobCategory";
-import WhyChooseCareerKhoj from "./WhyChooseCareerKhoj";
-import { Link } from "react-router-dom";
-import HomeResumeLink from "./HomeResumeLink";
+import { JobSearchForm } from "./JobSearchForm";
+import { Stats } from "./Stats";
 
 const HeroSection = () => (
   <>
@@ -20,7 +16,7 @@ const HeroSection = () => (
         color: "white",
       }}
     >
-      <p className="text-sm mb-2 text-transparent bg-clip-text bg-white">
+      <p className="text-lg font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-b from-blue-800 to-purple-700">
         Find Job, Employment, and Career Opportunities
       </p>
 
@@ -30,7 +26,7 @@ const HeroSection = () => (
           WebkitBackgroundClip: "text",
         }}
       >
-        CareerKhoj: Your Personal Career Launchpad
+       <span className="text-blue-600">CareerKhoj</span> : Your Personal Career Launchpad
       </h1>
 
       <Stats />
@@ -38,8 +34,7 @@ const HeroSection = () => (
       <JobCategories />
     </div>
 
-    <HomeResumeLink />
-    <WhyChooseCareerKhoj />
+ 
   </>
 );
 
