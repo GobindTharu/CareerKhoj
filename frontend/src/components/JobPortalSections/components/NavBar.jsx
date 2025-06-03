@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { LogoutButton } from "../buttons/logoutButton";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
+import { LoginButton } from "../buttons/LoginButton";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,7 +17,6 @@ const NavBar = () => {
     { name: "About Us", link: "/about-us" },
   ];
 
-  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -53,7 +53,6 @@ const NavBar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center h-16">
         {/* insert the logo here*/}
 
-     
         <div className="flex justify-center items-center">
           <h1 className="text-3xl font-semibold font-serif text-gray-700">
             CareerKhoj
@@ -73,7 +72,7 @@ const NavBar = () => {
 
         {/* Desktop Login */}
         <div className="hidden lg:flex items-center">
-          <LogoutButton />
+          <LoginButton/>
         </div>
 
         {/* Single Toggle Button */}
@@ -134,7 +133,8 @@ const NavBar = () => {
         <div className="my-4 border-t border-gray-100" />
 
         <div className="w-full">
-          <LogoutButton />
+          {/* <LogoutButton /> */}
+          <LoginButton />
         </div>
       </div>
     </nav>

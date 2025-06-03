@@ -2,6 +2,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
+import SearchResults from "./components/JobPortalSections/components/SearchResults";
 import ChooseTemplate from "./components/ResumeSections/ResumeTempletes/ChooseTemplate";
 import AuthGuard from "./guard/AuthGuard";
 import GuestGuard from "./guard/GuestGuard";
@@ -10,6 +11,7 @@ import Login from "./Pages/Auth/Login";
 import SignUp from "./Pages/Auth/SignUp";
 import BuildResume from "./Pages/BuildResume";
 import HomePage from "./Pages/Home";
+import JobDetail from "./Pages/JobDetail";
 import Jobs from "./Pages/Jobs";
 
 const ResumeFormWrapper = () => {
@@ -45,7 +47,6 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Routes>
-        
         <Route
           path="/login"
           element={
@@ -79,7 +80,23 @@ function App() {
             </AuthGuard>
           }
         />
-         <Route
+        <Route
+          path="/search-results"
+          element={
+            <AuthGuard>
+              <SearchResults />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/job-details"
+          element={
+            <AuthGuard>
+              <JobDetail />
+            </AuthGuard>
+          }
+        />
+        <Route
           path="/resume-builder"
           element={
             <AuthGuard>
@@ -112,7 +129,6 @@ function App() {
             </AuthGuard>
           }
         />
-       
       </Routes>
     </div>
   );

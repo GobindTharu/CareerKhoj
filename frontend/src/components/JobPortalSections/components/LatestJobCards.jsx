@@ -1,15 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const LatestJobCards = () => {
+  const navigate = useNavigate();
   return (
-    <div className="p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer">
+    <div
+      onClick={() => navigate("/job-details")}
+      className="p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer"
+    >
       <div className="py-2 flex items-center gap-4 ">
         <div className=" flex items-center justify-center w-16 h-16  ">
-          <img
-            src="./circle-line-simple-design-logo-260nw-2174926871.webp"
-            alt=""
-            className=""
-          />
+          <img src="./company.png" alt="" className="" />
         </div>
         <div>
           <h1 className="font-medium text-lg">Company Name</h1>
@@ -35,7 +36,6 @@ const LatestJobCards = () => {
           Rs. 40k-60k salary
         </span>
       </div>
-     
     </div>
   );
 };
