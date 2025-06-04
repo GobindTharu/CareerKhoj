@@ -2,10 +2,12 @@ import bcrypt from "bcrypt";
 import express from "express";
 import jwt from "jsonwebtoken";
 
-
 import { isAuthenticated } from "../middleware/user.middleware.js";
 import { UserTable } from "../models/user.model.js";
-import { loginCredentialSchema, registerUserSchema } from "../validations/user.validation.js";
+import {
+  loginCredentialSchema,
+  registerUserSchema,
+} from "../validations/user.validation.js";
 import validateReqBody from "../middleware/validate.req.body.js";
 
 const router = express.Router();

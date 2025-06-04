@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { LogoutButton } from "../buttons/logoutButton";
-import { Link } from "react-router-dom";
 import clsx from "clsx";
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { LoginButton } from "../buttons/LoginButton";
 import Profile from "./Profile";
 
@@ -48,8 +48,10 @@ const NavBar = () => {
   const handleToggle = () => {
     setIsMenuOpen((prev) => !prev);
   };
-  const user = true;
-  
+
+
+  const user = useSelector((state) => state.user?.user);
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center h-16">

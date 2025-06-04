@@ -1,13 +1,17 @@
 import { LogOut } from "lucide-react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
+import { clearUser } from "../../../redux/userSlice";
+import { useDispatch } from "react-redux";
 
 export const LogoutButton = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
+    dispatch(clearUser());
     window.localStorage.clear();
+    window.cookies.clear();
     navigate("/login");
     toast.success("Logout Successful");
   };

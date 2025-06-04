@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { PlusIcon, UserCircle2 } from "lucide-react";
 import { LogoutButton } from "../buttons/logoutButton";
 
-export default function Profile() {
+export default function Profile(res) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -16,6 +16,9 @@ export default function Profile() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const userDetails = res.data.userDetails;
+  console.log(userDetails);
+
   return (
     <div className="relative" ref={dropdownRef}>
       <button
@@ -23,18 +26,16 @@ export default function Profile() {
         className="flex justify-center items-center rounded-full bg-gradient-to-r  from-indigo-400 to-purple-500 pr-2"
         onClick={() => setOpen(!open)}
       >
-    
-          <div className="flex items-center gap-3">
-            <img
-              src="/profile.avif"
-              alt="profile"
-              className="w-10 h-10 rounded-full object-cover"
-            />
-            <div>
-              <p className="font-medium text-gray-800">BalGobind Chaudhary</p>
-            </div>
+        <div className="flex items-center gap-3">
+          <img
+            src="/profile.avif"
+            alt="profile"
+            className="w-10 h-10 rounded-full object-cover"
+          />
+          <div>
+            <p className="font-medium text-gray-800">{userDetails.fullName}</p>
           </div>
-        
+        </div>
       </button>
 
       {open && (

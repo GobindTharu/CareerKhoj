@@ -3,9 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import axiosInstance from "../../libs/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import { setUser } from "../../redux/userSlice";
+import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -20,6 +23,9 @@ const LoginForm = () => {
       return await axiosInstance.post("/user/login", values);
     },
     onSuccess: (res) => {
+      dispatch(setUser(res.data.userDetails));
+      localStorage.setItem("user", JSON.stringify(res.data.userDetails));
+      console.log(res.data.userDetails);
       const { accessToken, userDetails } = res.data;
       const { fullName, role } = userDetails;
 
