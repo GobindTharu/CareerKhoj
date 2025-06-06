@@ -10,6 +10,8 @@ import {
 } from "../validations/user.validation.js";
 import validateReqBody from "../middleware/validate.req.body.js";
 import { singleUpload } from "../middleware/multer.js";
+import getDataUri from "../utils/datauri.js";
+import cloudinary from "../utils/cloudinary.js";
 
 const router = express.Router();
 
@@ -104,6 +106,18 @@ router.put(
   async (req, res) => {
     try {
       const { fullName, phoneNumber, bio, skills, profilePhoto } = req.body;
+
+      const file = req.file;
+
+      const fileUri = getDataUri(file);
+
+      const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+        resource_type: "raw",
+        folder: "resumes",
+        use_filename: true,
+        unique_filename: false,
+      });
+
       const userId = req.id;
 
       let user = await UserTable.findById(userId);
@@ -119,7 +133,6 @@ router.put(
       if (phoneNumber) user.phoneNumber = phoneNumber;
       if (bio) user.profile.bio = bio;
       if (bio) user.profile.profilePhoto = profilePhoto;
-
 
       // Skills: Parse JSON string to array
       if (skills) {
@@ -137,11 +150,9 @@ router.put(
       }
 
       // Resume file handling
-      if (req.file) {
-        // Example placeholder:
-        // const resumeUrl = await uploadToCloudinary(req.file.buffer);
-        user.profile.resume = req.file.buffer.toString("base64"); // Just for demo/storage, replace with real upload
-        user.profile.resumeOriginalName = req.file.originalname;
+      if (cloudResponse) {
+        user.profile.resume = cloudResponse.secure_url;
+        user.profile.resumeOriginalName = file.originalname;
       }
 
       await user.save();
