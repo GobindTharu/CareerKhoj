@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFacebook, FaLinkedin, FaTwitter, FaInstagram } from "react-icons/fa";
+import Logo from "./Logo";
 
 const Footer = () => {
   return (
@@ -8,7 +9,7 @@ const Footer = () => {
         {/* Company Info */}
         <div>
           {/* logo here  */}
-          <h2 className="text-2xl font-bold mb-4">CareerKhoj</h2>
+         <Logo/>
 
           <p className="text-sm text-gray-900">
             CareerKhoj is your all-in-one job and resume-builder platform.

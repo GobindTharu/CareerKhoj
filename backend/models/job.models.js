@@ -58,7 +58,6 @@ const jobSchema = new mongoose.Schema(
       enum: [
         "internship",
         "Fresher",
-        "Associate",
         "Mid-Level",
         "Senior-Level",
         "Executive",

@@ -22,7 +22,7 @@ export default function Profile() {
   }, []);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative hidden md:flex" ref={dropdownRef}>
       <button
         title="My Profile"
         className="flex justify-center items-center rounded-full bg-gray-300 pr-2"

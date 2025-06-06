@@ -1,8 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const LatestJobCards = () => {
+const LatestJobCards = ({ job }) => {
   const navigate = useNavigate();
+  
+
   return (
     <div
       onClick={() => navigate("/job-details")}
@@ -13,27 +15,23 @@ const LatestJobCards = () => {
           <img src="./company.png" alt="" className="" />
         </div>
         <div>
-          <h1 className="font-medium text-lg">Company Name</h1>
-          <p className="text-sm text-gray-500">Kathamndu</p>
+          <h1 className="font-medium text-lg">{job?.company?.name}</h1>
+          <p className="text-sm text-gray-500">{job?.location}</p>
         </div>
       </div>
       <div>
-        <h1 className="font-bold text-xl my-2">Job Title</h1>
-        <p className="text-sm text-gray-600">
-          {" "}
-          Lorem ipsum dolor sit amet consectetur adipisicingdolor sit amet
-          consectetur adipisicing elit. elit.
-        </p>
+        <h1 className="font-bold text-xl my-2">{job?.title}</h1>
+        <p className="text-sm text-gray-600"> {job?.description}</p>
       </div>
       <div className="flex items-center gap-2 mt-4">
         <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-3 py-1 rounded-full shadow-sm">
-          10 Positions
+         {job?.positions} Positions
         </span>
         <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-3 py-1 rounded-full shadow-sm">
-          Full-Time
+         {job.jobType}
         </span>
         <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-3 py-1 rounded-full shadow-sm">
-          Rs. 40k-60k salary
+          Rs. {job?.salary} Salary
         </span>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { LoginButton } from "../buttons/LoginButton";
 import Profile from "./Profile";
+import Logo from "./Logo";
 
 const NavBar = (data) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,14 +55,8 @@ const NavBar = (data) => {
   return (
     <nav className="fixed top-0 left-0 w-full z-100 backdrop-blur-md bg-white/70 border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center h-16">
-        <img src="./logo.png" alt="CareerKhoj Logo" className="h-16 w-16 mr-2" />
+        <Logo />
 
-        <div className="flex justify-center items-center">
-          <h1 className="text-3xl font-semibold font-serif text-gray-700">
-          
-          </h1>
-        </div>
-        {/* ends */}
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center gap-6">
           {menuList.map(({ name, link }) => (
@@ -79,7 +74,9 @@ const NavBar = (data) => {
             <Profile data={data} />
           </div>
         ) : (
-          <LoginButton />
+          <div className="hidden lg:flex items-center">
+            <LoginButton />
+          </div>
         )}
 
         {/* Single Toggle Button */}
@@ -127,14 +124,16 @@ const NavBar = (data) => {
           }
         )}
       >
-        <div className="w-full">  
+        <div className="w-full">
           {/* <LogoutButton /> */}
           {user ? (
             <div className="lg:flex items-center">
               <Profile data={data} />
             </div>
           ) : (
-            <LoginButton />
+            <div className="lg:flex items-center">
+              <LoginButton />
+            </div>
           )}
         </div>
         <nav className="space-y-4">

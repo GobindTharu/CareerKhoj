@@ -7,6 +7,7 @@ import HomeResumeLink from "../components/JobPortalSections/components/HomeResum
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setUser } from "../redux/userSlice";
+import useGetAllJobs from "../hooks/useGetAllJobs";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ export default function HomePage() {
       dispatch(setUser(JSON.parse(storedUser)));
     }
   }, [dispatch]);
+
+  useGetAllJobs();
 
   return (
     <>

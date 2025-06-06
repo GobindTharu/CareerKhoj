@@ -7,15 +7,27 @@ import ProfileUpdateForm from "./ProfileUpdateForm";
 const profileData = {
   jobs: [
     {
-      date: "17-07-2024",
+      date: "17-02-2025",
       jobRole: "Frontend Developer",
       company: "Google",
+      status: "Rejected",
+    },
+    {
+      date: "11-04-2025",
+      jobRole: "Fullstack Developer",
+      company: "Microsoft",
       status: "Selected",
     },
     {
-      date: "17-07-2024",
-      jobRole: "Frontend Developer",
-      company: "Microsoft",
+      date: "14-01-2025",
+      jobRole: "UI/UX Developer",
+      company: "Infosys",
+      status: "Accepted",
+    },
+    {
+      date: "17-03-2024",
+      jobRole: "Graphics Designer",
+      company: "leapfrog",
       status: "Selected",
     },
   ],
