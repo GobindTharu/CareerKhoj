@@ -9,6 +9,7 @@ import {
   registerUserSchema,
 } from "../validations/user.validation.js";
 import validateReqBody from "../middleware/validate.req.body.js";
+import { singleUpload } from "../middleware/multer.js";
 
 const router = express.Router();
 
@@ -96,34 +97,76 @@ router.post("/user/logout", isAuthenticated, async (req, res) => {
     .json({ message: "LoggedOut Successfully", success: true });
 });
 
-router.put("/user/update-profile/:id", isAuthenticated, async (req, res) => {
-  try {
-    const userId = req.params.id;
+router.put(
+  "/user/update-profile",
+  singleUpload,
+  isAuthenticated,
+  async (req, res) => {
+    try {
+      const { fullName, phoneNumber, bio, skills, profilePhoto } = req.body;
+      const userId = req.id;
 
-    const updatedUser = req.body;
+      let user = await UserTable.findById(userId);
 
-    const user = await UserTable.updateOne(
-      { _id: userId },
-      {
-        $set: {
-          ...updatedUser,
-        },
+      if (!user) {
+        return res
+          .status(404)
+          .json({ message: "User not found", success: false });
       }
-    );
 
-    if (!user) {
-      return res
-        .status(400)
-        .json({ message: "Something went Wrong", success: false });
+      // Basic updates
+      if (fullName) user.fullName = fullName;
+      if (phoneNumber) user.phoneNumber = phoneNumber;
+      if (bio) user.profile.bio = bio;
+      if (bio) user.profile.profilePhoto = profilePhoto;
+
+
+      // Skills: Parse JSON string to array
+      if (skills) {
+        try {
+          const parsedSkills = JSON.parse(skills);
+          if (Array.isArray(parsedSkills)) {
+            user.profile.skills = parsedSkills;
+          }
+        } catch {
+          return res.status(400).json({
+            message: "Skills must be a valid JSON array",
+            success: false,
+          });
+        }
+      }
+
+      // Resume file handling
+      if (req.file) {
+        // Example placeholder:
+        // const resumeUrl = await uploadToCloudinary(req.file.buffer);
+        user.profile.resume = req.file.buffer.toString("base64"); // Just for demo/storage, replace with real upload
+        user.profile.resumeOriginalName = req.file.originalname;
+      }
+
+      await user.save();
+
+      const safeUser = {
+        _id: user._id,
+        fullName: user.fullName,
+        phoneNumber: user.phoneNumber,
+        role: user.role,
+        profile: user.profile,
+      };
+
+      return res.status(200).json({
+        message: "User updated successfully",
+        user: { user: safeUser },
+        success: true,
+      });
+    } catch (error) {
+      console.error("Update error:", error);
+      return res.status(500).json({
+        message: "Server error: " + error.message,
+        success: false,
+      });
     }
-    return res.status(400).json({
-      message: "User updated successfully",
-      updatedUser,
-      success: true,
-    });
-  } catch (error) {
-    return res.status(500).json(error.message);
   }
-});
+);
 
 export { router as userController };

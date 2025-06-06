@@ -11,7 +11,6 @@ export const LogoutButton = () => {
   const handleLogout = () => {
     dispatch(clearUser());
     window.localStorage.clear();
-    window.cookies.clear();
     navigate("/login");
     toast.success("Logout Successful");
   };

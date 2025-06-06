@@ -3,10 +3,14 @@ import mongoose from "mongoose";
 const profileSchema = new mongoose.Schema({
   profilePhoto: { type: String, default: "" },
   bio: { type: String, default: "" },
-  skills: { type: String, default: "" },
+  skills: { type: [String], default: "" },
   resume: { type: String, default: "" },
   resumeOriginalName: { type: String, default: "" },
-  company: { type: mongoose.Schema.Types.ObjectId, ref: "Company", default: null },
+  company: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Company",
+    default: null,
+  },
 });
 
 const userSchema = new mongoose.Schema(

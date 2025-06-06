@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { LoginButton } from "../buttons/LoginButton";
 import Profile from "./Profile";
 
-const NavBar = () => {
+const NavBar = (data) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
@@ -49,7 +49,6 @@ const NavBar = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
-
   const user = useSelector((state) => state.user?.user);
 
   return (
@@ -77,7 +76,7 @@ const NavBar = () => {
 
         {user ? (
           <div className="hidden lg:flex items-center">
-            <Profile />
+            <Profile data={data} />
           </div>
         ) : (
           <LoginButton />

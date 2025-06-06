@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { PlusIcon, UserCircle2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { LogoutButton } from "../buttons/logoutButton";
 
-export default function Profile(res) {
+export default function Profile() {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -15,9 +16,6 @@ export default function Profile(res) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const userDetails = res.data.userDetails;
-  console.log(userDetails);
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -33,7 +31,7 @@ export default function Profile(res) {
             className="w-10 h-10 rounded-full object-cover"
           />
           <div>
-            <p className="font-medium text-gray-800">{userDetails.fullName}</p>
+            <p className="font-medium text-gray-800">BalGobind Chaudhary </p>
           </div>
         </div>
       </button>
@@ -57,7 +55,10 @@ export default function Profile(res) {
 
           {/* Main Options */}
           <div className="space-y-1 pb-2">
-            <button className="w-full text-left text-sm text-gray-700 hover:bg-gray-200 rounded-md px-2 py-1">
+            <button
+              onClick={() => navigate("/profile-view")}
+              className="w-full text-left text-sm text-gray-700 hover:bg-gray-200 rounded-md px-2 py-1"
+            >
               View Profile
             </button>
           </div>
