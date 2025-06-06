@@ -54,11 +54,11 @@ const NavBar = (data) => {
   return (
     <nav className="fixed top-0 left-0 w-full z-100 backdrop-blur-md bg-white/70 border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center h-16">
-        {/* insert the logo here*/}
+        <img src="./logo.png" alt="CareerKhoj Logo" className="h-16 w-16 mr-2" />
 
         <div className="flex justify-center items-center">
           <h1 className="text-3xl font-semibold font-serif text-gray-700">
-            CareerKhoj
+          
           </h1>
         </div>
         {/* ends */}
