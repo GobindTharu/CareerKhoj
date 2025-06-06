@@ -52,7 +52,7 @@ const NavBar = (data) => {
   const user = useSelector((state) => state.user?.user);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 border-b border-gray-200 shadow-sm">
+    <nav className="fixed top-0 left-0 w-full z-100 backdrop-blur-md bg-white/70 border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center h-16">
         {/* insert the logo here*/}
 
@@ -120,13 +120,23 @@ const NavBar = (data) => {
       <div
         ref={menuRef}
         className={clsx(
-          "fixed top-16 right-0 w-1/2 h-[calc(100vh-4rem)] bg-white border-l border-gray-200 shadow-xl z-40 flex flex-col justify-between py-8 px-6 transition-transform duration-300 ease-in-out",
+          "fixed top-16 right-0 w-80 h-100 bg-gray-100 border-l border-gray-200 shadow-xl z-40 flex flex-col justify-between py-8 px-6 transition-transform duration-300 ease-in-out",
           {
             "translate-x-0": isMenuOpen,
             "translate-x-full": !isMenuOpen,
           }
         )}
       >
+        <div className="w-full">  
+          {/* <LogoutButton /> */}
+          {user ? (
+            <div className="lg:flex items-center">
+              <Profile data={data} />
+            </div>
+          ) : (
+            <LoginButton />
+          )}
+        </div>
         <nav className="space-y-4">
           {menuList.map(({ name, link }) => (
             <Link key={link} to={link} onClick={() => setIsMenuOpen(false)}>
@@ -138,11 +148,6 @@ const NavBar = (data) => {
         </nav>
 
         <div className="my-4 border-t border-gray-100" />
-
-        <div className="w-full">
-          {/* <LogoutButton /> */}
-          <LoginButton />
-        </div>
       </div>
     </nav>
   );

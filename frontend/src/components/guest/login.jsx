@@ -25,7 +25,6 @@ const LoginForm = () => {
     onSuccess: (res) => {
       dispatch(setUser(res.data.userDetails));
       localStorage.setItem("user", JSON.stringify(res.data.userDetails));
-      console.log(res.data.userDetails);
       const { accessToken, userDetails } = res.data;
       const { fullName, role } = userDetails;
 

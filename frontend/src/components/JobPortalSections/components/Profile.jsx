@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogoutButton } from "../buttons/logoutButton";
+import { useSelector } from "react-redux";
+import { Settings, User } from "lucide-react";
 
 export default function Profile() {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user?.user);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -21,34 +25,34 @@ export default function Profile() {
     <div className="relative" ref={dropdownRef}>
       <button
         title="My Profile"
-        className="flex justify-center items-center rounded-full bg-gradient-to-r  from-indigo-400 to-purple-500 pr-2"
+        className="flex justify-center items-center rounded-full bg-gray-300 pr-2"
         onClick={() => setOpen(!open)}
       >
         <div className="flex items-center gap-3">
           <img
-            src="/profile.avif"
+            src={user?.profile?.profilePhoto || "./profileDefault.jpg"}
             alt="profile"
             className="w-10 h-10 rounded-full object-cover"
           />
           <div>
-            <p className="font-medium text-gray-800">BalGobind Chaudhary </p>
+            <p className="font-medium text-gray-800">{user?.fullName}</p>
           </div>
         </div>
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-64 bg-gray-100 rounded-md shadow-xl border border-gray-300 z-50 p-3 space-y-3">
+        <div className="absolute right-0 mt-2 w-78   h-100 bg-gray-100 rounded-md shadow-xl border border-gray-300 z-50 p-3 space-y-3">
           {/* Profile Section */}
           <div className="border-b pb-2">
             <div className="flex items-center gap-3">
               <img
-                src="/profile.avif"
+                src={user?.profile?.profilePhoto || "./profileDefault.jpg"}
                 alt="profile"
                 className="w-12 h-12 rounded-full object-cover"
               />
               <div>
-                <p className="font-medium text-gray-800">Gobind Tharu</p>
-                <p className="text-sm text-gray-500">gobind@gmail.com</p>
+                <p className="font-medium text-gray-800">{user?.fullName}</p>
+                <p className="text-sm text-gray-500">{user?.email}</p>
               </div>
             </div>
           </div>
@@ -57,9 +61,9 @@ export default function Profile() {
           <div className="space-y-1 pb-2">
             <button
               onClick={() => navigate("/profile-view")}
-              className="w-full text-left text-sm text-gray-700 hover:bg-gray-200 rounded-md px-2 py-1"
+              className="flex items-center gap-3 w-full text-left text-sm text-gray-700 hover:bg-gray-200 rounded-md px-2 py-1"
             >
-              View Profile
+              <User /> View Profile
             </button>
           </div>
 
@@ -81,13 +85,15 @@ export default function Profile() {
 
           {/* Help & Logout */}
           <div className="space-y-1">
-            <button className="w-full text-left text-sm text-gray-700 hover:bg-gray-200 rounded-md px-2 py-1">
-              Settings
+            <button className="flex items-center gap-3 w-full text-left text-sm text-gray-700 hover:bg-gray-200 rounded-md px-2 py-1">
+              <Settings /> Settings
             </button>
             <button className="w-full text-left text-sm text-gray-700 hover:bg-gray-200 rounded-md px-2 py-1">
               Help & Feedback
             </button>
-            <LogoutButton />
+            <div className="flex items-baseline-last mt-12">
+              <LogoutButton />
+            </div>
           </div>
         </div>
       )}

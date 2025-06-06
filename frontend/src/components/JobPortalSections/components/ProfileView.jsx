@@ -1,25 +1,10 @@
 import { Edit2 } from "lucide-react";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import NavBar from "./NavBar";
+import { useSelector } from "react-redux";
+import ProfileUpdateForm from "./ProfileUpdateForm";
 
 const profileData = {
-  fullName: "Gobind Tharu",
-  email: "gobind@gmail.com",
-  phone: "9816494422",
-  about:
-    "Passionate Fullstack developer with a knack for building responsive, performant web applications. developer with a knack for building responsive,",
-  skills: [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "ReactJS",
-    "TailwindCSS",
-    "Express",
-    "Node.js",
-  ],
-  resumeLink: "#",
-  profilePhoto: "./profile.avif",
   jobs: [
     {
       date: "17-07-2024",
@@ -37,97 +22,130 @@ const profileData = {
 };
 
 const ProfileView = () => {
-  const navigate = useNavigate();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const user = useSelector((state) => state.user?.user);
+
   return (
-    <div className="max-w-7xl mx-auto p-6 pt-16 bg-white  shadow-md mt-16">
+    <div className="relative bg-gray-100">
       <NavBar />
-      {/* Profile Header */}
-      <div className="flex items-center justify-between p-6 py-16 mb-6  shadow-xl rounded-xl">
-        <div className="flex items-start gap-4">
+
+      {isPopupOpen && (
+        <>
+          <div className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm" />
+          <div className="fixed inset-0 z-50 flex items-start justify-center p-4 overflow-auto">
+            <ProfileUpdateForm onClose={() => setIsPopupOpen(false)} />
+          </div>
+        </>
+      )}
+
+      <div
+        className={`max-w-7xl mx-auto p-6 pt-24 transition duration-300 ${
+          isPopupOpen ? "blur-sm pointer-events-none select-none" : ""
+        }`}
+      >
+        <div className=" flex items-center justify-center bg-white p-6 rounded-2xl shadow-xl flex-col md:flex-row md:items-center gap-6 mb-6">
           <img
-            src={profileData.profilePhoto}
+            src={user?.profile.profilePhoto || "./profileDefault.jpg"}
             alt="Avatar"
-            className="w-16 h-16 md:w-52 md:h-52 rounded-full"
+            className=" w-24 h-24 md:w-40 md:h-40 object-cover rounded-full border"
           />
-          <div>
-            <h1 className="text-2xl font-bold p-4 border-b shadow-xl">
-              {profileData.fullName}
+          <div className="flex-1">
+            <h1 className="text-2xl font-bold border-b pb-2">
+              {user?.fullName}
             </h1>
-            <p className="text-gray-600 py-8 font-sm">{profileData.about}</p>
-            <div className="text-sm mt-2 space-y-1">
-              <p className="text-md font-bold">
-                <span className="text-md font-bold text-gray-700">Email: </span>
-                {profileData.email}
+            <p className="text-gray-600 mt-4">{user?.profile?.bio}</p>
+            <div className="text-sm mt-4 space-y-1">
+              <p>
+                <span className="font-semibold text-gray-700">Email: </span>
+                {user?.email}
               </p>
-              <p className="text-md font-bold">
-                <span className="text-md font-bold text-gray-700">Phone:</span>{" "}
-                {profileData.phone}
+              <p>
+                <span className="font-semibold text-gray-700">Phone: </span>
+                {user?.phoneNumber}
               </p>
             </div>
           </div>
           <button
-            onClick={() => navigate("/profile-update")}
-            className=" font-bold text-3xl text-gray-500 hover:text-blue-500 border-2 rounded-lg p-2"
+            onClick={() => setIsPopupOpen(true)}
+            className=" absolute  top-28 lg:right-82 md:right-16 self-end  md:self-auto mt-2 text-gray-600 hover:text-blue-500 border p-2 rounded-lg"
           >
-            <Edit2 />
+            <Edit2 size={24} />
           </button>
         </div>
-      </div>
 
-      {/* Skills */}
-      <div className="mb-4 py-6">
-        <h2 className="font-semibold my-4">Skills</h2>
-        <div className="flex flex-wrap gap-2">
-          {profileData.skills.map((skill, index) => (
-            <span
-              key={index}
-              className="bg-gray-200 text-sm px-3 py-1 rounded-full"
-            >
-              {skill}
-            </span>
-          ))}
+        {/* Skills */}
+        <div className="mb-6">
+          <h2 className="font-semibold text-lg mb-2">Skills</h2>
+          <div className="flex flex-wrap gap-2">
+            {Array.isArray(user?.profile?.skills) &&
+            user.profile.skills.length > 0 ? (
+              user.profile.skills.map((skill, index) => (
+                <span
+                  key={index}
+                  className="bg-gray-200 text-sm px-3 py-1 rounded-full"
+                >
+                  {skill}
+                </span>
+              ))
+            ) : (
+              <p className="text-sm text-gray-500">No skills listed.</p>
+            )}
+          </div>
         </div>
-      </div>
 
-      {/* Resume */}
-      <div className="mb-6">
-        <h2 className="font-semibold my-2">Resume</h2>
-        <a
-          href={profileData.resumeLink}
-          className="text-blue-600 hover:underline text-sm"
-        >
-          View Resume
-        </a>
-      </div>
+        {/* Resume */}
+        <div className="mb-6">
+          <h2 className="font-semibold text-lg mb-2">Resume</h2>
+          {user?.profile?.resume ? (
+            <a
+              href={`https://docs.google.com/gview?url=${encodeURIComponent(
+                user.profile.resume
+              )}&embedded=true`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline text-sm"
+            >
+              View Resume: <span>{user.profile.resumeOriginalName}</span>
+            </a>
+          ) : (
+            <p className="text-sm text-gray-500">No resume uploaded.</p>
+          )}
+        </div>
 
-      {/* Applied Jobs */}
-      <div>
-        <h2 className="font-semibold text-lg py-3">Applied Jobs</h2>
-        <div className="overflow-x-auto  mb-16">
-          <table className="w-full text-sm text-left border border-gray-200">
-            <thead className="bg-gray-200">
-              <tr>
-                <th className="px-4 py-4">Date</th>
-                <th className="px-4 py-4">Job Role</th>
-                <th className="px-4 py-4">Company</th>
-                <th className="px-4 py-4">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {profileData.jobs.map((job, index) => (
-                <tr key={index} className="border-t">
-                  <td className="px-4 py-4">{job.date}</td>
-                  <td className="px-4 py-4">{job.jobRole}</td>
-                  <td className="px-4 py-4">{job.company}</td>
-                  <td>
-                    <span className="ml-4 inline-block px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full">
-                      {job.status}
-                    </span>
-                  </td>
+        <div className="mb-16">
+          <h2 className="font-semibold text-lg mb-3">Applied Jobs</h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-full border border-gray-200 text-sm">
+              <thead className="bg-gray-200">
+                <tr>
+                  <th className="px-4 py-3">S.N</th>
+                  <th className="px-4 py-3">Date</th>
+                  <th className="px-4 py-3 ">Job Role</th>
+                  <th className="px-4 py-3 ">Company</th>
+                  <th className="px-4 py-3 ">Status</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {profileData.jobs.map((job, index) => (
+                  <tr key={index} className="border-t">
+                    <td className="px-4 py-3 w-1/4 text-center">{index + 1}</td>
+                    <td className="px-4 py-3 w-1/4 text-center ">{job.date}</td>
+                    <td className="px-4 py-3 w-1/4 text-center">
+                      {job.jobRole}
+                    </td>
+                    <td className="px-4 py-3 w-1/4 text-center">
+                      {job.company}
+                    </td>
+                    <td className="px-4 py-3 w-1/4 text-center">
+                      <span className="inline-block px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full">
+                        {job.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
