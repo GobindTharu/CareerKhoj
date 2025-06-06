@@ -4,11 +4,11 @@ import express from "express";
 import cookieParser from "cookie-parser";
 
 // components import
-import connectDb from "./db.connection.js";
 import { userController } from "./controller/user.controller.js";
 import { companyController } from "./controller/company.controller.js";
 import { jobController } from "./controller/job.controller.js";
 import { applicationController } from "./controller/application.controller.js";
+import connectDb from "./utils/db.connection.js";
 
 //? create app
 const app = express();

@@ -1,32 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const jobList = [
-  {
-    id: 1,
-    title: "Full Stack Developer",
-    company: "F1Soft International Pvt. Ltd.",
-    location: "Kathmandu, Bāgmatī, Nepal",
-    tag: "1 school alum works here",
-  },
-  {
-    id: 2,
-    title: "Mid-level React Native Developer",
-    company: "TalentSathi - Simplifying the Recruitment",
-    location: "Kathmandu, Bāgmatī, Nepal (On-site)",
-    tag: "Company review time is typically 1 week",
-  },
-  {
-    id: 3,
-    title: "Service Technician",
-    company: "Generation Next Communication Pvt. Ltd.",
-    location: "Kathmandu, Bāgmatī, Nepal (On-site)",
-    tag: "Actively reviewing applicants",
-  },
-];
-
-const JobList = () => {
+const JobLists = () => {
   const navigate = useNavigate();
+  const allJobs = useSelector((state) => state.job.allJobs);
 
   const handleClick = (jobId) => {
     navigate(`/job/${jobId}`);
@@ -36,10 +14,11 @@ const JobList = () => {
     <div className="max-w-3xl mx-auto bg-white border rounded-lg shadow-sm p-4">
       <h2 className="text-lg font-semibold mb-4">Top job picks for you</h2>
       <p className="text-sm text-gray-600 mb-4">
-        Based on your profile, preferences, and activity like applies, searches, and saves
+        Based on your profile, preferences, and activity like applies, searches,
+        and saves
       </p>
       <ul className="space-y-4">
-        {jobList.map((job) => (
+        {allJobs.map((job) => (
           <li
             key={job.id}
             className="p-3 hover:bg-gray-50 rounded-lg cursor-pointer flex justify-between items-start"
@@ -47,13 +26,17 @@ const JobList = () => {
           >
             <div>
               <p className="text-blue-600 font-medium">{job.title}</p>
-              <p className="text-sm text-gray-700">{job.company} · {job.location}</p>
+              <p className="text-sm text-gray-700">
+                {job.company} · {job.location}
+              </p>
               {job.tag && (
                 <p className="text-xs text-gray-500 mt-1">{job.tag}</p>
               )}
               <p className="text-xs text-gray-400 mt-1">Viewed · Easy Apply</p>
             </div>
-            <button className="text-gray-400 hover:text-red-500 text-lg font-bold">×</button>
+            <button className="text-gray-400 hover:text-red-500 text-lg font-bold">
+              ×
+            </button>
           </li>
         ))}
       </ul>
@@ -66,4 +49,4 @@ const JobList = () => {
   );
 };
 
-export default JobList;
+export default JobLists;

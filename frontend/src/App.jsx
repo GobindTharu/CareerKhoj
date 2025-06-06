@@ -2,15 +2,18 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
+import SearchResults from "./components/JobPortalSections/components/SearchResults";
 import ChooseTemplate from "./components/ResumeSections/ResumeTempletes/ChooseTemplate";
-import AuthGuard from "./guard/AuthGuard";
-import GuestGuard from "./guard/GuestGuard";
 import AboutPage from "./Pages/AboutUs";
 import Login from "./Pages/Auth/Login";
 import SignUp from "./Pages/Auth/SignUp";
 import BuildResume from "./Pages/BuildResume";
 import HomePage from "./Pages/Home";
+import JobDetail from "./Pages/JobDetail";
 import Jobs from "./Pages/Jobs";
+import UserProfileUpdateForm from "./components/JobPortalSections/components/ProfileUpdateForm";
+import ProfileView from "./components/JobPortalSections/components/ProfileView";
+import ProfileUpdateForm from "./components/JobPortalSections/components/ProfileUpdateForm";
 
 const ResumeFormWrapper = () => {
   const [submittedData, setSubmittedData] = React.useState(null);
@@ -45,74 +48,19 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Routes>
-        
-        <Route
-          path="/login"
-          element={
-            <GuestGuard>
-              <Login />
-            </GuestGuard>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <GuestGuard>
-              {" "}
-              <SignUp />
-            </GuestGuard>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <AuthGuard>
-              <HomePage />
-            </AuthGuard>
-          }
-        />
-        <Route
-          path="/jobs"
-          element={
-            <AuthGuard>
-              <Jobs />
-            </AuthGuard>
-          }
-        />
-         <Route
-          path="/resume-builder"
-          element={
-            <AuthGuard>
-              <BuildResume />
-            </AuthGuard>
-          }
-        />
-        <Route
-          path="/about-us"
-          element={
-            <AuthGuard>
-              <AboutPage />
-            </AuthGuard>
-          }
-        />
-        <Route
-          path="/choose-template"
-          element={
-            <AuthGuard>
-              <ChooseTemplate />
-            </AuthGuard>
-          }
-        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/profile-view" element={<ProfileView />} />
+        <Route path="/profile-update" element={<ProfileUpdateForm />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/search-results" element={<SearchResults />} />
+        <Route path="/job-details" element={<JobDetail />} />
+        <Route path="/resume-builder" element={<BuildResume />} />
+        <Route path="/about-us" element={<AboutPage />} />
+        <Route path="/choose-template" element={<ChooseTemplate />} />
 
-        <Route
-          path="/simple-form"
-          element={
-            <AuthGuard>
-              <ResumeFormWrapper />
-            </AuthGuard>
-          }
-        />
-       
+        <Route path="/simple-form" element={<ResumeFormWrapper />} />
       </Routes>
     </div>
   );

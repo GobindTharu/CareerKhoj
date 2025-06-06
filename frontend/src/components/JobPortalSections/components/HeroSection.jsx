@@ -3,20 +3,21 @@ import { JobSearchForm } from "./JobSearchForm";
 import { Stats } from "./Stats";
 
 const HeroSection = () => (
-  <>
+  <div className="relative min-h-[90vh]">
+    {/* Blurred Background Layer */}
     <div
-      className="flex flex-col gap-4 pt-24 px-6 text-center min-h-[90vh]"
+      className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-fixed filter blur-8"
       style={{
         backgroundImage: `url('./homepagebackground.avif')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundBlendMode: "overlay",
-        backgroundAttachment: "fixed", // <-- Added this line
-        color: "white",
       }}
-    >
-      <p className="text-lg font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-b from-blue-800 to-purple-700">
+    ></div>
+
+    {/* Overlay */}
+    <div className="absolute inset-0 z-10 bg-black/20"></div>
+
+    {/* Main Content */}
+    <div className="relative z-20 flex flex-col gap-4 pt-24 px-6 text-center text-white">
+      <p className="text-lg font-bold mb-2 text-transparent bg-clip-text bg-white">
         Find Job, Employment, and Career Opportunities
       </p>
 
@@ -26,16 +27,15 @@ const HeroSection = () => (
           WebkitBackgroundClip: "text",
         }}
       >
-       <span className="text-blue-600">CareerKhoj</span> : Your Personal Career Launchpad
+        <span className="text-blue-600">CareerKhoj</span> : Your Personal Career
+        Launchpad
       </h1>
 
       <Stats />
       <JobSearchForm />
       <JobCategories />
     </div>
-
- 
-  </>
+  </div>
 );
 
 export default HeroSection;

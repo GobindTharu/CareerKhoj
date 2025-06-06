@@ -146,6 +146,13 @@ const SignupForm = () => {
 
         {/* Agree to Terms */}
         <div className="flex items-center justify-end gap-2">
+          <input
+            type="checkbox"
+            name="agreeToTerms"
+            checked={formData.agreeToTerms}
+            onChange={handleChange}
+            className="h-4 w-4 text-blue-600"
+          />
           <label className="text-sm text-gray-700">
             I agree to the{" "}
             <a href="/terms" className="text-blue-600 underline">
@@ -156,13 +163,6 @@ const SignupForm = () => {
               Privacy Policy
             </a>
           </label>
-          <input
-            type="checkbox"
-            name="agreeToTerms"
-            checked={formData.agreeToTerms}
-            onChange={handleChange}
-            className="h-4 w-4 text-blue-600"
-          />
         </div>
         {errors.agreeToTerms && (
           <p className="text-sm text-red-500">{errors.agreeToTerms}</p>
@@ -173,6 +173,14 @@ const SignupForm = () => {
           className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
         >
           Register
+        </button>
+
+        <button
+          type="button"
+          className="w-full border border-gray-300 py-2 rounded-md flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-100 transition"
+        >
+          <img src="/google.png" alt="Google" className="w-5 h-5" />
+          Sign in with Google
         </button>
 
         <p className="text-sm text-center text-gray-600">
