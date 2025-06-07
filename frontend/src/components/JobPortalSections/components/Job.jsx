@@ -45,7 +45,7 @@ const Job = ({ job }) => {
       <p className="flex justify-end pt-12 text-sm text-blue-600">{daysLeft}</p>
       <div className="flex justify-between mt-3 px-2">
         <button
-          onClick={() => navigate("/job-details")}
+          onClick={() => navigate(`/job-details/${job?._id}`)}
           className="px-3 py-1 text-white bg-gray-950 rounded-lg mr-2 disabled:opacity-50"
         >
           Details

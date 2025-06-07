@@ -1,5 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { FaMapMarkerAlt, FaCalendarAlt } from "react-icons/fa";
+import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import axiosInstance from "../../../libs/axiosInstance";
 
 const jobData = {
   title: "Software Developer",
@@ -42,6 +45,44 @@ const jobData = {
 };
 
 const JobDetails = () => {
+  const params = useParams();
+  const jobId = params.id;
+
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["job-detail", jobId],
+    queryFn: async () => {
+      const response = await axiosInstance.get(`/job/detail/${jobId}`);
+      return response.data.jobDetails;
+    },
+  });
+
+  if (isLoading) return <div className="flex items-center justify-center">Please Wait.....</div>;
+  if (isError) {
+    return (
+      <div className="p-2 ">
+        <p>
+          Error loading product:
+          {error.response.data.message}
+        </p>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return <div className="flex items-center justify-center">No product details available.</div>
+  }
+
+  // const {
+  //   name,
+  //   brand,
+  //   category,
+  //   price,
+  //   quantity,
+  //   image,
+  //   description,
+  //   freeShipping,
+  // } = data;
+
   return (
     <div className="p-4 md:p-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
       {/* Left Column (Main Job Details) */}

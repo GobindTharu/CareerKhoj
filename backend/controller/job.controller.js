@@ -51,7 +51,7 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
       category,
       company: companyId,
       experienceLevel: experience,
-      created_by: req.id, 
+      created_by: req.id,
     });
 
     const isDuplicate = duplicateJobs.some((job) => {
@@ -136,7 +136,7 @@ router.get("/job/jobseeker/list", isAuthenticated, async (req, res) => {
 
 // jobseeker hob by id
 
-router.get("/job/get/:id", isAuthenticated, async (req, res) => {
+router.get("/job/detail/:id", isAuthenticated, async (req, res) => {
   try {
     const jobId = req.params.id;
 
