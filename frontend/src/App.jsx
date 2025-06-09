@@ -2,6 +2,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
+import ProfileUpdateForm from "./components/JobPortalSections/components/ProfileUpdateForm";
+import ProfileView from "./components/JobPortalSections/components/ProfileView";
 import SearchResults from "./components/JobPortalSections/components/SearchResults";
 import ChooseTemplate from "./components/ResumeSections/ResumeTempletes/ChooseTemplate";
 import AboutPage from "./Pages/AboutUs";
@@ -9,11 +11,8 @@ import Login from "./Pages/Auth/Login";
 import SignUp from "./Pages/Auth/SignUp";
 import BuildResume from "./Pages/BuildResume";
 import HomePage from "./Pages/Home";
-import JobDetail from "./Pages/JobDetail";
 import Jobs from "./Pages/Jobs";
-import UserProfileUpdateForm from "./components/JobPortalSections/components/ProfileUpdateForm";
-import ProfileView from "./components/JobPortalSections/components/ProfileView";
-import ProfileUpdateForm from "./components/JobPortalSections/components/ProfileUpdateForm";
+import JobDetail from "./Pages/JobDetail";
 
 const ResumeFormWrapper = () => {
   const [submittedData, setSubmittedData] = React.useState(null);
@@ -55,7 +54,7 @@ function App() {
         <Route path="/profile-update" element={<ProfileUpdateForm />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/search-results" element={<SearchResults />} />
-        <Route path="/job-details" element={<JobDetail />} />
+        <Route path="/job-detail/:id" element={<JobDetail />} />
         <Route path="/resume-builder" element={<BuildResume />} />
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/choose-template" element={<ChooseTemplate />} />

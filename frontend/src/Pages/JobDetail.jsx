@@ -6,7 +6,7 @@ export default function JobDetail() {
   return (
     <>
       <NavBar />
-      <JobDetails/>
+      <JobDetails />
       <Footer />
     </>
   );
