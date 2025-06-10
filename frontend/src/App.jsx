@@ -12,7 +12,7 @@ import SignUp from "./Pages/Auth/SignUp";
 import BuildResume from "./Pages/BuildResume";
 import HomePage from "./Pages/Home";
 import Jobs from "./Pages/Jobs";
-import JobDetail from "./Pages/JobDetail";
+import JobDetails from "./components/JobPortalSections/components/JobDetails";
 
 const ResumeFormWrapper = () => {
   const [submittedData, setSubmittedData] = React.useState(null);
@@ -54,7 +54,7 @@ function App() {
         <Route path="/profile-update" element={<ProfileUpdateForm />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/search-results" element={<SearchResults />} />
-        <Route path="/job-detail/:id" element={<JobDetail />} />
+        <Route path="/job-details/:id" element={<JobDetails />} />
         <Route path="/resume-builder" element={<BuildResume />} />
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/choose-template" element={<ChooseTemplate />} />

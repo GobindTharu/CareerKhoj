@@ -140,7 +140,11 @@ router.get("/job/detail/:id", isAuthenticated, async (req, res) => {
   try {
     const jobId = req.params.id;
 
-    const jobs = await JobTable.findById(jobId);
+    const jobs = await JobTable.findById(jobId)
+      .populate({
+        path: "company",
+      })
+      .sort({ createdAt: -1 });
 
     if (!jobs) {
       return res
