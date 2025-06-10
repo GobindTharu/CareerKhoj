@@ -29,9 +29,13 @@ const Job = ({ job }) => {
       <div>
         <h1 className="font-bold text-lg my-2">{job?.title}</h1>
 
+<<<<<<< HEAD
         <p className="h-15 overflow-y-hidden text-sm text-gray-600">
           {job?.description}
         </p>
+=======
+        <p className="h-15 overflow-hidden text-sm text-gray-600">{job?.description}</p>
+>>>>>>> backend
       </div>
       <div className="flex items-center gap-2 mt-8">
         <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-2 py-1 rounded-full shadow-sm">

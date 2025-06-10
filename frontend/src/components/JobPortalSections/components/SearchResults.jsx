@@ -4,7 +4,7 @@ import Job from "./Job";
 
 const ranJobs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-const SearchResults = () => {
+const SearchResults = ({ job }) => {
   return (
     <div>
       <NavBar />
@@ -14,8 +14,8 @@ const SearchResults = () => {
         </h1>
 
         <div className="grid grid-cols-3 gap-4">
-          {ranJobs.map((item, index) => {
-            return <Job />;
+          {job.map((job) => {
+            return <Job key={job._id} job={job} />;
           })}
         </div>
       </div>
