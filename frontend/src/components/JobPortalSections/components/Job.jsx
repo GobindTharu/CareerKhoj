@@ -18,7 +18,10 @@ const Job = ({ job }) => {
       <div className="flex items-center gap-2 my-2">
         <button className="py-1">
           <div className=" flex items-center justify-center w-16 h-16">
-            <img src="./company.png" alt=" company logo" />
+            <img
+              src={job?.company?.logo || "/company.png"}
+              alt=" company logo"
+            />
           </div>
         </button>
         <div>
@@ -29,7 +32,9 @@ const Job = ({ job }) => {
       <div>
         <h1 className="font-bold text-lg my-2">{job?.title}</h1>
 
-        <p className="text-sm text-gray-600">{job?.description}</p>
+        <p className="h-15 text-sm overflow-y-hidden text-gray-600">
+          {job?.requirements?.qualification}
+        </p>
       </div>
       <div className="flex items-center gap-2 mt-8">
         <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-2 py-1 rounded-full shadow-sm">
@@ -45,7 +50,7 @@ const Job = ({ job }) => {
       <p className="flex justify-end pt-12 text-sm text-blue-600">{daysLeft}</p>
       <div className="flex justify-between mt-3 px-2">
         <button
-          onClick={() => navigate("/job-details")}
+          onClick={() => navigate(`/job-details/${job?._id}`)}
           className="px-3 py-1 text-white bg-gray-950 rounded-lg mr-2 disabled:opacity-50"
         >
           Details

@@ -30,7 +30,7 @@ export default function Profile() {
       >
         <div className="flex items-center gap-3">
           <img
-            src={user?.profile?.profilePhoto || "./profileDefault.jpg"}
+            src={user?.profile?.profilePhoto || "/profileDefault.jpg"}
             alt="profile"
             className="w-10 h-10 rounded-full object-cover"
           />
@@ -46,7 +46,7 @@ export default function Profile() {
           <div className="border-b pb-2">
             <div className="flex items-center gap-3">
               <img
-                src={user?.profile?.profilePhoto || "./profileDefault.jpg"}
+                src={user?.profile?.profilePhoto || "/profileDefault.jpg"}
                 alt="profile"
                 className="w-12 h-12 rounded-full object-cover"
               />

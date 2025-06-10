@@ -3,7 +3,6 @@ import { JobTable } from "../models/job.models.js";
 import { isAuthenticated } from "../middleware/user.middleware.js";
 const router = express.Router();
 
-// Create Jobs by recruiter
 router.post("/job/post", isAuthenticated, async (req, res) => {
   try {
     const {
@@ -17,9 +16,11 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
       position,
       category,
       deadline,
+      offer,
       companyId,
     } = req.body;
 
+    // Validate required fields
     if (
       !title ||
       !description ||
@@ -38,10 +39,19 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
       });
     }
 
-    const normalizedRequirements = requirements
-      .split(",")
-      .map((item) => item.trim().toLowerCase());
+    // Extract and normalize requirement fields
+    const { qualification = "", skills = [], resume = false } = requirements;
 
+    const normalizedSkills = Array.isArray(skills)
+      ? skills.map((s) => s.trim().toLowerCase()).filter((s) => s.length > 0)
+      : typeof skills === "string"
+      ? skills
+          .split(",")
+          .map((s) => s.trim().toLowerCase())
+          .filter((s) => s.length > 0)
+      : [];
+
+    // Check for duplicate job
     const duplicateJobs = await JobTable.find({
       title: title.trim(),
       description: description.trim(),
@@ -51,16 +61,21 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
       category,
       company: companyId,
       experienceLevel: experience,
-      created_by: req.id, 
+      created_by: req.id,
     });
 
     const isDuplicate = duplicateJobs.some((job) => {
-      const existingReq = (job.requirements || [])
-        .map((r) => r.toLowerCase())
-        .sort();
-      const newReq = [...normalizedRequirements].sort();
+      const existingSkills = Array.isArray(job.requirements.skills)
+        ? [...job.requirements.skills].map((s) => s.toLowerCase()).sort()
+        : [];
+
+      const newSkills = [...normalizedSkills].sort();
+
       return (
-        JSON.stringify(existingReq) === JSON.stringify(newReq) &&
+        job.requirements.qualification?.toLowerCase().trim() ===
+          qualification.toLowerCase().trim() &&
+        JSON.stringify(existingSkills) === JSON.stringify(newSkills) &&
+        job.requirements.resume === resume &&
         job.positions === Number(position)
       );
     });
@@ -72,11 +87,15 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
       });
     }
 
-    // Create new job
+    
     const newJob = await JobTable.create({
       title: title.trim(),
       description: description.trim(),
-      requirements: normalizedRequirements,
+      requirements: {
+        qualification: qualification.trim(),
+        skills: normalizedSkills,
+        resume: resume,
+      },
       salary: Number(salary),
       location: location.trim(),
       jobType,
@@ -84,6 +103,7 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
       positions: Number(position),
       category,
       deadline: deadline || null,
+      offer: offer || "",
       company: companyId,
       created_by: req.id,
     });
@@ -136,11 +156,15 @@ router.get("/job/jobseeker/list", isAuthenticated, async (req, res) => {
 
 // jobseeker hob by id
 
-router.get("/job/get/:id", isAuthenticated, async (req, res) => {
+router.get("/job/detail/:id", isAuthenticated, async (req, res) => {
   try {
     const jobId = req.params.id;
 
-    const jobs = await JobTable.findById(jobId);
+    const jobs = await JobTable.findById(jobId)
+      .populate({
+        path: "company",
+      })
+      .sort({ createdAt: -1 });
 
     if (!jobs) {
       return res

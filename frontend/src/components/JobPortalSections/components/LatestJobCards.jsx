@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 const LatestJobCards = ({ job }) => {
   const navigate = useNavigate();
-  
 
   return (
     <div
@@ -12,7 +11,7 @@ const LatestJobCards = ({ job }) => {
     >
       <div className="py-2 flex items-center gap-4 ">
         <div className=" flex items-center justify-center w-16 h-16  ">
-          <img src="./company.png" alt="" className="" />
+          <img src={job?.company?.logo || "/company.png"} alt="" className="" />
         </div>
         <div>
           <h1 className="font-medium text-lg">{job?.company?.name}</h1>
@@ -25,10 +24,10 @@ const LatestJobCards = ({ job }) => {
       </div>
       <div className="flex items-center gap-2 mt-4">
         <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-3 py-1 rounded-full shadow-sm">
-         {job?.positions} Positions
+          {job?.positions} Positions
         </span>
         <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-3 py-1 rounded-full shadow-sm">
-         {job.jobType}
+          {job.jobType}
         </span>
         <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-3 py-1 rounded-full shadow-sm">
           Rs. {job?.salary} Salary
