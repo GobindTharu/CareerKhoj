@@ -12,8 +12,18 @@ const jobSchema = new mongoose.Schema(
       required: [true, "Job description is required"],
     },
     requirements: {
-      type: [String],
-      required: true,
+      qualification: {
+        type: String,
+        default: "",
+      },
+      skills: {
+        type: [String],
+        default: [],
+      },
+      resume: {
+        type: Boolean,
+        default: false,
+      },
     },
     salary: {
       type: Number,
@@ -55,16 +65,13 @@ const jobSchema = new mongoose.Schema(
     },
     experienceLevel: {
       type: String,
-      enum: [
-        "internship",
-        "Fresher",
-        "Mid-Level",
-        "Senior-Level",
-        "Executive",
-      ],
+      enum: ["Fresher", "Mid-Level", "Senior-Level", "Executive"],
       default: "Fresher",
     },
 
+    offer: {
+      type: String,
+    },
     deadline: {
       type: Date,
     },
