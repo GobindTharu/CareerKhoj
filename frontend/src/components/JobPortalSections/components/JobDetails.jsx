@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -7,18 +7,54 @@ import { setSingleJob } from "../../../redux/jobSlice";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import { getDaysLeftToApply, getPostedDaysAgo } from "./Job";
+import toast from "react-hot-toast";
 
 const JobDetails = () => {
-  // const isApplied = true;
+  const singleJob = useSelector((state) => state.job.singleJob);
+  const user = useSelector((state) => state.user.user);
+  const isInitiallyApplied =
+    Boolean(
+      singleJob?.application?.some(
+        (a) => String(a?.applicant) === String(user?._id)
+      )
+    ) || false;
+  const [isApplied, setIsApplied] = useState(isInitiallyApplied);
+
   const params = useParams();
   const jobId = params.id;
-  const singleJob = useSelector((state) => state.job.singleJob);
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  console.log(singleJob);
 
   const daysLeft = getDaysLeftToApply(singleJob?.deadline);
   const postedAgo = getPostedDaysAgo(singleJob?.createdAt);
+
+  console.log(isInitiallyApplied);
+  console.log("Applications:", singleJob?.application);
+  console.log("User ID:", user?._id);
+
+  const applyJobHandler = async () => {
+    try {
+      const res = await axiosInstance.get(`/application/apply/${jobId}`, {
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        setIsApplied(true);
+
+        const updatedSingleJob = {
+          ...singleJob,
+          application: [
+            ...(singleJob.application || []),
+            { applicant: user?._id },
+          ],
+        };
+        dispatch(setSingleJob(updatedSingleJob));
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }
+  };
 
   useEffect(() => {
     const fetchSingleJob = async () => {
@@ -27,10 +63,12 @@ const JobDetails = () => {
           withCredentials: true,
         });
 
-        console.log(res.data?.jobs);
-
         if (res.data.success) {
           dispatch(setSingleJob(res.data.jobs));
+          setIsApplied(
+            res.data.jobs?.application.some((a) => String(a?.applicant)) ===
+              String(user?._id)
+          );
         }
       } catch (error) {
         console.log(error);
@@ -38,8 +76,6 @@ const JobDetails = () => {
     };
     fetchSingleJob();
   }, [jobId, dispatch, user?._id]);
-
-  console.log(singleJob?.title);
 
   return (
     <>
@@ -52,7 +88,10 @@ const JobDetails = () => {
             <div className="flex items-center gap-2 my-2">
               <button className="py-1">
                 <div className=" flex items-center justify-center w-16 h-16 md:w-32 md:h-32">
-                  <img src="/company.png" alt="Company logo" />
+                  <img
+                    src={singleJob?.company?.logo || "/company.png"}
+                    alt="Company logo"
+                  />
                 </div>
               </button>
               <div className="w-full mb-4 border-b  px-5 pb-2 border-gray-200">
@@ -95,9 +134,20 @@ const JobDetails = () => {
                   <strong>Valid Until:</strong> {daysLeft}
                 </span>
               </div>
-              <div className="flex justify-end mt-6">
-                <button className="bg-blue-600 hover:bg-blue-700 transition-colors text-white font-semibold py-2 px-6 rounded-xl shadow-md">
-                  Apply Now
+              <div className="flex justify-between   mt-6">
+                <span className="mr-2">
+                  applicants: {singleJob?.application?.length}
+                </span>
+                <button
+                  onClick={isApplied ? null : applyJobHandler}
+                  disabled={isApplied}
+                  className={`${
+                    isApplied
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-blue-600 hover:bg-blue-700"
+                  }transition-colors text-white font-semibold py-2 px-6 rounded-xl shadow-md`}
+                >
+                  {isApplied ? "Already Applied" : "Apply Now"}
                 </button>
               </div>
             </div>
@@ -115,14 +165,13 @@ const JobDetails = () => {
                 <strong>Qualification Required:</strong>{" "}
                 {singleJob?.requirements?.qualification}
               </p>
-              <p>
-                <strong className="">Key Skills:</strong>
-                <ul className="list-disc list-inside pl-4 mt-1">
-                  {singleJob?.requirements?.skills?.map((skill, index) => (
-                    <li key={index}>{skill}</li>
-                  ))}
-                </ul>
-              </p>
+
+              <strong className="">Key Skills:</strong>
+              <ul className="list-disc list-inside pl-4 mt-1">
+                {singleJob?.requirements?.skills?.map((skill, index) => (
+                  <li key={index}>{skill}</li>
+                ))}
+              </ul>
 
               <p>
                 <strong className="mr-2 ">Resume:</strong>
@@ -141,18 +190,8 @@ const JobDetails = () => {
               </h2>
             </div>
             <div className="space-y-3 text-gray-700 text-sm leading-relaxed">
-              <div>
-                <strong>Job Responsibilities:</strong>
-                <p className="py-3">{singleJob?.description}</p>
-              </div>
-              <div>
-                {/* <strong>Requirements:</strong>
-              <ul className="list-disc list-inside space-y-1">
-                {jobData.jobDescription.requirements.map((req, index) => (
-                  <li key={index}>{req}</li>
-                ))}
-              </ul> */}
-              </div>
+              <strong>Job Responsibilities:</strong>
+              <p className="py-3">{singleJob?.description}</p>
             </div>
           </div>
 
