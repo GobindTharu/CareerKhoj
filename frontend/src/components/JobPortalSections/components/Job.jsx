@@ -56,7 +56,7 @@ const Job = ({ job }) => {
           Details
         </button>
         <button className="px-3 py-1 text-white bg-gray-950 rounded-lg disabled:opacity-50">
-          Apply
+          Save
         </button>
       </div>
     </div>

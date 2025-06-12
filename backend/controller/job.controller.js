@@ -87,7 +87,6 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
       });
     }
 
-    
     const newJob = await JobTable.create({
       title: title.trim(),
       description: description.trim(),
@@ -163,6 +162,9 @@ router.get("/job/detail/:id", isAuthenticated, async (req, res) => {
     const jobs = await JobTable.findById(jobId)
       .populate({
         path: "company",
+      })
+      .populate({
+        path: "application",
       })
       .sort({ createdAt: -1 });
 
