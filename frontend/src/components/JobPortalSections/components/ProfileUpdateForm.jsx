@@ -24,13 +24,12 @@ const ProfileUpdateForm = ({ onClose }) => {
       if (data?.success) {
         dispatch(setUser(data.user));
         toast.success("Profile updated successfully");
-      } else {
-        toast.error(data.message || "Profile update failed");
       }
+      onClose();
     },
     onError: (error) => {
       console.error("Profile update error:", error);
-      toast.error("Failed to update profile");
+      toast.error(error.message || "Profile update failed");
     },
   });
 

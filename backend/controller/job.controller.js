@@ -121,9 +121,19 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
   }
 });
 
+router.get("/jobs/get-all", async (req, res) => {
+  try {
+    const jobs = await JobTable.find().sort({ postedAt: -1 }); // newest first
+    res.status(200).json({ success: true, jobs });
+  } catch (error) {
+    console.error("Error fetching jobs:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+});
+
 /// jobSeeker job list
 
-router.get("/job/jobseeker/list", isAuthenticated, async (req, res) => {
+router.get("/jobs/search", isAuthenticated, async (req, res) => {
   try {
     const keyword = req.query.keyword || "";
 
@@ -154,7 +164,6 @@ router.get("/job/jobseeker/list", isAuthenticated, async (req, res) => {
 });
 
 // jobseeker hob by id
-
 router.get("/job/detail/:id", isAuthenticated, async (req, res) => {
   try {
     const jobId = req.params.id;

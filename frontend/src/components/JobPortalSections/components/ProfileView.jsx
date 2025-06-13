@@ -1,7 +1,7 @@
 import { Edit2 } from "lucide-react";
-import React, { useState } from "react";
-import NavBar from "./NavBar";
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import NavBar from "./NavBar";
 import ProfileUpdateForm from "./ProfileUpdateForm";
 
 const profileData = {
@@ -57,7 +57,7 @@ const ProfileView = () => {
       >
         <div className=" flex items-center justify-center bg-white p-6 rounded-2xl shadow-xl flex-col md:flex-row md:items-center gap-6 mb-6">
           <img
-            src={user?.profile.profilePhoto || "./profileDefault.jpg"}
+            src={user?.profile?.profilePhoto || "./profileDefault.jpg"}
             alt="Avatar"
             className=" w-24 h-24 md:w-40 md:h-40 object-cover rounded-full border"
           />

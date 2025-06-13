@@ -8,7 +8,7 @@ const Job = ({ job }) => {
   const postedAgo = getPostedDaysAgo(job.createdAt);
 
   return (
-    <div className="p-3 rounded-md shadow-xl bg-white border-gray-100">
+    <div className="px-3 py-6 rounded-md shadow-xl bg-white border-gray-100">
       <div className="flex items-center justify-between ">
         <p className="text-sm text-blue-600">{postedAgo}</p>
         <button className=" rounded-full text-sm text-white bg-gray-400 hover:bg-gray-300 p-2 border">
@@ -36,7 +36,7 @@ const Job = ({ job }) => {
           {job?.requirements?.qualification}
         </p>
       </div>
-      <div className="flex items-center gap-2 mt-8">
+      <div className="flex items-center gap-2 mt-4">
         <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-2 py-1 rounded-full shadow-sm">
           {job?.positions} Positions
         </span>
@@ -47,7 +47,7 @@ const Job = ({ job }) => {
           Rs.{job?.salary}salary
         </span>
       </div>
-      <p className="flex justify-end pt-12 text-sm text-blue-600">{daysLeft}</p>
+      <p className="flex justify-end pt-6 text-sm text-blue-600">{daysLeft}</p>
       <div className="flex justify-between mt-3 px-2">
         <button
           onClick={() => navigate(`/job-details/${job?._id}`)}

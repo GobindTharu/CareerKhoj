@@ -12,7 +12,7 @@ const LatestJobs = () => {
           JObs Openings
         </h1>
         <div className="grid  grid-cols-1 md:grid-cols-3 gap-7  mx-5 my-5 md:my-12 ">
-          {allJobs.length <= 0 ? (
+          {Array.isArray(allJobs) && allJobs.length <= 0 ? (
             <span>No Jobs Available</span>
           ) : (
             allJobs?.map((job) => <LatestJobCards key={job._id} job={job} />)

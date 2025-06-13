@@ -23,8 +23,6 @@ const JobDetails = () => {
   const daysLeft = getDaysLeftToApply(singleJob?.deadline);
   const postedAgo = getPostedDaysAgo(singleJob?.createdAt);
 
-  console.log(isApplied);
-
   const applyJobHandler = async () => {
     try {
       const res = await axiosInstance.get(`/application/apply/${jobId}`, {

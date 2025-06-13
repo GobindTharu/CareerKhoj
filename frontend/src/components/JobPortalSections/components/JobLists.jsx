@@ -1,8 +1,7 @@
-import React from "react";
 import { useSelector } from "react-redux";
+import useGetAllJobs from "../../../hooks/useGetAllJobs";
 import FilterCard from "./FilterCard";
 import Job from "./Job";
-import useGetAllJobs from "../../../hooks/useGetAllJobs";
 
 const JobLists = () => {
   useGetAllJobs();
@@ -11,7 +10,7 @@ const JobLists = () => {
   return (
     <>
       <div className="max-w-7xl mx-auto py-35">
-        <div className="flex gap-5">
+        <div className="flex gap-5 mt-12">
           <div className="w-20% ">
             <FilterCard />
           </div>
