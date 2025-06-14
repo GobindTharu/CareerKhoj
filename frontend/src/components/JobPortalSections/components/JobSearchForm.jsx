@@ -51,7 +51,7 @@ export const JobSearchForm = () => {
           onClick={handleSearch}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              e.preventDefault(); 
+              e.preventDefault();
               handleSearch();
             }
           }}
@@ -61,16 +61,20 @@ export const JobSearchForm = () => {
         </button>
       </form>
 
-      <div className="w-5xl absolute z-10 mt-4 bg-gray-200">
-        <h2 className="text-xl font-semibold mb-4">Search Results</h2>
+      <div className="max-w-5xl z-10 mt-4 bg-transparent">
+        <h2 className="text-xl font-semibold mb-4 bg-transparent">
+          Search Results
+        </h2>
 
         {loading ? (
-          <p className="text-gray-600">Loading jobs...</p>
+          <p className="text-gray-600 bg-transparent">Loading jobs...</p>
         ) : jobs.length === 0 ? (
-          <p className="text-gray-500">No jobs found for your criteria.</p>
+          <p className="text-gray-500 bg-transparent">
+            No jobs found for your criteria.
+          </p>
         ) : (
-          <div className="flex-1 h-[88vh] overflow-y-auto pb-5">
-            <div className="grid grid-cols-3 gap-4 p-1">
+          <div className="flex-1 h-[48vh] overflow-y-auto pb-5 bg-transparent">
+            <div className="grid grid-cols-3 gap-4 p-1 bg-transparent">
               {jobs.map((job) => (
                 <div>
                   <Job key={job?._id} job={job} />

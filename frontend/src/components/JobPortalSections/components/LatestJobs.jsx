@@ -15,25 +15,10 @@ const LatestJobs = () => {
           {Array.isArray(allJobs) && allJobs.length <= 0 ? (
             <span>No Jobs Available</span>
           ) : (
-            allJobs?.map((job) => <LatestJobCards key={job._id} job={job} />)
+            allJobs
+              ?.slice(0, 6)
+              .map((job) => <LatestJobCards key={job._id} job={job} />)
           )}
-        </div>
-
-        <div className="flex justify-end mt-4">
-          <button
-            //   disabled={currentPage <= 1}
-            //   onClick={() => setCurrentPage((p) => p - 1)}
-            className="px-3 py-1 text-blue-600 bg-gray-200 rounded mr-2 disabled:opacity-50"
-          >
-            Previous
-          </button>
-          <button
-            //   disabled={currentPage >= totalPage}
-            //   onClick={() => setCurrentPage((p) => p + 1)}
-            className="px-3 py-1 text-blue-600 bg-gray-200 rounded disabled:opacity-50"
-          >
-            Next
-          </button>
         </div>
       </div>
     </>

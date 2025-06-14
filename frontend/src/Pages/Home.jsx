@@ -4,13 +4,22 @@ import HeroSection from "../components/JobPortalSections/components/HeroSection"
 import NavBar from "../components/JobPortalSections/components/NavBar";
 import LatestJobs from "../components/JobPortalSections/components/LatestJobs";
 import HomeResumeLink from "../components/JobPortalSections/components/HomeResumeLink";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setUser } from "../redux/userSlice";
 import useGetAllJobs from "../hooks/useGetAllJobs";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state?.user?.user);
+
+  useEffect(() => {
+    if (user?.role === "recruiter") {
+      navigate("/recruiter/companies");
+    }
+  }, []);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
