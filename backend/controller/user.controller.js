@@ -167,7 +167,7 @@ router.put(
 
       return res.status(200).json({
         message: "User updated successfully",
-        user: { user: safeUser },
+        user: safeUser,
         success: true,
       });
     } catch (error) {
@@ -192,7 +192,7 @@ router.get("/user/profile", isAuthenticated, async (req, res) => {
         .json({ success: false, message: "User not found" });
     }
 
-    res.status(200).json({ success: true, user });
+    return res.status(200).json({ success: true, user });
   } catch (error) {
     console.error("Error fetching user profile:", error);
     res.status(500).json({ success: false, message: "Server error" });

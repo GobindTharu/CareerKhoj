@@ -23,6 +23,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+
+        {/* JobSeeker Routes */}
         <Route path="/" element={<HomePage />} />
         <Route path="/profile-view" element={<ProfileView />} />
         <Route path="/profile-update" element={<ProfileUpdateForm />} />
@@ -38,6 +40,9 @@ function App() {
         <Route path="/recruiter/companies" element={<Companies />} />
         <Route path="/recruiter/company/create" element={<CompanyCreate />} />
         <Route path="/recruiter/company-update/:id" element={<CompanyUpdateForm />} />
+
+
+        
       </Routes>
     </div>
   );

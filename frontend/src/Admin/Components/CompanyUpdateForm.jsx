@@ -10,15 +10,24 @@ const CompanyUpdateForm = () => {
   const navigate = useNavigate();
   const company = useSelector((state) => state?.company);
   console.log(company);
-  const [formData, setFormData] = useState({
+  const [loading, setLoading] = useState(false);
+
+  const [input, setInput] = useState({
     name: "",
     description: "",
     website: "",
     location: "",
-    logo: null,
+    file: null,
   });
 
-  const [loading, setLoading] = useState(false);
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "logo") {
+      setInput({ ...input, logo: files[0] });
+    } else {
+      setInput({ ...input, [name]: value });
+    }
+  };
 
   useEffect(() => {
     const fetchCompany = async () => {
@@ -27,7 +36,7 @@ const CompanyUpdateForm = () => {
           withCredentials: true,
         });
         const { name, description, website, location } = res.data;
-        setFormData((prev) => ({
+        setInput((prev) => ({
           ...prev,
           name,
           description,
@@ -42,27 +51,18 @@ const CompanyUpdateForm = () => {
     if (company?._id) fetchCompany();
   }, [company?._id]);
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "logo") {
-      setFormData({ ...formData, logo: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       const data = new FormData();
-      data.append("name", formData.name);
-      data.append("description", formData.description);
-      data.append("website", formData.website);
-      data.append("location", formData.location);
-      if (formData?.logo) {
-        data.append("logo", formData.logo);
+      data.append("name", input.name);
+      data.append("description", input.description);
+      data.append("website", input.website);
+      data.append("location", input.location);
+      if (input?.logo) {
+        data.append("logo", input.logo);
       }
 
       await axiosInstance.put(`/company/update/${id}`, data, {
@@ -101,7 +101,7 @@ const CompanyUpdateForm = () => {
               <input
                 type="text"
                 name="name"
-                value={formData.name}
+                value={input.name}
                 onChange={handleChange}
                 required
                 className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -113,7 +113,7 @@ const CompanyUpdateForm = () => {
               <input
                 type="text"
                 name="description"
-                value={formData.description}
+                value={input.description}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
@@ -124,7 +124,7 @@ const CompanyUpdateForm = () => {
               <input
                 type="text"
                 name="website"
-                value={formData.website}
+                value={input.website}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
@@ -135,7 +135,7 @@ const CompanyUpdateForm = () => {
               <input
                 type="text"
                 name="location"
-                value={formData.location}
+                value={input.location}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
@@ -145,7 +145,7 @@ const CompanyUpdateForm = () => {
               <label className="block mb-1 font-medium">Logo</label>
               <input
                 type="file"
-                name="logo"
+                name="file"
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded px-3 py-2"
                 accept="image/*"
@@ -156,7 +156,11 @@ const CompanyUpdateForm = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-indigo-700 hover:bg-indigo-800 text-white font-semibold py-3 rounded-md transition duration-200"
+            className={`${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
+            } w-full font-semibold py-3 rounded-md transition duration-200`}
           >
             {loading ? "Updating..." : "Update"}
           </button>

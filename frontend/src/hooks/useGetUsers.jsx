@@ -11,7 +11,7 @@ const useGetUserProfile = () => {
         const res = await axiosInstance.get("/user/profile", {
           withCredentials: true,
         });
-console.log(res.data.user)
+        console.log(res.data.user);
         if (res.data.success) {
           dispatch(setUser(res.data.user));
         }
