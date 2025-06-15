@@ -6,7 +6,7 @@ import axiosInstance from "../../libs/axiosInstance";
 
 const CompanyUpdateForm = () => {
   const { id } = useParams();
-  
+
   const navigate = useNavigate();
   const company = useSelector((state) => state?.company);
   console.log(company);
@@ -20,11 +20,12 @@ const CompanyUpdateForm = () => {
 
   const [loading, setLoading] = useState(false);
 
-  // Fetch company data by ID
   useEffect(() => {
     const fetchCompany = async () => {
       try {
-        const res = await axiosInstance.get(`/company/get/${id}`,{withCredentials: true});
+        const res = await axiosInstance.get(`/company/get/${id}`, {
+          withCredentials: true,
+        });
         const { name, description, website, location } = res.data;
         setFormData((prev) => ({
           ...prev,
@@ -60,7 +61,9 @@ const CompanyUpdateForm = () => {
       data.append("description", formData.description);
       data.append("website", formData.website);
       data.append("location", formData.location);
-      if (formData?.logo) {data.append("logo", formData.logo)};
+      if (formData?.logo) {
+        data.append("logo", formData.logo);
+      }
 
       await axiosInstance.put(`/company/update/${id}`, data, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -69,7 +72,7 @@ const CompanyUpdateForm = () => {
       alert("Company updated successfully");
       navigate("/recruiter/companies");
     } catch (err) {
-      console.error("Update error:", err.response?.data || err.message);
+      console.error("Update error:", err?.response?.data || err?.message);
       alert("Update failed");
     } finally {
       setLoading(false);
@@ -88,7 +91,7 @@ const CompanyUpdateForm = () => {
           >
             ← Back
           </button>
-          <h2 className="text-xl font-semibold px-6">Company Setup</h2>
+          <h2 className="text-2xl font-semibold px-6">Company Setup</h2>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
