@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-hot-toast";
-import { setUser } from "../../../redux/userSlice";
-import axiosInstance from "../../../libs/axiosInstance";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import axiosInstance from "../../../libs/axiosInstance";
+import { setUser } from "../../../redux/userSlice";
 
 const ProfileUpdateForm = ({ onClose }) => {
   const user = useSelector((state) => state.user?.user);
@@ -22,15 +22,14 @@ const ProfileUpdateForm = ({ onClose }) => {
     },
     onSuccess: (data) => {
       if (data?.success) {
-        dispatch(setUser(data.user));
+        dispatch(setUser(data?.user));
         toast.success("Profile updated successfully");
-      } else {
-        toast.error(data.message || "Profile update failed");
       }
+      onClose();
     },
     onError: (error) => {
       console.error("Profile update error:", error);
-      toast.error("Failed to update profile");
+      toast.error(error.message || "Profile update failed");
     },
   });
 
@@ -106,7 +105,6 @@ const ProfileUpdateForm = ({ onClose }) => {
     }
 
     mutate(formData);
-    onClose();
   };
 
   return (

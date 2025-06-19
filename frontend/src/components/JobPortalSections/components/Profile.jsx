@@ -22,7 +22,7 @@ export default function Profile() {
   }, []);
 
   return (
-    <div className="relative hidden md:flex" ref={dropdownRef}>
+    <div className="relative flex" ref={dropdownRef}>
       <button
         title="My Profile"
         className="flex justify-center items-center rounded-full bg-gray-300 pr-2"
@@ -58,14 +58,16 @@ export default function Profile() {
           </div>
 
           {/* Main Options */}
-          <div className="space-y-1 pb-2">
-            <button
-              onClick={() => navigate("/profile-view")}
-              className="flex items-center gap-3 w-full text-left text-sm text-gray-700 hover:bg-gray-200 rounded-md px-2 py-1"
-            >
-              <User /> View Profile
-            </button>
-          </div>
+          {user && user?.role == "jobseeker" ? (
+            <div className="space-y-1 pb-2">
+              <button
+                onClick={() => navigate("/profile-view")}
+                className="flex items-center gap-3 w-full text-left text-sm text-gray-700 hover:bg-gray-200 rounded-md px-2 py-1"
+              >
+                <User /> View Profile
+              </button>
+            </div>
+          ) : null}
 
           {/* Preferences */}
           <div className="space-y-1  pb-2">

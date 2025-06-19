@@ -1,12 +1,14 @@
 import express from "express";
 import { CompanyTable } from "../models/company.models.js";
 import { isAuthenticated } from "../middleware/user.middleware.js";
+import { singleUpload } from "../middleware/multer.js";
 const router = express.Router();
 
 //  register company
 router.post("/company/register", isAuthenticated, async (req, res) => {
   try {
     const { companyName } = req.body;
+
     if (!companyName) {
       return res
         .status(400)
@@ -69,40 +71,45 @@ router.get("/company/get/:id", isAuthenticated, async (req, res) => {
 });
 
 // update company
-router.put("/company/update/:id", isAuthenticated, async (req, res) => {
-  try {
-    const updatedCompany = req.body;
-    const file = req.file;
+router.put(
+  "/company/update/:id",
+  singleUpload,
+  isAuthenticated,
+  async (req, res) => {
+    try {
+      const updatedCompany = req.body;
+      const file = req.file;
 
-    const companyId = req.params.id;
+      const companyId = req.params.id;
 
-    const existing = await CompanyTable.findOne({
-      name: updatedCompany.name,
-      _id: { $ne: companyId },
-    });
-
-    if (existing) {
-      return res.status(400).json({
-        message: "Company name already exists.",
-        success: false,
+      const existing = await CompanyTable.findOne({
+        name: updatedCompany.name,
+        _id: { $ne: companyId },
       });
-    }
-    const company = await CompanyTable.findByIdAndUpdate(
-      req.params.id,
-      updatedCompany,
-      { new: true }
-    );
 
-    if (!company) {
-      return res
-        .status(404)
-        .json({ message: "Company not found", success: false });
-    }
+      if (existing) {
+        return res.status(400).json({
+          message: "Company name already exists.",
+          success: false,
+        });
+      }
+      const company = await CompanyTable.findByIdAndUpdate(
+        req.params.id,
+        updatedCompany,
+        { new: true }
+      );
 
-    return res.status(200).json({ company, success: true });
-  } catch (error) {
-    return res.status(500).json(error.message);
+      if (!company) {
+        return res
+          .status(404)
+          .json({ message: "Company not found", success: false });
+      }
+
+      return res.status(200).json({ company, success: true });
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
   }
-});
+);
 
 export { router as companyController };

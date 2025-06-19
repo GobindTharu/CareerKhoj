@@ -9,15 +9,24 @@ import Logo from "./Logo";
 
 const NavBar = (data) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const user = useSelector((state) => state.user.user);
+
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
 
-  const menuList = [
+  const recruiterMenu = [
+    { name: "Companies", link: "/admin/companies" },
+    { name: "Jobs", link: "/admin/jobs" },
+  ];
+
+  const jobSeekerMenu = [
     { name: "Home", link: "/" },
     { name: "Jobs", link: "/jobs" },
     { name: "Build Resume", link: "/resume-builder" },
     { name: "About Us", link: "/about-us" },
   ];
+
+  const menuList = user?.role === "recruiter" ? recruiterMenu : jobSeekerMenu;
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -49,8 +58,6 @@ const NavBar = (data) => {
   const handleToggle = () => {
     setIsMenuOpen((prev) => !prev);
   };
-
-  const user = useSelector((state) => state.user?.user);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-100 backdrop-blur-md bg-white/70 border-b border-gray-200 shadow-sm">

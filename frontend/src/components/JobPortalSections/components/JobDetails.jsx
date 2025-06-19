@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../../libs/axiosInstance";
 import { setSingleJob } from "../../../redux/jobSlice";
 import Footer from "./Footer";
-import NavBar from "./NavBar";
 import { getDaysLeftToApply, getPostedDaysAgo } from "./Job";
-import toast from "react-hot-toast";
+import NavBar from "./NavBar";
 
 const JobDetails = () => {
   const singleJob = useSelector((state) => state.job.singleJob);
   const user = useSelector((state) => state.user.user);
-  const isInitiallyApplied =
-    Boolean(
-      singleJob?.application?.some(
-        (a) => String(a?.applicant) === String(user?._id)
-      )
-    ) || false;
-  const [isApplied, setIsApplied] = useState(isInitiallyApplied);
+  const isApplied = singleJob?.application?.some(
+    (application) => String(application?.applicant) === String(user?._id)
+  );
 
   const params = useParams();
   const jobId = params.id;
@@ -27,10 +23,6 @@ const JobDetails = () => {
   const daysLeft = getDaysLeftToApply(singleJob?.deadline);
   const postedAgo = getPostedDaysAgo(singleJob?.createdAt);
 
-  console.log(isInitiallyApplied);
-  console.log("Applications:", singleJob?.application);
-  console.log("User ID:", user?._id);
-
   const applyJobHandler = async () => {
     try {
       const res = await axiosInstance.get(`/application/apply/${jobId}`, {
@@ -38,8 +30,6 @@ const JobDetails = () => {
       });
 
       if (res.data.success) {
-        setIsApplied(true);
-
         const updatedSingleJob = {
           ...singleJob,
           application: [
@@ -48,7 +38,7 @@ const JobDetails = () => {
           ],
         };
         dispatch(setSingleJob(updatedSingleJob));
-        toast.success(res.data.message);
+        toast.success(res.data.message || "Successful update");
       }
     } catch (error) {
       console.log(error);
@@ -62,14 +52,11 @@ const JobDetails = () => {
         const res = await axiosInstance.get(`/job/detail/${jobId}`, {
           withCredentials: true,
         });
-
         if (res.data.success) {
           dispatch(setSingleJob(res.data.jobs));
-          setIsApplied(
-            res.data.jobs?.application.some((a) => String(a?.applicant)) ===
-              String(user?._id)
-          );
         }
+        console.log(res.data.jobs.application);
+        console.log(user?._id);
       } catch (error) {
         console.log(error);
       }

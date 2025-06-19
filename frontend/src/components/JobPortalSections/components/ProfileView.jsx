@@ -1,7 +1,7 @@
 import { Edit2 } from "lucide-react";
-import React, { useState } from "react";
-import NavBar from "./NavBar";
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import NavBar from "./NavBar";
 import ProfileUpdateForm from "./ProfileUpdateForm";
 
 const profileData = {
@@ -57,14 +57,22 @@ const ProfileView = () => {
       >
         <div className=" flex items-center justify-center bg-white p-6 rounded-2xl shadow-xl flex-col md:flex-row md:items-center gap-6 mb-6">
           <img
-            src={user?.profile.profilePhoto || "./profileDefault.jpg"}
+            src={user?.profile?.profilePhoto || "./profileDefault.jpg"}
             alt="Avatar"
             className=" w-24 h-24 md:w-40 md:h-40 object-cover rounded-full border"
           />
           <div className="flex-1">
-            <h1 className="text-2xl font-bold border-b pb-2">
-              {user?.fullName}
-            </h1>
+            <div className="flex justify-between">
+              <h1 className="text-2xl font-bold border-b pb-2">
+                {user?.fullName}
+              </h1>
+              <button
+                onClick={() => setIsPopupOpen(true)}
+                className="mt-2 text-gray-600 hover:text-blue-500 border p-2 rounded-lg"
+              >
+                <Edit2 size={24} />
+              </button>
+            </div>
             <p className="text-gray-600 mt-4">{user?.profile?.bio}</p>
             <div className="text-sm mt-4 space-y-1">
               <p>
@@ -77,12 +85,6 @@ const ProfileView = () => {
               </p>
             </div>
           </div>
-          <button
-            onClick={() => setIsPopupOpen(true)}
-            className=" absolute  top-28 lg:right-82 md:right-16 self-end  md:self-auto mt-2 text-gray-600 hover:text-blue-500 border p-2 rounded-lg"
-          >
-            <Edit2 size={24} />
-          </button>
         </div>
 
         {/* Skills */}

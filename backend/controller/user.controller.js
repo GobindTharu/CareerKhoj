@@ -167,7 +167,7 @@ router.put(
 
       return res.status(200).json({
         message: "User updated successfully",
-        user: { user: safeUser },
+        user: safeUser,
         success: true,
       });
     } catch (error) {
@@ -179,5 +179,24 @@ router.put(
     }
   }
 );
+
+router.get("/user/profile", isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.id;
+
+    const user = await UserTable.findById(userId).select("-password");
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    return res.status(200).json({ success: true, user });
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
 
 export { router as userController };
