@@ -1,5 +1,6 @@
 import { Edit2 } from "lucide-react";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const companies = [
   { name: "Abc", logo: "/company.png", date: "2025-01-12" },
   { name: "Abc", logo: "/company.png", date: "2025-01-12" },
@@ -8,8 +9,9 @@ const companies = [
   { name: "Abc", logo: "/company.png", date: "2025-01-12" },
 ];
 
-const CompanyTable = () => {
+const CompanyTable = (companyId) => {
   const [isOpen, setIsOpen] = useState(null);
+  const navigate = useNavigate();
 
   const handleOpen = () => {
     if (isOpen == "open") {
@@ -22,7 +24,9 @@ const CompanyTable = () => {
   return (
     <>
       <div className="mb-16">
-        <h2 className="flex item justify-center font-semibold text-lg mb-3">All Company</h2>
+        <h2 className="flex item justify-center font-semibold text-lg mb-3">
+          All Company
+        </h2>
         <div className="overflow-x-auto">
           <table className="min-w-full border border-gray-200 text-sm">
             <thead className="bg-gray-200">
@@ -58,7 +62,12 @@ const CompanyTable = () => {
                       />
                     </div>
                     {isOpen == "open" && (
-                      <span className="absolute bg-gray-200 w-16 px-2">
+                      <span
+                        onClick={() =>
+                          navigate(`/recruiter/company-update/${companyId}`)
+                        }
+                        className="absolute bg-gray-200 w-16 px-2"
+                      >
                         Edit
                       </span>
                     )}

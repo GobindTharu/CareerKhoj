@@ -16,6 +16,7 @@ import SignUp from "./Pages/Auth/SignUp";
 import BuildResume from "./Pages/BuildResume";
 import HomePage from "./Pages/Home";
 import Jobs from "./Pages/Jobs";
+import JoinUs from "./components/JobPortalSections/components/JoinUs";
 
 function App() {
   return (
@@ -33,16 +34,17 @@ function App() {
         <Route path="/job-details/:id" element={<JobDetails />} />
         <Route path="/resume-builder" element={<BuildResume />} />
         <Route path="/about-us" element={<AboutPage />} />
+        <Route path="/about-us" element={<AboutPage />} />
         <Route path="/choose-template" element={<ChooseTemplate />} />
-        <Route path="/simple-form" element={<ResumeFormWrapper />} />
+        <Route path="/join-us" element={<JoinUs />} />
 
         {/* Recruiter Routes */}
         <Route path="/recruiter/companies" element={<Companies />} />
         <Route path="/recruiter/company/create" element={<CompanyCreate />} />
-        <Route path="/recruiter/company-update/:id" element={<CompanyUpdateForm />} />
-
-
-        
+        <Route
+          path="/recruiter/company-update/:id"
+          element={<CompanyUpdateForm />}
+        />
       </Routes>
     </div>
   );

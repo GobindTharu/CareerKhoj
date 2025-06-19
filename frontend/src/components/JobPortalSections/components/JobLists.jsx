@@ -23,6 +23,7 @@ const JobLists = () => {
                 {allJobs.map((job) => (
                   <div>
                     <Job key={job?._id} job={job} />
+                   
                   </div>
                 ))}
               </div>
