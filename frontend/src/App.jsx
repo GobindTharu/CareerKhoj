@@ -21,6 +21,7 @@ import ResumeTemplate4 from "./components/ResumeSections/ResumeTempletes/ResumeT
 import ResumeTemplate5 from "./components/ResumeSections/ResumeTempletes/ResumeTemplate5";
 
 
+
 const ResumeFormWrapper = () => {
   const [submittedData, setSubmittedData] = React.useState(null);
   const [submitted, setSubmitted] = React.useState(false);
@@ -65,7 +66,7 @@ function App() {
         <Route path="/resume-builder" element={<BuildResume />} />
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/choose-template" element={<ChooseTemplate />} />
-          <Route path="/resume-template/1" element={<ResumeTemplate1/>} />
+        <Route path="/resume-template/1" element={<ResumeTemplate1/>} />
         <Route path="/resume-template/2" element={<ResumeTemplate2/>} />
         <Route path="/resume-template/2" element={<ResumeTemplate3/>} />
         <Route path="/resume-template/2" element={<ResumeTemplate4/>} />
