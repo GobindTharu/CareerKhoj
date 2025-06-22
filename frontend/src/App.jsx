@@ -14,6 +14,12 @@ import Jobs from "./Pages/Jobs";
 import UserProfileUpdateForm from "./components/JobPortalSections/components/ProfileUpdateForm";
 import ProfileView from "./components/JobPortalSections/components/ProfileView";
 import ProfileUpdateForm from "./components/JobPortalSections/components/ProfileUpdateForm";
+import ResumeTemplate1 from "./components/ResumeSections/ResumeTempletes/ResumeTemplate1";
+import ResumeTemplate2 from "./components/ResumeSections/ResumeTempletes/ResumeTemplate2";
+import ResumeTemplate3 from "./components/ResumeSections/ResumeTempletes/ResumeTemplate3";
+import ResumeTemplate4 from "./components/ResumeSections/ResumeTempletes/ResumeTemplate4";
+import ResumeTemplate5 from "./components/ResumeSections/ResumeTempletes/ResumeTemplate5";
+
 
 const ResumeFormWrapper = () => {
   const [submittedData, setSubmittedData] = React.useState(null);
@@ -59,8 +65,14 @@ function App() {
         <Route path="/resume-builder" element={<BuildResume />} />
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/choose-template" element={<ChooseTemplate />} />
-
+          <Route path="/resume-template/1" element={<ResumeTemplate1/>} />
+        <Route path="/resume-template/2" element={<ResumeTemplate2/>} />
+        <Route path="/resume-template/2" element={<ResumeTemplate3/>} />
+        <Route path="/resume-template/2" element={<ResumeTemplate4/>} />
+        <Route path="/resume-template/2" element={<ResumeTemplate5/>} />
         <Route path="/simple-form" element={<ResumeFormWrapper />} />
+
+  
       </Routes>
     </div>
   );
