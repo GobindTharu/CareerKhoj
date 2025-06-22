@@ -50,6 +50,7 @@ function App() {
         <Route path="/resume-template/3" element={<ResumeTemplate3 />} />
         <Route path="/resume-template/4" element={<ResumeTemplate4 />} />
         <Route path="/resume-template/5" element={<ResumeTemplate5 />} />
+
         <Route path="/simple-form" element={<ResumeFormWrapper />} />
 
         {/* Recruiter Routes */}
