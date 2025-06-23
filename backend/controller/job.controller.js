@@ -21,18 +21,7 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
     } = req.body;
 
     // Validate required fields
-    if (
-      !title ||
-      !description ||
-      !salary ||
-      !location ||
-      !jobType ||
-      experience == null ||
-      position == null ||
-      !category ||
-      !requirements ||
-      !companyId
-    ) {
+    if (!title || !description || !salary) {
       return res.status(400).json({
         message: "Some required fields are missing",
         success: false,
