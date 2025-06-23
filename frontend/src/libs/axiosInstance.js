@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://career-khoj-backend.onrender.com",
+  baseURL: "https://careerkhoj.onrender.com",
   timeout: 5000, //5 second
 });
 
