@@ -17,12 +17,12 @@ import BuildResume from "./Pages/BuildResume";
 import HomePage from "./Pages/Home";
 import Jobs from "./Pages/Jobs";
 import JoinUs from "./components/JobPortalSections/components/JoinUs";
+import ResumeTemplate1 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate1";
+import ResumeTemplate2 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate2";
+import ResumeTemplate3 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate3";
+import ResumeTemplate4 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate4";
+import ResumeTemplate5 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate5";
 
-import ResumeTemplate1 from "./components/ResumeSections/ResumeTempletes/ResumeTemplate1";
-import ResumeTemplate2 from "./components/ResumeSections/ResumeTempletes/ResumeTemplate2";
-import ResumeTemplate3 from "./components/ResumeSections/ResumeTempletes/ResumeTemplate3";
-import ResumeTemplate4 from "./components/ResumeSections/ResumeTempletes/ResumeTemplate4";
-import ResumeTemplate5 from "./components/ResumeSections/ResumeTempletes/ResumeTemplate5";
 
 function App() {
   return (
