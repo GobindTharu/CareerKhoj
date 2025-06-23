@@ -9,6 +9,8 @@ import Footer from "./Footer";
 import { getDaysLeftToApply, getPostedDaysAgo } from "./Job";
 import NavBar from "./NavBar";
 
+
+
 const JobDetails = () => {
   const singleJob = useSelector((state) => state.job.singleJob);
   const user = useSelector((state) => state.user.user);
@@ -24,6 +26,7 @@ const JobDetails = () => {
   const postedAgo = getPostedDaysAgo(singleJob?.createdAt);
 
   const applyJobHandler = async () => {
+    
     try {
       const res = await axiosInstance.get(`/application/apply/${jobId}`, {
         withCredentials: true,
