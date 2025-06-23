@@ -13,7 +13,7 @@ const JobLists = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Header and Filter Toggle */}
-      <div className="flex items-center justify-between md:justify-start md:gap-8 mb-6 py-4">
+      <div className="flex items-center justify-between md:justify-start md:gap-8 mb-6 pt-16">
         <h1 className="text-2xl font-bold text-gray-800">Available Jobs</h1>
         <button
           className="md:hidden flex items-center gap-2 text-sm px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded border"
@@ -25,7 +25,7 @@ const JobLists = () => {
       </div>
 
       {/* Main Content: Flex-column on mobile, row on desktop */}
-      <div className="flex flex-col md:flex-row gap-6">
+      <div className="flex flex-col md:flex-row gap-6 py-2">
         {/* Filter Sidebar */}
         {(showFilter || window.innerWidth >= 768) && (
           <div className="w-full md:w-1/4 lg:w-1/5  p-4 rounded">
