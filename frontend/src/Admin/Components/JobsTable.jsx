@@ -9,7 +9,7 @@ const companies = [
   { name: "Abc", logo: "/company.png", date: "2025-01-12" },
 ];
 
-const CompanyTable = (companyId) => {
+const JobsTable = (companyId) => {
   const [isOpen, setIsOpen] = useState(null);
   const navigate = useNavigate();
 
@@ -25,14 +25,13 @@ const CompanyTable = (companyId) => {
     <>
       <div className="mb-16">
         <h2 className="flex item justify-center font-semibold text-lg mb-3">
-          All Company
+          All Jobs
         </h2>
         <div className="overflow-x-auto">
           <table className="min-w-full border border-gray-200 text-sm">
             <thead className="bg-gray-200">
               <tr>
                 <th className="px-4 py-3">S.N</th>
-                <th className="px-4 py-3 ">Logo</th>
                 <th className="px-4 py-3 ">Name</th>
                 <th className="px-4 py-3">Date </th>
                 <th className="px-4 py-3 ">Action</th>
@@ -42,12 +41,6 @@ const CompanyTable = (companyId) => {
               {companies.map((company, index) => (
                 <tr key={index} className="border-t">
                   <td className="px-4 py-3 w-1/4 text-center">{index + 1}</td>
-                  <td className="px-4 py-3">
-                    <img
-                      src={company?.logo}
-                      className="w-12 h-12 items-center"
-                    />
-                  </td>
                   <td className="px-4 py-3 w-1/4 text-center">
                     {company?.name}
                   </td>
@@ -61,6 +54,7 @@ const CompanyTable = (companyId) => {
                         className="w-16 font-bold relative "
                       />
                     </div>
+  
                     {isOpen == "open" && (
                       <span
                         onClick={() =>
@@ -82,4 +76,4 @@ const CompanyTable = (companyId) => {
   );
 };
 
-export default CompanyTable;
+export default JobsTable;
