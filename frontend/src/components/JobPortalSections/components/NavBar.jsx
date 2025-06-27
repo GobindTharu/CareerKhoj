@@ -1,6 +1,6 @@
 "use client";
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { Children, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { LoginButton } from "../buttons/LoginButton";
@@ -15,15 +15,23 @@ const NavBar = (data) => {
   const toggleRef = useRef(null);
 
   const recruiterMenu = [
-    { name: "Companies", link: "/admin/companies" },
-    { name: "Jobs", link: "/admin/jobs" },
+    { name: "Companies", link: "/recruiter/companies" },
+    { name: "Jobs", link: "/recruiter/jobs" },
   ];
 
   const jobSeekerMenu = [
     { name: "Home", link: "/" },
     { name: "Jobs", link: "/jobs" },
     { name: "Build Resume", link: "/resume-builder" },
-    { name: "About Us", link: "/about-us" },
+    {
+      name: "About Us",
+      link: "/about-us",
+      Children: [
+        { name: "career", link: "/career" },
+        { name: "join us", link: "/join-us" },
+        { name: "privacy", link: "/privacy" },
+      ],
+    },
   ];
 
   const menuList = user?.role === "recruiter" ? recruiterMenu : jobSeekerMenu;
@@ -66,13 +74,27 @@ const NavBar = (data) => {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center gap-6">
-          {menuList.map(({ name, link }) => (
-            <Link key={link} to={link}>
-              <span className="text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-100 transition cursor-pointer">
-                {name}
-              </span>
-            </Link>
+          {menuList.map(({ name, link, Children }) => (
+            <div key={link} className="relative group">
+              <Link to={link}>
+                <span className="text-sm font-medium px-3 py-2 rounded-md hover:bg-gray-100 transition cursor-pointer">
+                  {name}
+                </span>
+              </Link>
+              {Children && (
+                <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden group-hover:block z-50">
+                  {Children.map((child) => (
+                    <Link key={child.link} to={child.link}>
+                      <span className="block px-4 py-2 text-sm hover:bg-gray-100">
+                        {child.name}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
+          
         </div>
         {/* Desktop Login */}
 
