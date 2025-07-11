@@ -124,13 +124,7 @@ const LoginForm = () => {
           Login
         </button>
 
-        <button
-          type="button"
-          className="w-full border border-gray-300 py-2 rounded-md flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-100 transition"
-        >
-          <img src="/google.png" alt="Google" className="w-5 h-5" />
-          Sign in with Google
-        </button>
+      
 
         <div className="flex justify-between text-sm text-gray-600 mt-4">
           <a href="/forget-password" className="hover:underline">

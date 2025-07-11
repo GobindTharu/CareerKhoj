@@ -1,6 +1,7 @@
 import { Edit2 } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 const companies = [
   { name: "Abc", logo: "/company.png", date: "2025-01-12" },
   { name: "Abc", logo: "/company.png", date: "2025-01-12" },
@@ -19,6 +20,23 @@ const JobsTable = (companyId) => {
     } else {
       setIsOpen("open");
     }
+  };
+
+  const handleDelete = async() => {
+    // try {
+    //   const res = await axiosInstance.delete(
+    //     `/company/delete/${}`,
+    //     {        
+    //       withCredentials: true,
+    //     }
+    //   );
+
+
+      
+    // } catch (error) {
+      
+    // }
+
   };
 
   return (
@@ -53,18 +71,25 @@ const JobsTable = (companyId) => {
                         onClick={handleOpen}
                         className="w-16 font-bold relative "
                       />
+                      {isOpen == "open" && (
+                        <>
+                          <span
+                            onClick={() =>
+                              navigate(`/recruiter/company-update/${companyId}`)
+                            }
+                            className=" flex items-center justify-center bg-gray-200 w-16 py-2 px-8 "
+                          >
+                            Edit
+                          </span>
+                          <span
+                            onClick={handleDelete}
+                            className=" flex items-center justify-center bg-gray-200 w-16 py-2 px-8 "
+                          >
+                            Delete
+                          </span>
+                        </>
+                      )}
                     </div>
-  
-                    {isOpen == "open" && (
-                      <span
-                        onClick={() =>
-                          navigate(`/recruiter/company-update/${companyId}`)
-                        }
-                        className="absolute bg-gray-200 w-16 px-2"
-                      >
-                        Edit
-                      </span>
-                    )}
                   </td>
                 </tr>
               ))}

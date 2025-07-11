@@ -24,7 +24,7 @@ const Companies = () => {
             }}
             className="text-white hover:bg-black bg-gray-800 py-2 px-3 rounded-md"
           >
-            New Company
+            All jobs
           </button>
         </div>
         <JobsTable key={company?._id} company={company}/>
