@@ -124,8 +124,6 @@ const LoginForm = () => {
           Login
         </button>
 
-      
-
         <div className="flex justify-between text-sm text-gray-600 mt-4">
           <a href="/forget-password" className="hover:underline">
             Forgot Password?
