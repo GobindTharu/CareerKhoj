@@ -36,6 +36,8 @@ const NavBar = (data) => {
 
   const menuList = user?.role === "recruiter" ? recruiterMenu : jobSeekerMenu;
 
+  
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -53,7 +55,7 @@ const NavBar = (data) => {
         setIsMenuOpen(false);
       }
     };
-
+    
     document.addEventListener("mousedown", handleClickOutside);
     window.addEventListener("resize", handleResize);
 

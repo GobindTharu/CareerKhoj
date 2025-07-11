@@ -74,7 +74,7 @@ export const JobSearchForm = () => {
           </p>
         ) : (
           <div className="flex-1 h-[48vh] overflow-y-auto pb-5 bg-transparent">
-            <div className="grid grid-cols-3 gap-4 p-1 bg-transparent">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-1 bg-transparent">
               {jobs.map((job) => (
                 <div>
                   <Job key={job?._id} job={job} />

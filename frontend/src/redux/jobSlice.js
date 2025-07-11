@@ -13,8 +13,11 @@ const jobSlice = createSlice({
     setSingleJob: (state, action) => {
       state.singleJob = action.payload;
     },
+    setRecruiterJobs: (state, action) => {
+      state.recruiterJob = action.payload;
+    },
   },
 });
 
-export const { setAllJobs, setSingleJob } = jobSlice.actions;
+export const { setAllJobs, setSingleJob, recruiterJob } = jobSlice.actions;
 export default jobSlice.reducer;
