@@ -1,12 +1,14 @@
 import React from "react";
 import NavBar from "../../components/JobPortalSections/components/NavBar";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import JobsTable from "./JobsTable";
+// import { useSelector } from "react-redux";
+import useGetAllCompanies from "../../hooks/useGetAllCompanies";
 
 const Companies = () => {
   const navigate = useNavigate();
-  const company = useSelector((state) => state.Company);
+  // const company = useSelector((state) => state.company);
+
+  useGetAllCompanies();
 
   return (
     <>
@@ -24,10 +26,10 @@ const Companies = () => {
             }}
             className="text-white hover:bg-black bg-gray-800 py-2 px-3 rounded-md"
           >
-            All jobs
+            Add Jobs
           </button>
         </div>
-        <JobsTable key={company?._id} company={company}/>
+        {/* <JobsTable key={company?._id} company={company} /> */}
       </div>
     </>
   );

@@ -22,7 +22,8 @@ import ResumeTemplate2 from "./components/ResumeSections/ResumeTemplates/ResumeT
 import ResumeTemplate3 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate3";
 import ResumeTemplate4 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate4";
 import ResumeTemplate5 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate5";
-
+import RecruiterJobs from "./Admin/Components/RecruiterJobs";
+import PostJob from "./Admin/Components/PostJob";
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        
+
         {/* JobSeeker Routes */}
         <Route path="/" element={<HomePage />} />
         <Route path="/profile-view" element={<ProfileView />} />
@@ -56,7 +57,14 @@ function App() {
         {/* Recruiter Routes */}
         <Route path="/recruiter/companies" element={<Companies />} />
         <Route path="/recruiter/company/create" element={<CompanyCreate />} />
-        <Route path="/recruiter/company-update/:id" element={<CompanyUpdateForm />} />
+        <Route
+          path="/recruiter/company-update/:id"
+          element={<CompanyUpdateForm />}
+        />
+
+        {/* Jobs */}
+        <Route path="/recruiter/jobs" element={<RecruiterJobs />} />
+        <Route path="/recruiter/jobs/create" element={<PostJob />} />
       </Routes>
     </div>
   );

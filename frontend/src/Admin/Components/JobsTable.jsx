@@ -22,21 +22,16 @@ const JobsTable = (companyId) => {
     }
   };
 
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     // try {
     //   const res = await axiosInstance.delete(
     //     `/company/delete/${}`,
-    //     {        
+    //     {
     //       withCredentials: true,
     //     }
     //   );
-
-
-      
     // } catch (error) {
-      
     // }
-
   };
 
   return (
