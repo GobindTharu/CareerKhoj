@@ -56,7 +56,7 @@ router.get("/application/apply/:id", isAuthenticated, async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.log(error);
+    (error);
     return res.status(500).json({
       message: error.message || "Server Error",
       success: false,
@@ -89,7 +89,7 @@ router.get("/application/get", isAuthenticated, async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.log(error);
+    (error);
     return res.status(500).json({
       message: error.message || "Server Error",
       success: false,
@@ -98,28 +98,32 @@ router.get("/application/get", isAuthenticated, async (req, res) => {
 });
 
 // get applicants
-
+// GET /application/:id/applicants
 router.get("/application/:id/applicants", async (req, res) => {
   try {
     const jobId = req.params.id;
+
     const job = await JobTable.findById(jobId).populate({
-      path: "job",
+      path: "application",
       options: { sort: { createdAt: -1 } },
-      populate: { path: "company", options: { sort: { createdAt: -1 } } },
+      populate: {
+        path: "applicant",
+      },
     });
 
     if (!job) {
       return res.status(404).json({
-        message: "Job not found",
+        message: "Job not found.",
         success: false,
       });
     }
+
     return res.status(200).json({
-      job,
       success: true,
+      job,
     });
   } catch (error) {
-    console.log(error);
+    ("Error in /application/:id/applicants:", error);
     return res.status(500).json({
       message: error.message || "Server Error",
       success: false,
@@ -160,7 +164,7 @@ router.post("/application/status/:id/update", async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.log(error);
+    (error);
     return res.status(500).json({
       message: error.message || "Server Error",
       success: false,

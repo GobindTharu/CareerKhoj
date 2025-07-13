@@ -60,7 +60,7 @@ const jobSchema = new mongoose.Schema(
 
     company: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Company", // assuming you have a company model
+      ref: "Company", 
       required: true,
     },
     experienceLevel: {

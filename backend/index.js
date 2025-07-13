@@ -24,11 +24,12 @@ dotenv.config({});
 app.use(
   cors({
     origin: [
+      "https://career-khoj.vercel.app",
+      "https://careerkhoj.balgobindchaudhary.com.np",
       "https://57a4-2405-acc0-1304-3a5b-da85-866d-ab0a-e52b.ngrok-free.app",
       "http://localhost:5173",
       "http://localhost:5174",
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );

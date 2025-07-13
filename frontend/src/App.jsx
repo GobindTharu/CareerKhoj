@@ -22,7 +22,10 @@ import ResumeTemplate2 from "./components/ResumeSections/ResumeTemplates/ResumeT
 import ResumeTemplate3 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate3";
 import ResumeTemplate4 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate4";
 import ResumeTemplate5 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate5";
-
+import RecruiterJobs from "./Admin/Components/RecruiterJobs";
+import PostJob from "./Admin/Components/PostJob";
+import Applicants from "./Admin/Components/Applicants";
+import ProtectedRoute from "./Admin/Components/ProtectedRoute";
 
 function App() {
   return (
@@ -31,7 +34,7 @@ function App() {
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        
+
         {/* JobSeeker Routes */}
         <Route path="/" element={<HomePage />} />
         <Route path="/profile-view" element={<ProfileView />} />
@@ -54,9 +57,54 @@ function App() {
         <Route path="/simple-form" element={<ResumeFormWrapper />} />
 
         {/* Recruiter Routes */}
-        <Route path="/recruiter/companies" element={<Companies />} />
-        <Route path="/recruiter/company/create" element={<CompanyCreate />} />
-        <Route path="/recruiter/company-update/:id" element={<CompanyUpdateForm />} />
+        <Route
+          path="/recruiter/companies"
+          element={
+            <ProtectedRoute>
+              <Companies />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recruiter/company/create"
+          element={
+            <ProtectedRoute>
+              <CompanyCreate />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recruiter/company-update/:id"
+          element={
+            <ProtectedRoute>
+              <CompanyUpdateForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recruiter/jobs"
+          element={
+            <ProtectedRoute>
+              <RecruiterJobs />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recruiter/jobs/create"
+          element={
+            <ProtectedRoute>
+              <PostJob />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recruiter/jobs/:id/applicants"
+          element={
+            <ProtectedRoute>
+              <Applicants />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );

@@ -38,9 +38,8 @@ router.post("/company/register", isAuthenticated, async (req, res) => {
 router.get("/company/get", isAuthenticated, async (req, res) => {
   try {
     const userId = req.id;
-    console.log(userId);
+    (userId);
     const companies = await CompanyTable.find({ userId: userId });
-    console.log(companies);
     if (!companies) {
       return res
         .status(404)

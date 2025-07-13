@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import axiosInstance from "../../libs/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -36,35 +37,37 @@ const SignupForm = () => {
     confirmPassword: "",
     role: "jobseeker",
     phoneNumber: "",
-    verificationMethod: "email",
     agreeToTerms: false,
   });
 
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.fullName || formData.fullName.length < 2)
-      newErrors.fullName = "Full name must be at least 2 characters";
-
-    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = "Valid email is required";
-
-    if (!formData.password || formData.password.length < 8)
-      newErrors.password = "Password must be at least 8 characters";
-
-    if (formData.password !== formData.confirmPassword)
-      newErrors.confirmPassword = "Passwords do not match";
-
-    if (!formData.role) newErrors.role = "Role is required";
-
-    if (!formData.verificationMethod)
-      newErrors.verificationMethod = "Verification method is required";
-
-    if (!formData.agreeToTerms)
-      newErrors.agreeToTerms = "You must agree to the terms and conditions";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  // Yup validation schema
+  const schema = yup.object().shape({
+    fullName: yup
+      .string()
+      .min(5, "Full name must be at least 5 characters")
+      .required("Full name is required"),
+    email: yup
+      .string()
+      .email("Please enter a valid email")
+      .matches(
+        /^[^\s@]+@[^\s@]+\.(com|net|org|in)$/i,
+        "Only .com, .net, .org, or .in email allowed"
+      )
+      .required("Email is required"),
+    password: yup
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .required("Password is required"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password")], "Passwords do not match")
+      .required("Please confirm your password"),
+    role: yup.string().required("Role is required"),
+    phoneNumber: yup.string(),
+    agreeToTerms: yup
+      .boolean()
+      .oneOf([true], "You must agree to the terms and conditions"),
+  });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -78,10 +81,18 @@ const SignupForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
+    try {
+      await schema.validate(formData, { abortEarly: false });
+      setErrors({});
       mutate(formData);
+    } catch (validationErrors) {
+      const formattedErrors = {};
+      validationErrors.inner.forEach((err) => {
+        formattedErrors[err.path] = err.message;
+      });
+      setErrors(formattedErrors);
     }
   };
 
@@ -89,15 +100,14 @@ const SignupForm = () => {
     <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
       <form
         onSubmit={handleSubmit}
-        className="bg-gradient-to-r from-indigo-200 to-purple-200 w-full max-w-lg bg-white p-8 rounded-2xl shadow-xl space-y-6"
+        className="bg-gradient-to-r from-indigo-200 to-purple-200 w-full max-w-lg p-8 rounded-2xl shadow-xl space-y-6"
       >
-        {/* LOgo Here Also */}
         <div className="flex justify-center items-center">
           <h1 className="text-3xl font-semibold font-serif text-gray-700">
             CareerKhoj
           </h1>
         </div>
-        {/* ...... */}
+
         {[
           { name: "fullName", label: "Full Name" },
           { name: "email", label: "Email Address", type: "email" },
@@ -173,14 +183,6 @@ const SignupForm = () => {
           className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
         >
           Register
-        </button>
-
-        <button
-          type="button"
-          className="w-full border border-gray-300 py-2 rounded-md flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-100 transition"
-        >
-          <img src="/google.png" alt="Google" className="w-5 h-5" />
-          Sign in with Google
         </button>
 
         <p className="text-sm text-center text-gray-600">

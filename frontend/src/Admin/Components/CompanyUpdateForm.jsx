@@ -9,7 +9,7 @@ const CompanyUpdateForm = () => {
 
   const navigate = useNavigate();
   const company = useSelector((state) => state?.company);
-  console.log(company);
+
   const [loading, setLoading] = useState(false);
 
   const [input, setInput] = useState({

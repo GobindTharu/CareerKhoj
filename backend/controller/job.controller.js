@@ -21,18 +21,7 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
     } = req.body;
 
     // Validate required fields
-    if (
-      !title ||
-      !description ||
-      !salary ||
-      !location ||
-      !jobType ||
-      experience == null ||
-      position == null ||
-      !category ||
-      !requirements ||
-      !companyId
-    ) {
+    if (!title || !description || !salary) {
       return res.status(400).json({
         message: "Some required fields are missing",
         success: false,
@@ -198,7 +187,10 @@ router.get("/job/recruiter/list", isAuthenticated, async (req, res) => {
   try {
     const recruiterId = req.id;
 
-    const jobs = await JobTable.find({ created_by: recruiterId });
+    const jobs = await JobTable.find({ created_by: recruiterId }).populate({
+      path: "company",
+      createdAt: -1,
+    });
     if (!jobs) {
       return res
         .status(404)

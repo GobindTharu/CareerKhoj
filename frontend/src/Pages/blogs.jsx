@@ -1,6 +1,6 @@
 import React from "react";
 
-export const BlogsCard = ({ blogs }) => {
+export const BlogsCard = () => {
   return (
     <div className="max-w-sm bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
       {/* Top Image */}

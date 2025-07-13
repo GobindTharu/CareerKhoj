@@ -1,25 +1,25 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axiosInstance from "../libs/axiosInstance";
-import { setUser } from "../redux/userSlice";
 
-const useGetUserProfile = () => {
+
+const useGetAllAdminJobs = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchAllAdminJobs = async () => {
       try {
-        const res = await axiosInstance.get("/user/profile", {
+        const res = await axiosInstance.get("/jobs/get-all", {
           withCredentials: true,
         });
         if (res.data.success) {
-          dispatch(setUser(res.data.user));
+          dispatch(setRecruiterJobs(res.data.jobs));
         }
       } catch (error) {
         console.log(error);
       }
     };
-    fetchUser();
-  }, [dispatch]);
+    fetchAllAdminJobs();
+  }, []);
 };
 
-export default useGetUserProfile;
+export default useGetAllAdminJobs;

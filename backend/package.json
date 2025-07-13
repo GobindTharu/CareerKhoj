@@ -4,8 +4,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +21,7 @@
     "cors": "^2.8.5",
     "datauri": "^4.1.0",
     "dayjs": "^1.11.13",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.15.0",
