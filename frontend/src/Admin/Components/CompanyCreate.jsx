@@ -24,7 +24,6 @@ const CompanyCreate = () => {
         }
       );
 
-      console.log(res.data);
       if (res?.data?.success) {
         dispatch(setSingleCompany(res?.data?.company));
         toast.success(res.data.success);

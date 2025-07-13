@@ -11,7 +11,6 @@ const useGetAllCompanies = () => {
         const res = await axiosInstance.get(`/company/get`, {
           withCredentials: true,
         });
-        console.log(res.data);
         if (res.data.success) {
           dispatch(setAllCompany(res.data.companies));
         }
@@ -20,7 +19,7 @@ const useGetAllCompanies = () => {
       }
     };
     fetchAllCompanies();
-  }, []);
+  }, [dispatch]);
 };
 
 export default useGetAllCompanies;

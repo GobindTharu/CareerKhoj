@@ -1,41 +1,16 @@
 import { Edit2 } from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import useGetAppliedJobs from "../../../hooks/useGetAppliedJobs";
 import NavBar from "./NavBar";
 import ProfileUpdateForm from "./ProfileUpdateForm";
-
-const profileData = {
-  jobs: [
-    {
-      date: "17-02-2025",
-      jobRole: "Frontend Developer",
-      company: "Google",
-      status: "Rejected",
-    },
-    {
-      date: "11-04-2025",
-      jobRole: "Fullstack Developer",
-      company: "Microsoft",
-      status: "Selected",
-    },
-    {
-      date: "14-01-2025",
-      jobRole: "UI/UX Developer",
-      company: "Infosys",
-      status: "Accepted",
-    },
-    {
-      date: "17-03-2024",
-      jobRole: "Graphics Designer",
-      company: "leapfrog",
-      status: "Selected",
-    },
-  ],
-};
+import AppliedJobTable from "./AppliedJobTable";
 
 const ProfileView = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const user = useSelector((state) => state.user?.user);
+
+  useGetAppliedJobs();
 
   return (
     <div className="relative bg-gray-100">
@@ -126,41 +101,9 @@ const ProfileView = () => {
           )}
         </div>
 
-        <div className="mb-16">
-          <h2 className="font-semibold text-lg mb-3">Applied Jobs</h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full border border-gray-200 text-sm">
-              <thead className="bg-gray-200">
-                <tr>
-                  <th className="px-4 py-3">S.N</th>
-                  <th className="px-4 py-3">Date</th>
-                  <th className="px-4 py-3 ">Job Role</th>
-                  <th className="px-4 py-3 ">Company</th>
-                  <th className="px-4 py-3 ">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {profileData.jobs.map((job, index) => (
-                  <tr key={index} className="border-t">
-                    <td className="px-4 py-3 w-1/4 text-center">{index + 1}</td>
-                    <td className="px-4 py-3 w-1/4 text-center ">{job.date}</td>
-                    <td className="px-4 py-3 w-1/4 text-center">
-                      {job.jobRole}
-                    </td>
-                    <td className="px-4 py-3 w-1/4 text-center">
-                      {job.company}
-                    </td>
-                    <td className="px-4 py-3 w-1/4 text-center">
-                      <span className="inline-block px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full">
-                        {job.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        {/* Application Data */}
+
+        <AppliedJobTable />
       </div>
     </div>
   );

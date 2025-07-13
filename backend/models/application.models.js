@@ -9,12 +9,12 @@ const applicationSchema = new mongoose.Schema(
     },
     applicant: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", 
+      ref: "User",
       required: [true, "Applicant reference is required"],
     },
     status: {
       type: String,
-      enum: ["pending","rejected", "accepted"],
+      enum: ["pending", "rejected", "accepted"],
       default: "pending",
     },
     appliedAt: {
@@ -23,8 +23,11 @@ const applicationSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // Adds createdAt and updatedAt
+    timestamps: true,
   }
 );
 
-export const ApplicationTable = mongoose.model("Application", applicationSchema);
+export const ApplicationTable = mongoose.model(
+  "Application",
+  applicationSchema
+);

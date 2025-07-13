@@ -16,7 +16,6 @@ export const JobSearchForm = () => {
           keyword,
         },
       });
-      console.log(res.data);
       setJobs(res.data.jobs);
     } catch (err) {
       console.error("Search failed", err);

@@ -114,7 +114,7 @@ const RecruiterJobsTable = () => {
         >
           <div
             onClick={() => {
-              navigate(`/admin/companies/${openPopoverId}`);
+              navigate(`/recruiter/companies/${openPopoverId}`);
               setOpenPopoverId(null);
             }}
             className="flex items-center gap-2 py-2 px-3 text-sm hover:bg-gray-100 cursor-pointer transition"
@@ -124,7 +124,7 @@ const RecruiterJobsTable = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/admin/jobs/${openPopoverId}/applicants`);
+              navigate(`/recruiter/jobs/${openPopoverId}/applicants`);
               setOpenPopoverId(null);
             }}
             className="flex items-center gap-2 py-2 px-3 text-sm hover:bg-gray-100 cursor-pointer transition"

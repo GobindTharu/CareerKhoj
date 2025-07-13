@@ -9,6 +9,7 @@ const useGetAllRecruiterJobs = () => {
     const fetchAllRecruiterJobs = async () => {
       try {
         const res = await axiosInstance.get(`/job/recruiter/list`, {
+          timeout: 5000,
           withCredentials: true,
         });
         if (res.data.success) {

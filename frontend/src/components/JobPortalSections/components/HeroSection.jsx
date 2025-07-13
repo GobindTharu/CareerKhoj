@@ -12,6 +12,7 @@ const HeroSection = () => (
       }}
     ></div>
 
+
     {/* Overlay */}
     <div className="absolute inset-0 z-10 bg-black/20"></div>
 

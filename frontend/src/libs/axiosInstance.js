@@ -1,12 +1,14 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://careerkhoj.onrender.com",
+  // baseURL: "https://careerkhoj.onrender.com",
+  baseURL: "http://localhost:8080",
+
   timeout: 5000, //5 second
 });
 
 axiosInstance.interceptors.request.use(function (config) {
-  const accessToken = window.localStorage.getItem("accessToken");
+  const accessToken = localStorage.getItem("accessToken");
 
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;

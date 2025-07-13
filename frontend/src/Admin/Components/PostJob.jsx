@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import axiosInstance from "../../libs/axiosInstance";
 import { useSelector } from "react-redux";
 import NavBar from "../../components/JobPortalSections/components/NavBar";
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const jobTypes = ["Full-time", "Part-time", "Internship", "Contract", "Remote"];
 const categories = [
@@ -23,7 +23,7 @@ const JobPostForm = () => {
   const company = useSelector((state) => state.company);
   const companyId = company?.singleCompany?._id;
 
-  console.log(companyId);
+
 
   const formik = useFormik({
     initialValues: {

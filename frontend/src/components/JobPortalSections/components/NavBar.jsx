@@ -15,8 +15,8 @@ const NavBar = (data) => {
   const toggleRef = useRef(null);
 
   const recruiterMenu = [
-    { name: "Companies", link: "/recruiter/companies" },
     { name: "Jobs", link: "/recruiter/jobs" },
+    { name: "Company", link: "/recruiter/companies" },
   ];
 
   const jobSeekerMenu = [
@@ -36,8 +36,6 @@ const NavBar = (data) => {
 
   const menuList = user?.role === "recruiter" ? recruiterMenu : jobSeekerMenu;
 
-  
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -55,7 +53,7 @@ const NavBar = (data) => {
         setIsMenuOpen(false);
       }
     };
-    
+
     document.addEventListener("mousedown", handleClickOutside);
     window.addEventListener("resize", handleResize);
 
@@ -96,7 +94,6 @@ const NavBar = (data) => {
               )}
             </div>
           ))}
-          
         </div>
         {/* Desktop Login */}
 

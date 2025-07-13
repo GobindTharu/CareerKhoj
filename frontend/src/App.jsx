@@ -24,6 +24,8 @@ import ResumeTemplate4 from "./components/ResumeSections/ResumeTemplates/ResumeT
 import ResumeTemplate5 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate5";
 import RecruiterJobs from "./Admin/Components/RecruiterJobs";
 import PostJob from "./Admin/Components/PostJob";
+import Applicants from "./Admin/Components/Applicants";
+import ProtectedRoute from "./Admin/Components/ProtectedRoute";
 
 function App() {
   return (
@@ -55,16 +57,54 @@ function App() {
         <Route path="/simple-form" element={<ResumeFormWrapper />} />
 
         {/* Recruiter Routes */}
-        <Route path="/recruiter/companies" element={<Companies />} />
-        <Route path="/recruiter/company/create" element={<CompanyCreate />} />
+        <Route
+          path="/recruiter/companies"
+          element={
+            <ProtectedRoute>
+              <Companies />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recruiter/company/create"
+          element={
+            <ProtectedRoute>
+              <CompanyCreate />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/recruiter/company-update/:id"
-          element={<CompanyUpdateForm />}
+          element={
+            <ProtectedRoute>
+              <CompanyUpdateForm />
+            </ProtectedRoute>
+          }
         />
-
-        {/* Jobs */}
-        <Route path="/recruiter/jobs" element={<RecruiterJobs />} />
-        <Route path="/recruiter/jobs/create" element={<PostJob />} />
+        <Route
+          path="/recruiter/jobs"
+          element={
+            <ProtectedRoute>
+              <RecruiterJobs />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recruiter/jobs/create"
+          element={
+            <ProtectedRoute>
+              <PostJob />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recruiter/jobs/:id/applicants"
+          element={
+            <ProtectedRoute>
+              <Applicants />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );
