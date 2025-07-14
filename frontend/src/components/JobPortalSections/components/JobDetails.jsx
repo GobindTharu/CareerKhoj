@@ -8,6 +8,7 @@ import { setSingleJob } from "../../../redux/jobSlice";
 import Footer from "./Footer";
 import { getDaysLeftToApply, getPostedDaysAgo } from "./Job";
 import NavBar from "./NavBar";
+import { ProtectedButtonToApply } from "./ProtectedButtonToApply";
 
 const JobDetails = () => {
   const singleJob = useSelector((state) => state.job.singleJob);
@@ -123,17 +124,19 @@ const JobDetails = () => {
                 <span className="mr-2">
                   applicants: {singleJob?.application?.length}
                 </span>
-                <button
-                  onClick={isApplied ? null : applyJobHandler}
-                  disabled={isApplied}
-                  className={`${
-                    isApplied
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-blue-600 hover:bg-blue-700"
-                  }transition-colors text-white font-semibold py-2 px-6 rounded-xl shadow-md`}
-                >
-                  {isApplied ? "Already Applied" : "Apply Now"}
-                </button>
+                <ProtectedButtonToApply>
+                  <button
+                    onClick={isApplied ? null : applyJobHandler}
+                    disabled={isApplied}
+                    className={`${
+                      isApplied
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-blue-600 hover:bg-blue-700"
+                    }transition-colors text-white font-semibold py-2 px-6 rounded-xl shadow-md`}
+                  >
+                    {isApplied ? "Already Applied" : "Apply Now"}
+                  </button>
+                </ProtectedButtonToApply>
               </div>
             </div>
           </div>

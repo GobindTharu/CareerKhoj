@@ -1,5 +1,5 @@
 import React from "react";
-import { Bookmark } from "lucide-react";
+import { Bookmark, ShieldCheck, ShieldEllipsis } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Job = ({ job }) => {
@@ -12,7 +12,7 @@ const Job = ({ job }) => {
       <div className="flex items-center justify-between ">
         <p className="text-sm text-blue-600">{postedAgo}</p>
         <button className=" rounded-full text-sm text-white bg-gray-400 hover:bg-gray-300 p-2 border">
-          <Bookmark />
+          <ShieldCheck />
         </button>
       </div>
       <div className="flex items-center gap-2 my-2">
@@ -37,13 +37,13 @@ const Job = ({ job }) => {
         </p>
       </div>
       <div className="flex items-center gap-2 mt-4">
-        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-2 py-1 rounded-full shadow-sm">
+        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-1 py-1 rounded-full shadow-sm">
           {job?.positions} Positions
         </span>
-        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-2 py-1 rounded-full shadow-sm">
+        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-1 py-1 rounded-full shadow-sm">
           {job.jobType}
         </span>
-        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-2 py-1 rounded-full shadow-sm">
+        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-1 py-1 rounded-full shadow-sm">
           Rs.{job?.salary}salary
         </span>
       </div>

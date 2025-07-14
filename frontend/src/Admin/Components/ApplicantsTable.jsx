@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useGetApplicantsById } from "../../hooks/useGetApplicatById";
 import axiosInstance from "../../libs/axiosInstance";
 
-const shortlistingStatus = ["Accepted", "Rejected"];
+const shortlistingStatus = ["Accepted", "Rejected", "Pending"];
 
 const ApplicantsTable = () => {
   const [showPopover, setShowPopover] = useState(false);
@@ -90,7 +90,15 @@ const ApplicantsTable = () => {
                     onClick={togglePopover}
                     className="flex flex-row items-center justify-between "
                   >
-                    <span className="text-green-700 px-2 capitalize">
+                    <span
+                      className={`px-2 capitalize ${
+                        item.status.toLowerCase() === "accepted"
+                          ? "text-green-700"
+                          : item.status.toLowerCase() === "rejected"
+                          ? "text-red-500"
+                          : "text-gray-500"
+                      }`}
+                    >
                       {item?.status}
                     </span>
                     <MoreVertical className="w-12 h-12 text-gray-600 px-2 hover:bg-gray-200 py-2 rounded-full" />{" "}
