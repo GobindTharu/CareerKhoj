@@ -110,6 +110,7 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
   }
 });
 
+// all Jobs
 router.get("/jobs/get-all", async (req, res) => {
   try {
     const jobs = await JobTable.find().sort({ postedAt: -1 }); // newest first
