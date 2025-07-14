@@ -15,8 +15,8 @@ const NavBar = (data) => {
   const toggleRef = useRef(null);
 
   const recruiterMenu = [
-    { name: "Jobs", link: "/recruiter/jobs" },
     { name: "Company", link: "/recruiter/companies" },
+    { name: "Jobs", link: "/recruiter/jobs" },
   ];
 
   const jobSeekerMenu = [

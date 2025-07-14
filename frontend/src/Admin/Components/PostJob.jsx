@@ -46,10 +46,16 @@ const JobPostForm = () => {
     validationSchema: Yup.object({
       title: Yup.string().required("Job title is required"),
       description: Yup.string().required("Description is required"),
-      salary: Yup.number()
-        .typeError("Salary must be a number")
-        .positive("Must be positive")
-        .required("Salary is required"),
+      salary: Yup.string()
+        .required("Salary is required")
+        .matches(
+          /^\d+(\.\d+)?$/,
+          "Salary must be a positive number without + sign"
+        )
+        .test("is-positive", "Salary must be greater than zero", (value) =>
+          value ? parseFloat(value) > 0 : false
+        ),
+
       location: Yup.string().required("Location is required"),
       jobType: Yup.string().oneOf(jobTypes).required("Job type is required"),
       experience: Yup.string()

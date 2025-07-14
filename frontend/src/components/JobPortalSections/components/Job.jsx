@@ -2,7 +2,32 @@ import React from "react";
 import { Bookmark, ShieldCheck, ShieldEllipsis } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+
+
+export const getPostedDaysAgo = (createdAt) => {
+  const createdDate = new Date(createdAt);
+  const now = new Date();
+  const diffTime = Math.abs(now - createdDate);
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays === 0
+    ? "Today"
+    : `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+};
+
+export const getDaysLeftToApply = (deadline) => {
+  const deadlineDate = new Date(deadline);
+  const now = new Date();
+  const diffTime = deadlineDate - now;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays < 0) return "Application closed";
+  if (diffDays === 0) return "Last day to apply!";
+  return `${diffDays} day${diffDays > 1 ? "s" : ""} left`;
+};
+
+
 const Job = ({ job }) => {
+
   const navigate = useNavigate();
   const daysLeft = getDaysLeftToApply(job.deadline);
   const postedAgo = getPostedDaysAgo(job.createdAt);
@@ -61,27 +86,6 @@ const Job = ({ job }) => {
       </div>
     </div>
   );
-};
-
-export const getPostedDaysAgo = (createdAt) => {
-  const createdDate = new Date(createdAt);
-  const now = new Date();
-  const diffTime = Math.abs(now - createdDate);
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays === 0
-    ? "Today"
-    : `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
-};
-
-export const getDaysLeftToApply = (deadline) => {
-  const deadlineDate = new Date(deadline);
-  const now = new Date();
-  const diffTime = deadlineDate - now;
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-  if (diffDays < 0) return "Application closed";
-  if (diffDays === 0) return "Last day to apply!";
-  return `${diffDays} day${diffDays > 1 ? "s" : ""} left`;
 };
 
 export default Job;
