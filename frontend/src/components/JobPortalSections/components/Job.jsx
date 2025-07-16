@@ -1,8 +1,33 @@
 import React from "react";
-import { Bookmark } from "lucide-react";
+import { Bookmark, ShieldCheck, ShieldEllipsis } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+
+
+export const getPostedDaysAgo = (createdAt) => {
+  const createdDate = new Date(createdAt);
+  const now = new Date();
+  const diffTime = Math.abs(now - createdDate);
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays === 0
+    ? "Today"
+    : `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+};
+
+export const getDaysLeftToApply = (deadline) => {
+  const deadlineDate = new Date(deadline);
+  const now = new Date();
+  const diffTime = deadlineDate - now;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays < 0) return "Application closed";
+  if (diffDays === 0) return "Last day to apply!";
+  return `${diffDays} day${diffDays > 1 ? "s" : ""} left`;
+};
+
+
 const Job = ({ job }) => {
+
   const navigate = useNavigate();
   const daysLeft = getDaysLeftToApply(job.deadline);
   const postedAgo = getPostedDaysAgo(job.createdAt);
@@ -12,7 +37,7 @@ const Job = ({ job }) => {
       <div className="flex items-center justify-between ">
         <p className="text-sm text-blue-600">{postedAgo}</p>
         <button className=" rounded-full text-sm text-white bg-gray-400 hover:bg-gray-300 p-2 border">
-          <Bookmark />
+          <ShieldCheck />
         </button>
       </div>
       <div className="flex items-center gap-2 my-2">
@@ -37,13 +62,13 @@ const Job = ({ job }) => {
         </p>
       </div>
       <div className="flex items-center gap-2 mt-4">
-        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-2 py-1 rounded-full shadow-sm">
+        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-1 py-1 rounded-full shadow-sm">
           {job?.positions} Positions
         </span>
-        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-2 py-1 rounded-full shadow-sm">
+        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-1 py-1 rounded-full shadow-sm">
           {job.jobType}
         </span>
-        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-2 py-1 rounded-full shadow-sm">
+        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-1 py-1 rounded-full shadow-sm">
           Rs.{job?.salary}salary
         </span>
       </div>
@@ -61,27 +86,6 @@ const Job = ({ job }) => {
       </div>
     </div>
   );
-};
-
-export const getPostedDaysAgo = (createdAt) => {
-  const createdDate = new Date(createdAt);
-  const now = new Date();
-  const diffTime = Math.abs(now - createdDate);
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays === 0
-    ? "Today"
-    : `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
-};
-
-export const getDaysLeftToApply = (deadline) => {
-  const deadlineDate = new Date(deadline);
-  const now = new Date();
-  const diffTime = deadlineDate - now;
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-  if (diffDays < 0) return "Application closed";
-  if (diffDays === 0) return "Last day to apply!";
-  return `${diffDays} day${diffDays > 1 ? "s" : ""} left`;
 };
 
 export default Job;

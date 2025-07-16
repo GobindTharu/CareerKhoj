@@ -44,26 +44,39 @@ const SignupForm = () => {
   const schema = yup.object().shape({
     fullName: yup
       .string()
+      .required("Full name is required")
       .min(5, "Full name must be at least 5 characters")
-      .required("Full name is required"),
+      .matches(
+        /^[a-zA-Z\s.-]+$/,
+        "Full name must contain only letters, spaces, dots, or hyphens"
+      ),
     email: yup
       .string()
       .email("Please enter a valid email")
-      .matches(
-        /^[^\s@]+@[^\s@]+\.(com|net|org|in)$/i,
-        "Only .com, .net, .org, or .in email allowed"
-      )
+      .matches(/^[^\s@]+@gmail\.com$/i, "Only @gmail.com email is allowed")
       .required("Email is required"),
+
     password: yup
       .string()
+      .required("Password is required")
       .min(8, "Password must be at least 8 characters")
-      .required("Password is required"),
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        "Password must include uppercase, lowercase, number, and special character"
+      ),
     confirmPassword: yup
       .string()
       .oneOf([yup.ref("password")], "Passwords do not match")
       .required("Please confirm your password"),
     role: yup.string().required("Role is required"),
-    phoneNumber: yup.string(),
+    phoneNumber: yup
+      .string()
+      .required("Phone number is required")
+      .matches(
+        /^(98|97)\d{8}$/,
+        "Phone number must start with 98 or 97 and be exactly 10 digits"
+      ),
+
     agreeToTerms: yup
       .boolean()
       .oneOf([true], "You must agree to the terms and conditions"),

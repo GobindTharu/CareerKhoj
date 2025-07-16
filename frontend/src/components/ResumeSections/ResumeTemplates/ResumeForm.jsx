@@ -49,9 +49,14 @@ const ResumeForm = (props) => {
       case 1:
         return (
           <div className="space-y-6">
-            <h3 className="text-xl font-semibold text-gray-800">Personal Information</h3>
+            <h3 className="text-xl font-semibold text-gray-800">
+              Personal Information
+            </h3>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Full Name
               </label>
               <input
@@ -66,7 +71,10 @@ const ResumeForm = (props) => {
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Email
               </label>
               <input
@@ -87,7 +95,10 @@ const ResumeForm = (props) => {
           <div className="space-y-6">
             <h3 className="text-xl font-semibold text-gray-800">Education</h3>
             <div>
-              <label htmlFor="education" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="education"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Education Details
               </label>
               <textarea
@@ -107,7 +118,10 @@ const ResumeForm = (props) => {
           <div className="space-y-6">
             <h3 className="text-xl font-semibold text-gray-800">Skills</h3>
             <div>
-              <label htmlFor="skills" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="skills"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Skills
               </label>
               <input
@@ -127,7 +141,10 @@ const ResumeForm = (props) => {
           <div className="space-y-6">
             <h3 className="text-xl font-semibold text-gray-800">Experience</h3>
             <div>
-              <label htmlFor="experience" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="experience"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Work Experience
               </label>
               <textarea
@@ -151,26 +168,32 @@ const ResumeForm = (props) => {
     <div className="max-w-3xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
       {/* Progress Indicator */}
       <div className="flex justify-between mb-8">
-        {["Personal", "Education", "Skills", "Experience"].map((label, index) => (
-          <div key={index} className="flex-1 text-center">
-            <div
-              className={`w-10 h-10 mx-auto rounded-full flex items-center justify-center text-sm font-medium transition ${
-                step > index + 1
-                  ? "bg-blue-600 text-white"
-                  : step === index + 1
-                  ? "bg-blue-400 text-white"
-                  : "bg-gray-200 text-gray-600"
-              }`}
-            >
-              {index + 1}
+        {["Personal", "Education", "Skills", "Experience"].map(
+          (label, index) => (
+            <div key={index} className="flex-1 text-center">
+              <div
+                className={`w-10 h-10 mx-auto rounded-full flex items-center justify-center text-sm font-medium transition ${
+                  step > index + 1
+                    ? "bg-blue-600 text-white"
+                    : step === index + 1
+                    ? "bg-blue-400 text-white"
+                    : "bg-gray-200 text-gray-600"
+                }`}
+              >
+                {index + 1}
+              </div>
+              <p className="mt-2 text-sm font-medium text-gray-600">{label}</p>
             </div>
-            <p className="mt-2 text-sm font-medium text-gray-600">{label}</p>
-          </div>
-        ))}
+          )
+        )}
       </div>
 
       {/* Form Content */}
-      <form onSubmit={handleSubmit} onKeyDown={handleKeyDown} className="space-y-6">
+      <form
+        onSubmit={handleSubmit}
+        onKeyDown={handleKeyDown}
+        className="space-y-6"
+      >
         {renderStep()}
         <div className="flex justify-between mt-8">
           <button
@@ -178,7 +201,9 @@ const ResumeForm = (props) => {
             onClick={handleBack}
             disabled={step === 1}
             className={`px-6 py-2 rounded-lg font-medium transition ${
-              step === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200 hover:bg-gray-300"
+              step === 1
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-gray-200 hover:bg-gray-300"
             }`}
           >
             Back

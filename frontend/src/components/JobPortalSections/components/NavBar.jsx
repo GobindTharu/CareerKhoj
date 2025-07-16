@@ -15,14 +15,15 @@ const NavBar = (data) => {
   const toggleRef = useRef(null);
 
   const recruiterMenu = [
-    { name: "Jobs", link: "/recruiter/jobs" },
     { name: "Company", link: "/recruiter/companies" },
+    { name: "Jobs", link: "/recruiter/jobs" },
   ];
 
   const jobSeekerMenu = [
     { name: "Home", link: "/" },
     { name: "Jobs", link: "/jobs" },
     { name: "Build Resume", link: "/resume-builder" },
+    { name: "Build Resume TextMode", link: "/test" },
     {
       name: "About Us",
       link: "/about-us",

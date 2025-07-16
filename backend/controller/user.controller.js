@@ -73,7 +73,7 @@ router.post(
       const secretKey = process.env.SECRET_KEY;
 
       const token = jwt.sign(payload, secretKey, {
-        expiresIn: "7d",
+        expiresIn: "1d",
       });
 
       user.password = undefined;

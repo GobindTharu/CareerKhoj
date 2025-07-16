@@ -8,6 +8,7 @@ import { setSingleJob } from "../../../redux/jobSlice";
 import Footer from "./Footer";
 import { getDaysLeftToApply, getPostedDaysAgo } from "./Job";
 import NavBar from "./NavBar";
+import { ProtectedButtonToApply } from "./ProtectedButtonToApply";
 
 const JobDetails = () => {
   const singleJob = useSelector((state) => state.job.singleJob);
@@ -15,6 +16,10 @@ const JobDetails = () => {
   const isApplied = singleJob?.application?.some(
     (application) => String(application?.applicant) === String(user?._id)
   );
+
+  const hasResume = !!user?.profile?.resume;
+
+  console.log(hasResume);
 
   const params = useParams();
   const jobId = params.id;
@@ -25,6 +30,12 @@ const JobDetails = () => {
 
   const applyJobHandler = async () => {
     try {
+      if (isApplied) return;
+
+      if (!hasResume) {
+        toast.error("Please upload your resume in your profile to apply.");
+        return;
+      }
       const res = await axiosInstance.get(`/application/apply/${jobId}`, {
         withCredentials: true,
       });
@@ -123,17 +134,21 @@ const JobDetails = () => {
                 <span className="mr-2">
                   applicants: {singleJob?.application?.length}
                 </span>
-                <button
-                  onClick={isApplied ? null : applyJobHandler}
-                  disabled={isApplied}
-                  className={`${
-                    isApplied
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-blue-600 hover:bg-blue-700"
-                  }transition-colors text-white font-semibold py-2 px-6 rounded-xl shadow-md`}
-                >
-                  {isApplied ? "Already Applied" : "Apply Now"}
-                </button>
+                <ProtectedButtonToApply>
+                  <button
+                    onClick={() => {
+                      applyJobHandler();
+                    }}
+                    disabled={isApplied}
+                    className={`${
+                      isApplied
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-blue-600 hover:bg-blue-700"
+                    } transition-colors text-white font-semibold py-2 px-6 rounded-xl shadow-md`}
+                  >
+                    {isApplied ? "Already Applied" : "Apply Now"}
+                  </button>
+                </ProtectedButtonToApply>
               </div>
             </div>
           </div>

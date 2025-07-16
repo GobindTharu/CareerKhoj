@@ -1,31 +1,30 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 
+import Applicants from "./Admin/Components/Applicants";
 import Companies from "./Admin/Components/Companies";
 import CompanyCreate from "./Admin/Components/CompanyCreate";
 import CompanyUpdateForm from "./Admin/Components/CompanyUpdateForm";
+import PostJob from "./Admin/Components/PostJob";
+import ProtectedRoute from "./Admin/Components/ProtectedRoute";
+import RecruiterJobs from "./Admin/Components/RecruiterJobs";
 import JobDetails from "./components/JobPortalSections/components/JobDetails";
 import ProfileUpdateForm from "./components/JobPortalSections/components/ProfileUpdateForm";
 import ProfileView from "./components/JobPortalSections/components/ProfileView";
 import SearchResults from "./components/JobPortalSections/components/SearchResults";
 import ResumeFormWrapper from "./components/ResumeSections/Components/ResumeFormWrapper";
 import ChooseTemplate from "./components/ResumeSections/ResumeTemplates/ChooseTemplate";
+import ResumeTemplate1 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate1";
+import ResumeTemplate2 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate2";
+import ResumeTemplate3 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate3";
+import ResumeTemplate4 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate4";
+import ResumeTemplate5 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate5";
 import AboutPage from "./Pages/AboutUs";
 import Login from "./Pages/Auth/Login";
 import SignUp from "./Pages/Auth/SignUp";
 import BuildResume from "./Pages/BuildResume";
 import HomePage from "./Pages/Home";
 import Jobs from "./Pages/Jobs";
-import JoinUs from "./components/JobPortalSections/components/JoinUs";
-import ResumeTemplate1 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate1";
-import ResumeTemplate2 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate2";
-import ResumeTemplate3 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate3";
-import ResumeTemplate4 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate4";
-import ResumeTemplate5 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate5";
-import RecruiterJobs from "./Admin/Components/RecruiterJobs";
-import PostJob from "./Admin/Components/PostJob";
-import Applicants from "./Admin/Components/Applicants";
-import ProtectedRoute from "./Admin/Components/ProtectedRoute";
+import ResumeBuilder from "./components/TestResume/TextResume";
 
 function App() {
   return (
@@ -45,7 +44,6 @@ function App() {
         <Route path="/resume-builder" element={<BuildResume />} />
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/choose-template" element={<ChooseTemplate />} />
-        <Route path="/join-us" element={<JoinUs />} />
 
         {/* Resume Templates */}
         <Route path="/resume-template/1" element={<ResumeTemplate1 />} />
@@ -105,6 +103,10 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* Test */}
+
+        <Route path="/test" element={<ResumeBuilder />} />
       </Routes>
     </div>
   );
