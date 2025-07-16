@@ -1,4 +1,4 @@
-import { JobCategories } from "./JobCategory";
+// import { JobCategories } from "./JobCategory";
 import { JobSearchForm } from "./JobSearchForm";
 import { Stats } from "./Stats";
 
@@ -11,7 +11,6 @@ const HeroSection = () => (
         backgroundImage: `url('./homepagebackground.avif')`,
       }}
     ></div>
-
 
     {/* Overlay */}
     <div className="absolute inset-0 z-10 bg-black/20"></div>
@@ -34,7 +33,7 @@ const HeroSection = () => (
 
       <Stats />
       <JobSearchForm />
-      <JobCategories />
+      {/* <JobCategories /> */}
     </div>
   </div>
 );

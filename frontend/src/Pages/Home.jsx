@@ -9,6 +9,8 @@ import { useEffect } from "react";
 import { setUser } from "../redux/userSlice";
 import useGetAllJobs from "../hooks/useGetAllJobs";
 import { useNavigate } from "react-router-dom";
+import FeatureSection from "../components/JobPortalSections/components/Responsve";
+import CustomizePage from "../components/JobPortalSections/components/Customization";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -35,6 +37,8 @@ export default function HomePage() {
       <NavBar />
       <HeroSection />
       <HomeResumeLink />
+      <FeatureSection />
+      <CustomizePage />
       <LatestJobs />
       <WhyChooseCareerKhoj />
       <Footer />

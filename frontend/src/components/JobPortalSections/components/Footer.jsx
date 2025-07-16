@@ -9,9 +9,9 @@ const Footer = () => {
         {/* Company Info */}
         <div>
           {/* logo here  */}
-         <Logo/>
+          <Logo />
 
-          <p className="text-sm text-gray-900">
+          <p className="text-base text-gray-900">
             CareerKhoj is your all-in-one job and resume-builder platform.
             Explore top jobs, build standout resumes, and elevate your career —
             all in one place.
@@ -21,7 +21,7 @@ const Footer = () => {
         {/* Quick Links */}
         <div>
           <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
-          <ul className="space-y-2 text-sm text-gray-900">
+          <ul className="space-y-2 text-base text-gray-900">
             <li>
               <a href="/about-us" className="hover:underline">
                 About Us
@@ -55,7 +55,7 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-3">
             Jobs By Functional Area
           </h3>
-          <ul className="space-y-2 text-sm text-gray-900">
+          <ul className="space-y-2 text-base text-gray-900">
             <li>Website & Software</li>
             <li>Education & Training</li>
             <li>Graphic & UI/UX Design</li>
@@ -69,19 +69,12 @@ const Footer = () => {
         {/* Location */}
         <div>
           <h3 className="text-lg font-semibold mb-3">Our Location</h3>
-          <p className="text-sm mb-3">Bhairahawa, Nepal</p>
-          <iframe
-            title="CareerKhoj Location"
-            src="https://maps.google.com/maps?q=bhairahawa%2C%20nepal&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            className="w-full h-42 border-0 rounded-md"
-            allowFullScreen=""
-            loading="lazy"
-          ></iframe>
+          <p className="text-base mb-3">Bhairahawa, Nepal</p>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="bg-gray-950 text-sm text-gray-300 px-6 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-gray-950 text-base text-gray-300 px-6 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Left: Social Links */}
         <div className="flex items-center space-x-3">
           <span>Connect With Us:</span>

@@ -1,10 +1,12 @@
 // install framer-motion if not already installed
-import React from "react";
+// import React, { useState } from "react";
 import OpportunityFeatures from "./OpportunityFeatures";
+import RecruitmentProcess from "./RecruitmentProcess";
 import TeamMember from "./TeamMember";
 import VisionMission from "./VisionMission";
 
 const AboutUs = () => {
+  // const [showJoinModal, setShowJoinModal] = useState(false);
   return (
     <div className=" bg-gray-50 min-h-screen py-32 px-4 sm:px-8 lg:px-16 text-gray-800">
       {/* Header Section */}
@@ -45,6 +47,7 @@ const AboutUs = () => {
 
       {/* Values Section */}
       <VisionMission />
+      <RecruitmentProcess />
       {/* Opportunity */}
       <OpportunityFeatures />
       <TeamMember />
@@ -59,11 +62,12 @@ const AboutUs = () => {
           here.
         </p>
         <a
-          href="/join-us"
+          // onClick={() => setShowJoinModal(true)}
           className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full transition"
         >
           Join Now
         </a>
+        {/* <JoinUs open={showJoinModal} onClose={() => setShowJoinModal(false)} /> */}
       </div>
     </div>
   );

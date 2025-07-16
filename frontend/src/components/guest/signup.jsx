@@ -53,11 +53,9 @@ const SignupForm = () => {
     email: yup
       .string()
       .email("Please enter a valid email")
-      .matches(
-        /^[^\s@]+@[^\s@]+\.(com|net|org|in)$/i,
-        "Only .com, .net, .org, or .in email allowed"
-      )
+      .matches(/^[^\s@]+@gmail\.com$/i, "Only @gmail.com email is allowed")
       .required("Email is required"),
+
     password: yup
       .string()
       .required("Password is required")
@@ -75,9 +73,10 @@ const SignupForm = () => {
       .string()
       .required("Phone number is required")
       .matches(
-        /^(\+977-?|\b)(98|97)\d{8}$/,
-        "Must be a valid Nepali number (e.g., 980XXXXXXX or +977-980XXXXXXX)"
+        /^(98|97)\d{8}$/,
+        "Phone number must start with 98 or 97 and be exactly 10 digits"
       ),
+
     agreeToTerms: yup
       .boolean()
       .oneOf([true], "You must agree to the terms and conditions"),

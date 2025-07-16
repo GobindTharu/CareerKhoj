@@ -23,6 +23,7 @@ const NavBar = (data) => {
     { name: "Home", link: "/" },
     { name: "Jobs", link: "/jobs" },
     { name: "Build Resume", link: "/resume-builder" },
+    { name: "Build Resume TextMode", link: "/test" },
     {
       name: "About Us",
       link: "/about-us",
