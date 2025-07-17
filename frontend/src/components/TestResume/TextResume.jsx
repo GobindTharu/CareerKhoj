@@ -22,6 +22,13 @@ const ResumeBuilder = () => {
     summary: "",
     photo: null,
     education: [],
+    school: "",
+    degree: "",
+    city: "",
+    startDate: "",
+    endDate: "",
+    currentlyStudying: false,
+    description: "",
   });
 
   const [currentSection, setCurrentSection] = useState("About");

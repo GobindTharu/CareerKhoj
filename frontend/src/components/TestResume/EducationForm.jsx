@@ -4,7 +4,6 @@ const EducationForm = ({ formData, setFormData }) => {
   const [educationEntry, setEducationEntry] = useState({
     school: "",
     degree: "",
-    city: "",
     startDate: "",
     endDate: "",
     currentlyStudying: false,
@@ -57,14 +56,7 @@ const EducationForm = ({ formData, setFormData }) => {
           onChange={handleInputChange}
           className="border p-2"
         />
-        <input
-          type="text"
-          name="city"
-          placeholder="City"
-          value={educationEntry.city}
-          onChange={handleInputChange}
-          className="border p-2"
-        />
+
         <input
           type="month"
           name="startDate"
