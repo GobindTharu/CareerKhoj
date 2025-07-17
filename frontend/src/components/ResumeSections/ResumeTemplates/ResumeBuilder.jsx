@@ -15,14 +15,14 @@ const ResumeBuilder = () => {
   const [selectedTemplate, setSelectedTemplate] = useState("1");
 
   const handleSubmit = (data) => {
-    console.log("Received form data in resume.jsx:", data); // Debug log
+    console.log("Received form data in resume.jsx:", data); 
     setIsLoading(true);
-    // Simulate async submission (e.g., API call)
+ 
     setTimeout(() => {
       setFormData(data);
       setIsSubmitted(true);
       setIsLoading(false);
-    }, 500); // Short delay to show loading state
+    }, 500); 
   };
 
   const handleEdit = () => {
