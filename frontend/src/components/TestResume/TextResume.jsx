@@ -24,7 +24,6 @@ const ResumeBuilder = () => {
     education: [],
     school: "",
     degree: "",
-    city: "",
     startDate: "",
     endDate: "",
     currentlyStudying: false,
@@ -35,7 +34,7 @@ const ResumeBuilder = () => {
 
   const renderSection = () => {
     switch (currentSection) {
-      case "About":
+      case "About": 
         return <AboutForm formData={formData} setFormData={setFormData} />;
       case "Education":
         return <EducationForm formData={formData} setFormData={setFormData} />;
