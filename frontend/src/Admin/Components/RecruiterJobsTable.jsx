@@ -12,7 +12,8 @@ const RecruiterJobsTable = () => {
   const navigate = useNavigate();
 
   const buttonRefs = useRef({});
-
+//add the text
+ 
   useEffect(() => {
     const searchText =
       typeof searchJobByText === "string" ? searchJobByText.toLowerCase() : "";
