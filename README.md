@@ -103,4 +103,6 @@ Backend: Vercel, Render, Railway, or your VPS
 
 Database: MongoDB Atlas
 
+.
+
 
