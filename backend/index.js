@@ -9,6 +9,8 @@ import { companyController } from "./controller/company.controller.js";
 import { jobController } from "./controller/job.controller.js";
 import { applicationController } from "./controller/application.controller.js";
 import connectDb from "./utils/db.connection.js";
+import { dashboardRoutes } from "./controller/Admin.js";
+import { isAuthenticated } from "./middleware/user.middleware.js";
 
 //? create app
 const app = express();
@@ -42,6 +44,7 @@ app.use(userController);
 app.use(companyController);
 app.use(jobController);
 app.use(applicationController);
+app.use(isAuthenticated, dashboardRoutes);
 
 //?Network
 const Port = process.env.PORT || 5000;

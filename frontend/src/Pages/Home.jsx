@@ -39,7 +39,7 @@ export default function HomePage() {
       <NavBar />
       <HeroSection />
       <HomeResumeLink />
-     
+
       <CustomizePage />
       <LatestJobs />
       <WhyChooseCareerKhoj />
