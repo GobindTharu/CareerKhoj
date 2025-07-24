@@ -1,85 +1,79 @@
 import React from "react";
 
+const features = [
+  {
+    title: "Progressive Mobile Application",
+    description:
+      "Access Manatal from your computer, phone, or tablet to ensure you never miss any activity, wherever you are.",
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+    points: [
+      "Recruit on the go: Access all Manatal features from all your devices.",
+      "Receive notifications: Get notified for reminders, and specific events.",
+    ],
+    cta: "Try it For Free →",
+  },
+  {
+    title: "Customize or Link your Branded Career Page",
+    description:
+      "Portray your company's brand in your favorite language and proudly communicate who you are to top talent. Showcase your company culture and display your values by creating or linking your Career Page for an efficient recruitment process.",
+    image:
+      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80",
+    points: [
+      "No development required: Our Career Page can be set up and customized with no technical resources.",
+      "Fast setup and compatibility with all web platforms: WordPress, Wix, Squarespace, and others.",
+    ],
+    cta: "Try it For Free →",
+  },
+];
+
 const FeatureSection = () => {
   return (
-    <div className="bg-[#f9f9f9] py-20 px-4 md:px-10 lg:px-20">
-      {/* Feature 1 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24">
-        <div className="flex justify-center md:justify-start">
-          <img
-            src="https://assets.website-files.com/61e6d6b46058fe79ec5f7d7b/62038f3cc3929332fbdc38ef_Mobile.png"
-            alt="Progressive Mobile App"
-            className="w-full max-w-md"
-          />
-        </div>
-        <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-            Progressive Mobile Application
-          </h2>
-          <p className="text-gray-700 mb-4">
-            Access Manatal from your computer, phone, or tablet to ensure you
-            never miss any activity, wherever you are.
-          </p>
-          <ul className="text-gray-700 space-y-2 mb-6">
-            <li>
-              ✅ <strong>Recruit on the go:</strong> Access all Manatal features
-              from all your devices.
-            </li>
-            <li>
-              ✅ <strong>Receive notifications:</strong> Get notified for
-              reminders, and specific events.
-            </li>
-          </ul>
-          <a
-            href="#"
-            className="text-blue-600 font-semibold inline-flex items-center hover:underline"
+    <section className="bg-white py-20 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
+      {features.map(({ title, description, image, points, cta }, idx) => {
+        const isEven = idx % 2 === 0;
+        return (
+          <div
+            key={title}
+            className={`flex flex-col ${
+              isEven ? "md:flex-row" : "md:flex-row-reverse"
+            } items-center gap-12 mb-24 md:mb-32`}
           >
-            Try it For Free →
-          </a>
-        </div>
-      </div>
+            {/* Image */}
+           /* <div className="w-full md:w-1/2 flex justify-center">
+              <img
+                src={image}
+                alt={title}
+                className="w-full max-w-md rounded-xl shadow-lg object-cover"
+                loading="lazy"
+              />
+            </div>
 
-      {/* Feature 2 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div className="order-2 md:order-1">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-            Customize or Link your Branded Career Page
-          </h2>
-          <p className="text-gray-700 mb-4">
-            Portray your company's brand in your favorite language and proudly
-            communicate who you are to top talent. Showcase your company culture
-            and display your values by creating or linking your Career Page for
-            an efficient recruitment process.
-          </p>
-          <ul className="text-gray-700 space-y-2 mb-6">
-            <li>
-              ✅ <strong>No development required:</strong> Our Career Page can
-              be set up and customized with no technical resources.
-            </li>
-            <li>
-              ✅{" "}
-              <strong>
-                Fast setup and compatibility with all web platforms:
-              </strong>{" "}
-              WordPress, Wix, Squarespace, and others.
-            </li>
-          </ul>
-          <a
-            href="#"
-            className="text-blue-600 font-semibold inline-flex items-center hover:underline"
-          >
-            Try it For Free →
-          </a>
-        </div>
-        <div className="order-1 md:order-2 flex justify-center">
-          <img
-            src="https://assets.website-files.com/61e6d6b46058fe79ec5f7d7b/62038f7a7f796e20fc3377f4_BrandedCareerPage.png"
-            alt="Branded Career Page"
-            className="w-full max-w-md"
-          />
-        </div>
-      </div>
-    </div>
+            {/* Text Content */}
+            /*<div className="w-full md:w-1/2">
+              <h2 className="text-3xl font-extrabold text-gray-900 mb-6">
+                {title}
+              </h2>
+              <p className="text-gray-700 mb-6 leading-relaxed">{description}</p>
+              <ul className="mb-8 space-y-4 text-gray-600 list-disc list-inside">
+                {points.map((point, i) => (
+                  <li key={i} className="font-medium">
+                    {point}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="#"
+                className="inline-block text-blue-600 font-semibold text-lg hover:underline transition"
+                aria-label={`Call to action for ${title}`}
+              >
+                {cta}
+              </a>
+            </div>
+          </div>
+        );
+      })}*/
+    </section>
   );
 };
 

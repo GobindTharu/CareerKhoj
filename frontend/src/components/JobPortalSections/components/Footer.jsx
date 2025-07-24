@@ -4,114 +4,80 @@ import Logo from "./Logo";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-400">
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <footer className="bg-gray-50 text-gray-700">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
         {/* Company Info */}
         <div>
-          {/* logo here  */}
           <Logo />
-
-          <p className="text-base text-gray-900">
-            CareerKhoj is your all-in-one job and resume-builder platform.
-            Explore top jobs, build standout resumes, and elevate your career —
-            all in one place.
+          <p className="mt-4 text-gray-600 leading-relaxed max-w-sm">
+            CareerKhoj is your all-in-one job and resume-builder platform. Explore top jobs, build standout resumes, and elevate your career — all in one place.
           </p>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
-          <ul className="space-y-2 text-base text-gray-900">
-            <li>
-              <a href="/about-us" className="hover:underline">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="/career" className="hover:underline">
-                Career
-              </a>
-            </li>
-            <li>
-              <a href="/faqs" className="hover:underline">
-                FAQs / Help
-              </a>
-            </li>
-            <li>
-              <a href="/privacy" className="hover:underline">
-                Privacy Policy
-              </a>
-            </li>
-            <li>
-              <a href="/terms" className="hover:underline">
-                Terms & Conditions
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        {/* Jobs By Area */}
-        <div>
-          <h3 className="text-lg font-semibold mb-3">
-            Jobs By Functional Area
-          </h3>
-          <ul className="space-y-2 text-base text-gray-900">
-            <li>Website & Software</li>
-            <li>Education & Training</li>
-            <li>Graphic & UI/UX Design</li>
-            <li>Accounting & Finance</li>
-            <li>Restaurant & Food</li>
-            <li>Health & Hospital</li>
-            <li>Other More....</li>
+          <h3 className="text-xl font-semibold mb-5 text-gray-900">Quick Links</h3>
+          <ul className="space-y-3 text-gray-700">
+            {[
+              { href: "/about-us", label: "About Us" },
+              { href: "/career", label: "Career" },
+            ].map(({ href, label }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  className="hover:text-blue-600 hover:underline transition"
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* Location */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Our Location</h3>
-          <p className="text-base mb-3">Bhairahawa, Nepal</p>
+          <h3 className="text-xl font-semibold mb-5 text-gray-900">Our Location</h3>
+          <p className="text-gray-600">Bhairahawa, Nepal</p>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="bg-gray-950 text-base text-gray-300 px-6 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
-        {/* Left: Social Links */}
-        <div className="flex items-center space-x-3">
-          <span>Connect With Us:</span>
-          <a href="#" className="text-white hover:text-blue-400 text-lg">
-            <FaFacebook />
-          </a>
-          <a href="#" className="text-white hover:text-blue-300 text-lg">
-            <FaLinkedin />
-          </a>
-          <a href="#" className="text-white hover:text-blue-300 text-lg">
-            <FaTwitter />
-          </a>
-          <a href="#" className="text-white hover:text-pink-400 text-lg">
-            <FaInstagram />
-          </a>
+      <div className="border-t border-gray-200 bg-white px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-5 shadow-sm">
+        {/* Social Icons */}
+        <div className="flex items-center space-x-4">
+          <span className="font-medium text-gray-700">Connect With Us:</span>
+          {[{
+            icon: <FaFacebook />,
+            href: "#",
+            color: "hover:text-blue-600",
+          },{
+            icon: <FaLinkedin />,
+            href: "#",
+            color: "hover:text-blue-700",
+          },{
+            icon: <FaTwitter />,
+            href: "#",
+            color: "hover:text-blue-400",
+          },{
+            icon: <FaInstagram />,
+            href: "#",
+            color: "hover:text-pink-500",
+          }].map(({ icon, href, color }, i) => (
+            <a
+              key={i}
+              href={href}
+              className={`text-gray-500 transition-transform transform hover:scale-110 ${color} text-xl`}
+              aria-label="Social link"
+            >
+              {icon}
+            </a>
+          ))}
         </div>
 
-        {/* Center: Copyright */}
-        <p className="text-center flex-1 md:text-center">
-          All rights reserved © {new Date().getFullYear()} CareerKhoj: Your
-          Personal Career Launchpad.
+        {/* Copyright */}
+        <p className="text-gray-500 text-sm text-center flex-1 md:text-center">
+          &copy; {new Date().getFullYear()} CareerKhoj. All rights reserved. Your Personal Career Launchpad.
         </p>
-
-        {/* Right: Download App */}
-        <div className="flex items-center space-x-2">
-          <span>Download App</span>
-          <a
-            href="https://play.google.com/store/games?hl=en&pli=1"
-            className="block"
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-              alt="Download App"
-              className="h-6"
-            />
-          </a>
-        </div>
       </div>
     </footer>
   );

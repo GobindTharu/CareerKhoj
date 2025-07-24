@@ -1,41 +1,30 @@
-// import { JobCategories } from "./JobCategory";
 import { JobSearchForm } from "./JobSearchForm";
 import { Stats } from "./Stats";
+// import { JobCategories } from "./JobCategory";
 
 const HeroSection = () => (
-  <div className="relative min-h-[90vh]">
-    {/* Blurred Background Layer */}
-    <div
-      className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-fixed filter blur-8"
-      style={{
-        backgroundImage: `url('./homepagebackground.avif')`,
-      }}
-    ></div>
-
-    {/* Overlay */}
-    <div className="absolute inset-0 z-10 bg-black/20"></div>
-
-    {/* Main Content */}
-    <div className="relative z-20 flex flex-col gap-4 pt-24 px-6 text-center text-white">
-      <p className="text-lg font-bold mb-2 text-transparent bg-clip-text bg-white">
-        Find Job, Employment, and Career Opportunities
-      </p>
-
-      <h1
-        className="text-3xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-white"
-        style={{
-          WebkitBackgroundClip: "text",
-        }}
-      >
-        <span className="text-blue-600">CareerKhoj</span> : Your Personal Career
-        Launchpad
+  <section className="min-h-screen flex items-center justify-center bg-white">
+    <div className="w-full max-w-4xl px-4 text-center">
+      <h1 className="text-3xl sm:text-5xl font-semibold text-gray-900 leading-snug mb-4">
+        <span className="text-blue-600 we">CareerKhoj</span>
+        <span className="block">Your Personal Career Launchpad</span>
       </h1>
 
+      <p className="text-base sm:text-lg text-gray-600 mb-8">
+        Explore opportunities, find your path, and launch your future.
+      </p>
+
+      <div className="mb-10">
+        <JobSearchForm />
+      </div>
+
       <Stats />
-      <JobSearchForm />
-      {/* <JobCategories /> */}
+
+      {/* <div className="mt-12">
+        <JobCategories />
+      </div> */}
     </div>
-  </div>
+  </section>
 );
 
 export default HeroSection;
