@@ -4,7 +4,7 @@ const ResumePreview = forwardRef((props, ref) => {
   const { formData = {} } = props;
 
   return (
-    <div ref={ref} className="w-5/6 flex min-h-screen border ">
+    <div ref={ref} className=" flex min-h-screen border shadow-md">
       <div className="w-1/4 bg-[#2f3244] text-white p-6">
         {formData.photo ? (
           <img

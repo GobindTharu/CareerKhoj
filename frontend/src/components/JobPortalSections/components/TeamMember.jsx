@@ -9,7 +9,7 @@ const teamMembers = [
   },
   {
     name: "Bal Gobind Chaudhary",
-    role: "Lead Developer",
+    role: "Backend Developer",
     image: "./balgobind.jpeg",
     bio: "Full-stack engineer specializing in scalable web apps and system design.",
   },

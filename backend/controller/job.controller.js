@@ -113,7 +113,7 @@ router.post("/job/post", isAuthenticated, async (req, res) => {
 // all Jobs
 router.get("/jobs/get-all", async (req, res) => {
   try {
-    const jobs = await JobTable.find().sort({ postedAt: -1 }).populate({
+    const jobs = await JobTable.find().sort({ createdAt: -1 }).populate({
       path: "company",
     });
     res.status(200).json({ success: true, jobs });
@@ -125,7 +125,7 @@ router.get("/jobs/get-all", async (req, res) => {
 
 /// jobSeeker job list
 
-router.get("/jobs/search", isAuthenticated, async (req, res) => {
+router.get("/jobs/search", async (req, res) => {
   try {
     const keyword = req.query.keyword || "";
 

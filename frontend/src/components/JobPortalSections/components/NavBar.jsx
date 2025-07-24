@@ -28,28 +28,9 @@ const NavBar = (props) => {
   const jobSeekerMenu = [
     { name: "Home", link: "/" },
     { name: "Jobs", link: "/jobs" },
-
     { name: "Build Resume", link: "/test" },
-    {
-      name: "About Us",
-      link: "/about-us",
-      Children: [
-        { name: "Career", link: "/career" },
-        { name: "Join Us", link: "/join-us" },
-        { name: "Privacy", link: "/privacy" },
-      ],
-    },
+    { name: "About Us", link: "/about-us" },
   ];
-
-  // const menuList = () => {
-  //   if (user?.role === "recruiter") {
-  //     return recruiterMenu;
-  //   } else if (user?.role === "admin") {
-  //     return adminMenu;
-  //   } else {
-  //     return jobSeekerMenu;
-  //   }
-  // };
 
   const menuList =
     user?.role === "recruiter"
@@ -169,7 +150,9 @@ const NavBar = (props) => {
           }
         )}
       >
-        <div className="mb-6">{user ? <Profile data={props} /> : <LoginButton />}</div>
+        <div className="mb-6">
+          {user ? <Profile data={props} /> : <LoginButton />}
+        </div>
 
         <nav className="space-y-3">
           {menuList.map(({ name, link }) => (

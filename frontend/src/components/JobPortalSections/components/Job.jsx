@@ -1,8 +1,7 @@
 import React from "react";
 import { Bookmark, ShieldCheck, ShieldEllipsis } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
-
+import { FaBriefcase, FaMoneyBillWave, FaUsers } from "react-icons/fa";
 
 export const getPostedDaysAgo = (createdAt) => {
   const createdDate = new Date(createdAt);
@@ -25,9 +24,7 @@ export const getDaysLeftToApply = (deadline) => {
   return `${diffDays} day${diffDays > 1 ? "s" : ""} left`;
 };
 
-
 const Job = ({ job }) => {
-
   const navigate = useNavigate();
   const daysLeft = getDaysLeftToApply(job.deadline);
   const postedAgo = getPostedDaysAgo(job.createdAt);
@@ -61,15 +58,20 @@ const Job = ({ job }) => {
           {job?.requirements?.qualification}
         </p>
       </div>
-      <div className="flex items-center gap-2 mt-4">
-        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-1 py-1 rounded-full shadow-sm">
-          {job?.positions} Positions
+      {/* Job info tags */}
+      <div className="flex flex-wrap gap-3 mt-auto">
+        <span className="flex items-center gap-1 text-blue-600 bg-blue-100 rounded-full px-3 py-1 text-xs font-medium shadow-sm">
+          <FaUsers className="w-3 h-3" /> {job?.positions} Position
+          {job?.positions > 1 ? "s" : ""}
         </span>
-        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-1 py-1 rounded-full shadow-sm">
-          {job.jobType}
+
+        <span className="flex items-center gap-1 text-blue-600 bg-blue-100 rounded-full px-3 py-1 text-xs font-medium shadow-sm">
+          <FaBriefcase className="w-3 h-3" /> {job?.jobType}
         </span>
-        <span className="inline-block bg-blue-100 text-blue-500 text-sm font-medium px-1 py-1 rounded-full shadow-sm">
-          Rs.{job?.salary}salary
+
+        <span className="flex items-center gap-1 text-blue-600 bg-blue-100 rounded-full px-3 py-1 text-xs font-medium shadow-sm">
+          <FaMoneyBillWave className="w-3 h-3" /> Rs. {job?.salary || "N/A"}{" "}
+          Salary
         </span>
       </div>
       <p className="flex justify-end pt-6 text-sm text-blue-600">{daysLeft}</p>
