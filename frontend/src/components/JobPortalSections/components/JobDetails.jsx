@@ -12,6 +12,8 @@ import { ProtectedButtonToApply } from "./ProtectedButtonToApply";
 
 const JobDetails = () => {
   const singleJob = useSelector((state) => state.job.singleJob);
+  const allJob = useSelector((state) => state.job.allJobs);
+  console.log(allJob);
   const user = useSelector((state) => state.user.user);
   const isApplied = singleJob?.application?.some(
     (application) => String(application?.applicant) === String(user?._id)
@@ -225,38 +227,7 @@ const JobDetails = () => {
             </div>
             <div className="space-y-3 text-gray-700 text-sm leading-relaxed">
               <ul className="space-y-4 text-sm">
-                {[
-                  {
-                    title: "Senior Finance Officer",
-                    company: "MAW Expance Pvt. Ltd.",
-                    views: 1371,
-                    deadline: "11 days from now",
-                  },
-                  {
-                    title: "IT Officer",
-                    company: "Path Investment Pvt. Ltd.",
-                    views: 1633,
-                    deadline: "9 days from now",
-                  },
-                  {
-                    title: "Regional Sales Manager",
-                    company: "Pioneer Marketing",
-                    views: 1030,
-                    deadline: "14 days from now",
-                  },
-                  {
-                    title: "Restaurant Supervisor",
-                    company: "Newa Ghasa",
-                    views: 840,
-                    deadline: "4 days from now",
-                  },
-                  {
-                    title: "Sales Person (Remote)",
-                    company: "Mindrisers Institute of Tech.",
-                    views: 319,
-                    deadline: "Apply By Today",
-                  },
-                ].map((job, idx) => (
+                {allJob.slice(0, 9).map((job, idx) => (
                   <li key={idx}>
                     <strong className="text-blue-700">{job.title}</strong>
                     <p className="text-gray-500">

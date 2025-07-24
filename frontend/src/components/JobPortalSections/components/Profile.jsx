@@ -64,38 +64,13 @@ export default function Profile() {
                 onClick={() => navigate("/profile-view")}
                 className="flex items-center gap-3 w-full text-left text-sm text-gray-700 hover:bg-gray-200 rounded-md px-2 py-1"
               >
-                <User /> View Profile
+                <Settings /> Settings
               </button>
             </div>
           ) : null}
 
-          {/* Preferences */}
-          <div className="space-y-1  pb-2">
-            <div className="flex items-center justify-between px-2 py-1 text-sm text-gray-700">
-              <span>Theme</span>
-              <select
-                className="text-sm px-2 py-0.5 rounded-md border border-gray-300"
-                id="theme"
-                name="theme"
-              >
-                <option>System</option>
-                <option>Dark</option>
-                <option>Light</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Help & Logout */}
-          <div className="space-y-1">
-            <button className="flex items-center gap-3 w-full text-left text-sm text-gray-700 hover:bg-gray-200 rounded-md px-2 py-1">
-              <Settings /> Settings
-            </button>
-            <button className="w-full text-left text-sm text-gray-700 hover:bg-gray-200 rounded-md px-2 py-1">
-              Help & Feedback
-            </button>
-            <div className="flex items-baseline-last mt-12">
-              <LogoutButton />
-            </div>
+          <div className="flex items-baseline-last mt-12">
+            <LogoutButton />
           </div>
         </div>
       )}

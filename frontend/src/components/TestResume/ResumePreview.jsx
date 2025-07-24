@@ -14,7 +14,7 @@ const ResumePreview = forwardRef((props, ref) => {
                 : formData.photo
             }
             alt="Preview"
-            className="h-42 w-42 rounded-full border object-cover"
+            className="h-32 w-32 rounded-full border object-cover"
           />
         ) : (
           <span>No Photo</span>
