@@ -8,7 +8,7 @@ const CompanyUpdateForm = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
-  const company = useSelector((state) => state?.company);
+  const company = useSelector((state) => state?.company?.allCompany);
 
   const [loading, setLoading] = useState(false);
 
@@ -21,12 +21,14 @@ const CompanyUpdateForm = () => {
   });
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "logo") {
-      setInput({ ...input, logo: files[0] });
-    } else {
-      setInput({ ...input, [name]: value });
-    }
+    const { name, value } = e.target;
+
+    setInput({ ...input, [name]: value });
+  };
+
+  const changeFileHandler = (e) => {
+    const file = e.target.files?.[0];
+    setInput({ ...input, file });
   };
 
   useEffect(() => {
@@ -36,6 +38,7 @@ const CompanyUpdateForm = () => {
           withCredentials: true,
         });
         const { name, description, website, location } = res.data;
+
         setInput((prev) => ({
           ...prev,
           name,
@@ -61,8 +64,11 @@ const CompanyUpdateForm = () => {
       data.append("description", input.description);
       data.append("website", input.website);
       data.append("location", input.location);
-      if (input?.logo) {
-        data.append("logo", input.logo);
+      if (input.file) {
+        data.append("file", input.file);
+      }
+      if (input.name == company.name) {
+        alert("Company already Exist");
       }
 
       await axiosInstance.put(`/company/update/${id}`, data, {
@@ -73,7 +79,7 @@ const CompanyUpdateForm = () => {
       navigate("/recruiter/companies");
     } catch (err) {
       console.error("Update error:", err?.response?.data || err?.message);
-      alert("Update failed");
+      alert(err?.response?.data?.message);
     } finally {
       setLoading(false);
     }
@@ -146,7 +152,7 @@ const CompanyUpdateForm = () => {
               <input
                 type="file"
                 name="file"
-                onChange={handleChange}
+                onChange={changeFileHandler}
                 className="w-full border border-gray-300 rounded px-3 py-2"
                 accept="image/*"
               />
