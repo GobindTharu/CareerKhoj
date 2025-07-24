@@ -9,6 +9,7 @@ import ProjectsForm from "./ProjectsForm";
 import TrainingForm from "./TrainingForm";
 import LanguageForm from "./LanguageForm";
 import NavBar from "../JobPortalSections/components/NavBar";
+import ResumeDownloadPage from "./Resumedownload";
 
 const ResumeBuilder = () => {
   const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ const ResumeBuilder = () => {
 
   const renderSection = () => {
     switch (currentSection) {
-      case "About": 
+      case "About":
         return <AboutForm formData={formData} setFormData={setFormData} />;
       case "Education":
         return <EducationForm formData={formData} setFormData={setFormData} />;
@@ -64,9 +65,11 @@ const ResumeBuilder = () => {
           setCurrentSection={setCurrentSection}
         />
 
-        <div className="flex mx-4 w-full  h-screen bg-gray-50 text-gray-700">
-          <section className=" flex p-6 m-12 ">{renderSection()}</section>
-          <ResumePreview formData={formData} />
+        <div className="flex flex-col md:flex-row mx-4 w-full  min-h-screen bg-gray-50 text-gray-700">
+          <section className="w-1/4 flex p-6 m-12 ">{renderSection()}</section>
+          <div className="flex flex-col w-full">
+            <ResumeDownloadPage formData={formData} />
+          </div>
         </div>
       </main>
     </>
