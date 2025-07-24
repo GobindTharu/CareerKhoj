@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../components/JobPortalSections/components/NavBar";
 import { useNavigate } from "react-router-dom";
-// import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useGetAllCompanies from "../../hooks/useGetAllCompanies";
+import CompaniesTable from "./CompaniesTable";
+import { setSearchCompanyByText } from "../../redux/companySlice";
 
 const Companies = () => {
   const navigate = useNavigate();
-  // const company = useSelector((state) => state.company);
+  const company = useSelector((state) => state.company);
 
   useGetAllCompanies();
+
+  const [input, setInput] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSearchCompanyByText(input));
+  }, [input]);
 
   return (
     <>
@@ -17,6 +26,8 @@ const Companies = () => {
         <div className="flex justify-between items-center px-6">
           <input
             type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             placeholder="Filter by name"
             className="border-gray-700 border-1 py-2 px-3 rounded-lg"
           />
@@ -26,10 +37,10 @@ const Companies = () => {
             }}
             className="text-white hover:bg-black bg-gray-800 py-2 px-3 rounded-md"
           >
-            Add Jobs
+            Add Companies
           </button>
         </div>
-        {/* <JobsTable key={company?._id} company={company} /> */}
+        <CompaniesTable key={company?._id} company={company} />
       </div>
     </>
   );

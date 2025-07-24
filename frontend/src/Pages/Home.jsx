@@ -18,7 +18,9 @@ export default function HomePage() {
   const user = useSelector((state) => state?.user?.user);
 
   useEffect(() => {
-    if (user?.role === "recruiter") {
+    if (user?.role === "admin") {
+      navigate("/admin/all-user");
+    } else if (user?.role === "recruiter") {
       navigate("/recruiter/companies");
     }
   }, []);

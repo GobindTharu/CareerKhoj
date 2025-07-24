@@ -15,6 +15,11 @@ const NavBar = (props) => {
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
 
+  const adminMenu = [
+    { name: "All User", link: "/admin/allUser/" },
+    { name: "All Jobs", link: "/amin/jobs" },
+  ];
+  [];
   const recruiterMenu = [
     { name: "Company", link: "/recruiter/companies" },
     { name: "Jobs", link: "/recruiter/jobs" },
@@ -36,7 +41,22 @@ const NavBar = (props) => {
     },
   ];
 
-  const menuList = user?.role === "recruiter" ? recruiterMenu : jobSeekerMenu;
+  // const menuList = () => {
+  //   if (user?.role === "recruiter") {
+  //     return recruiterMenu;
+  //   } else if (user?.role === "admin") {
+  //     return adminMenu;
+  //   } else {
+  //     return jobSeekerMenu;
+  //   }
+  // };
+
+  const menuList =
+    user?.role === "recruiter"
+      ? recruiterMenu
+      : user?.role === "admin"
+      ? adminMenu
+      : jobSeekerMenu;
 
   useEffect(() => {
     const handleClickOutside = (e) => {

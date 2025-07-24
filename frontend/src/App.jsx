@@ -25,6 +25,7 @@ import BuildResume from "./Pages/BuildResume";
 import HomePage from "./Pages/Home";
 import Jobs from "./Pages/Jobs";
 import ResumeBuilder from "./components/TestResume/TextResume";
+import Admin from "./Admin/main/Admin";
 
 function App() {
   return (
@@ -44,6 +45,9 @@ function App() {
         <Route path="/resume-builder" element={<BuildResume />} />
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/choose-template" element={<ChooseTemplate />} />
+
+        {/* Test */}
+        <Route path="/test" element={<ResumeBuilder />} />
 
         {/* Resume Templates */}
         <Route path="/resume-template/1" element={<ResumeTemplate1 />} />
@@ -103,10 +107,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-
-        {/* Test */}
-
-        <Route path="/test" element={<ResumeBuilder />} />
+        <Route path="/admin/all-user" element={<Admin />} />
       </Routes>
     </div>
   );

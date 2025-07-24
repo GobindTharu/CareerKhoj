@@ -2,6 +2,8 @@ import express from "express";
 import { CompanyTable } from "../models/company.models.js";
 import { isAuthenticated } from "../middleware/user.middleware.js";
 import { singleUpload } from "../middleware/multer.js";
+import getDataUri from "../utils/datauri.js";
+import cloudinary from "../utils/cloudinary.js";
 const router = express.Router();
 
 //  register company
@@ -38,7 +40,7 @@ router.post("/company/register", isAuthenticated, async (req, res) => {
 router.get("/company/get", isAuthenticated, async (req, res) => {
   try {
     const userId = req.id;
-    (userId);
+    userId;
     const companies = await CompanyTable.find({ userId: userId });
     if (!companies) {
       return res
@@ -76,10 +78,16 @@ router.put(
   isAuthenticated,
   async (req, res) => {
     try {
-      const updatedCompany = req.body;
+      const { name, description, website, location } = req.body;
       const file = req.file;
 
+      const fileUri = getDataUri(file);
+      const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+      const logo = cloudResponse.secure_url;
+
       const companyId = req.params.id;
+
+      const updatedCompany = { name, description, website, location, logo };
 
       const existing = await CompanyTable.findOne({
         name: updatedCompany.name,

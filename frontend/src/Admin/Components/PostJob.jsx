@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axiosInstance from "../../libs/axiosInstance";
@@ -20,8 +20,21 @@ const experienceLevels = ["Fresher", "Mid-Level", "Senior-Level", "Executive"];
 
 const JobPostForm = () => {
   const navigate = useNavigate();
-  const company = useSelector((state) => state.company);
-  const companyId = company?.singleCompany?._id || "";
+  const companies = useSelector((state) => state.company?.allCompany || []);
+  const [selectedCompanyName, setSelectedCompanyName] = useState("");
+
+  const selectChangeHandler = (value) => {
+    setSelectedCompanyName(value);
+  };
+
+  const selectedCompany = companies.find(
+    (company) => company.name.toLowerCase() === selectedCompanyName
+  );
+
+  // Extract ID safely
+  const companyId = selectedCompany?._id || "";
+
+  console.log(companyId);
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -41,7 +54,7 @@ const JobPostForm = () => {
       category: "",
       deadline: "",
       offer: "",
-      companyId,
+      companyId: companyId,
     },
     validationSchema: Yup.object({
       title: Yup.string().required("Job title is required"),
@@ -154,6 +167,21 @@ const JobPostForm = () => {
           Post a New Job
         </h1>
         <form onSubmit={formik.handleSubmit} className="space-y-6">
+          {/* Company */}
+          {companies.length > 0 && (
+            <select
+              onChange={(e) => selectChangeHandler(e.target.value)}
+              className="w-[180px] border rounded-md p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select a Company</option>
+              {companies.map((company) => (
+                <option key={company._id} value={company?.name?.toLowerCase()}>
+                  {company.name}
+                </option>
+              ))}
+            </select>
+          )}
+
           {/* Job Title */}
           <div>
             <label className="block font-medium">Job Title</label>
@@ -375,6 +403,11 @@ const JobPostForm = () => {
               </p>
             )}
           </div>
+          {companies.length === 0 && (
+            <p className="text-xs text-red-600 font-bold text-center my-3">
+              *Please register a company first, before posting a jobs
+            </p>
+          )}
         </form>
       </div>
     </div>
