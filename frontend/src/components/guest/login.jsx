@@ -42,17 +42,15 @@ const LoginForm = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.email) newErrors.email = "Email is required field";
-    if (!formData.password) newErrors.password = "Password is required field";
+    if (!formData.email) newErrors.email = "Email is required.";
+    if (!formData.password) newErrors.password = "Password is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
-      mutate(formData);
-    }
+    if (validate()) mutate(formData);
   };
 
   const handleChange = (e) => {
@@ -61,26 +59,27 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-purple-100 px-4 py-8">
       <form
         onSubmit={handleSubmit}
-        className="bg-gradient-to-r from-indigo-200 to-purple-200 w-full max-w-md bg-gray-200 p-8 rounded-2xl shadow-xl space-y-6"
+        className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 space-y-6"
       >
-        {/* insert the logo here*/}
-
-        {/* start */}
-        <div className="flex justify-center items-center">
-          <h1 className="text-2xl font-semibold font-serif text-gray-700">
+        {/* Logo or Title */}
+        <div className="text-center">
+          {/* Replace this with your logo if needed */}
+          <h1 className="text-3xl font-bold text-indigo-700 font-sans tracking-wide">
             CareerKhoj
           </h1>
+          <p className="text-sm text-gray-500 mt-1">Welcome back! Please login</p>
         </div>
-        {/* ends */}
+
+        {/* Email */}
         <div className="space-y-1">
           <label
             htmlFor="email"
             className="block text-sm font-medium text-gray-700"
           >
-            Email
+            Email Address
           </label>
           <input
             type="email"
@@ -88,14 +87,15 @@ const LoginForm = () => {
             id="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            placeholder="your@example.com"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+            placeholder="you@example.com"
           />
           {errors.email && (
             <p className="text-sm text-red-500">{errors.email}</p>
           )}
         </div>
 
+        {/* Password */}
         <div className="space-y-1">
           <label
             htmlFor="password"
@@ -109,7 +109,7 @@ const LoginForm = () => {
             id="password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
             placeholder="••••••••"
           />
           {errors.password && (
@@ -117,22 +117,21 @@ const LoginForm = () => {
           )}
         </div>
 
+        {/* Submit */}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+          className="w-full bg-indigo-600 text-white py-2.5 rounded-md hover:bg-indigo-700 transition text-sm font-medium"
         >
           Login
         </button>
 
+        {/* Links */}
         <div className="flex justify-between text-sm text-gray-600 mt-4">
           <a href="/forget-password" className="hover:underline">
-            Forgot Password?
+            Forgot password?
           </a>
-          <a
-            href="/signup"
-            className="text-blue-600 hover:underline font-medium"
-          >
-            Don't have an account? Signup
+          <a href="/signup" className="text-indigo-600 hover:underline font-medium">
+            Don't have an account?
           </a>
         </div>
       </form>
