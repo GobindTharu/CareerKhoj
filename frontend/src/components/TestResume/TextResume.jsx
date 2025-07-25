@@ -3,15 +3,14 @@ import Sidebar from "./SideBar";
 import ResumeDownloadPage from "./Resumedownload";
 import AboutForm from "./AboutForm";
 import EducationForm from "./EducationForm";
-import SkillsForm from "./SkilsForm";
 import ExperienceForm from "./ExperienceForm";
-import ProjectsForm from "./ProjectsForm";
 import TrainingForm from "./TrainingForm";
 import LanguageForm from "./LanguageForm";
 import NavBar from "../JobPortalSections/components/NavBar";
 
 const ResumeBuilder = () => {
   const [formData, setFormData] = useState({});
+  console.log(formData);
   const [currentSection, setCurrentSection] = useState("About");
   const [selectedTemplate, setSelectedTemplate] = useState("classic");
 
@@ -50,7 +49,9 @@ const ResumeBuilder = () => {
         />
 
         <div className="flex flex-col md:flex-row mx-4 w-full min-h-screen bg-gray-50 text-gray-700">
-          <section className="w-full md:w-1/4 flex p-6 m-12">{renderSection()}</section>
+          <section className="w-full md:w-1/4 flex p-6 m-12">
+            {renderSection()}
+          </section>
 
           <div className="flex flex-col w-full px-4 pt-8">
             <div className="flex justify-end mb-4">

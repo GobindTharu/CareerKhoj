@@ -9,7 +9,7 @@ const ResumeDownloadPage = ({ formData, selectedTemplate }) => {
   const resumeRef = useRef();
 
   const handlePrint = useReactToPrint({
-    content: () => resumeRef.current,
+    contentRef: resumeRef, // NEW API
     documentTitle: "resume",
   });
 

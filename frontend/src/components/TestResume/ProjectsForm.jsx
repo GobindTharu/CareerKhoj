@@ -1,38 +1,39 @@
-import React, { useState } from "react";
-
-const ProjectsForm = ({ onChange }) => {
-  const [projects, setProjects] = useState([
-    { title: "", description: "", technologies: "", projectUrl: "" },
-  ]);
-
+const ProjectsForm = ({ formData, setFormData, onChange }) => {
+  // Handle field change
   const handleChange = (index, field, value) => {
-    const updated = [...projects];
+    const updated = [...formData];
     updated[index][field] = value;
-    setProjects(updated);
+    setFormData(updated);
+
+    // Send only valid projects to parent
     if (onChange) onChange(updated.filter((p) => p.title.trim() !== ""));
   };
 
+  // Add new project
   const addProject = () => {
-    setProjects([
-      ...projects,
+    const updated = [
+      ...formData,
       { title: "", description: "", technologies: "", projectUrl: "" },
-    ]);
+    ];
+    setFormData(updated);
   };
 
+  // Remove project
   const removeProject = (index) => {
-    const updated = projects.filter((_, i) => i !== index);
-    setProjects(updated);
+    const updated = formData.filter((_, i) => i !== index);
+    setFormData(updated);
     if (onChange) onChange(updated.filter((p) => p.title.trim() !== ""));
   };
 
   return (
     <div>
       <h2 className="text-2xl font-bold text-blue-700 mb-2">Projects</h2>
-      <p className="text-gray-500 mb-6">Add your projects details below.</p>
+      <p className="text-gray-500 mb-6">Add details of your projects below.</p>
 
-      {projects.map((project, idx) => (
+      {formData.map((project, idx) => (
         <div key={idx} className="mb-8 relative">
-          {projects.length > 1 && (
+          {/* Remove button */}
+          {formData.length > 1 && (
             <button
               type="button"
               onClick={() => removeProject(idx)}
@@ -44,6 +45,7 @@ const ProjectsForm = ({ onChange }) => {
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Project Title */}
             <input
               type="text"
               name={`title-${idx}`}
@@ -54,6 +56,7 @@ const ProjectsForm = ({ onChange }) => {
               className="border p-2 focus:outline-none w-full"
             />
 
+            {/* Technologies Used */}
             <input
               type="text"
               name={`technologies-${idx}`}
@@ -65,6 +68,7 @@ const ProjectsForm = ({ onChange }) => {
               className="border p-2 focus:outline-none w-full"
             />
 
+            {/* Project Description */}
             <textarea
               name={`description-${idx}`}
               placeholder="Project Description"
@@ -74,6 +78,7 @@ const ProjectsForm = ({ onChange }) => {
               className="col-span-1 md:col-span-2 border p-2 focus:outline-none w-full"
             />
 
+            {/* Project URL */}
             <input
               type="url"
               name={`projectUrl-${idx}`}
@@ -86,6 +91,7 @@ const ProjectsForm = ({ onChange }) => {
         </div>
       ))}
 
+      {/* Add Project Button */}
       <button
         type="button"
         onClick={addProject}

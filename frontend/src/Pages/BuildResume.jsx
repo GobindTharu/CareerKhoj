@@ -5,6 +5,14 @@ import ResumeBuilder from "../components/ResumeSections/ResumeTemplates/ResumeBu
 export default function BuildResume() {
   return (
     <>
+      <head>
+        <title>CareerKhoj</title>
+        <meta name="CareerKhoj" content="" />
+        <link rel="canonical" href={`https://careerkhoj.com/jobs/`} />
+        <meta property="og:title" content={` CareerKhoj`} />
+        <meta property="og:description" content="careerkhoj" />
+        <meta property="og:image" content="careerkhoj" />
+      </head>
       <NavBar />
       <ResumeBuilder />
       <Footer />

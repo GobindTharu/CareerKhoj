@@ -1,5 +1,13 @@
 import React from "react";
-const sections = ["About", "Education", "Experience", "Projects", "Skills"];
+const sections = [
+  "About",
+  "Education",
+  "Experience",
+  "Trainings",
+  "Projects",
+  "Language",
+  "Skills",
+];
 
 const Sidebar = ({ currentSection, setCurrentSection }) => {
   return (

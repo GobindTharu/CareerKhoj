@@ -1,27 +1,16 @@
-import React, { useState } from "react";
-
 const EducationForm = ({ formData, setFormData }) => {
-  const [educationEntry, setEducationEntry] = useState({
-    school: "",
-    degree: "",
-    startDate: "",
-    endDate: "",
-    currentlyStudying: false,
-    description: "",
-  });
-
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
-    setEducationEntry({ ...educationEntry, [name]: newValue });
+    setFormData({ ...formData, [name]: newValue });
   };
 
   const handleAddEducation = () => {
     setFormData({
       ...formData,
-      education: [...formData.education, educationEntry],
+      education: [...formData.education, formData],
     });
-    setEducationEntry({
+    setFormData({
       school: "",
       degree: "",
       city: "",
@@ -44,7 +33,7 @@ const EducationForm = ({ formData, setFormData }) => {
           type="text"
           name="school"
           placeholder="School"
-          value={educationEntry.school}
+          value={formData.school}
           onChange={handleInputChange}
           className="border p-2"
         />
@@ -52,7 +41,7 @@ const EducationForm = ({ formData, setFormData }) => {
           type="text"
           name="degree"
           placeholder="Degree"
-          value={educationEntry.degree}
+          value={formData.degree}
           onChange={handleInputChange}
           className="border p-2"
         />
@@ -61,7 +50,7 @@ const EducationForm = ({ formData, setFormData }) => {
           type="month"
           name="startDate"
           placeholder="Start Date"
-          value={educationEntry.startDate}
+          value={formData.startDate}
           onChange={handleInputChange}
           className="border p-2"
         />
@@ -69,16 +58,16 @@ const EducationForm = ({ formData, setFormData }) => {
           type="month"
           name="endDate"
           placeholder="Graduation Date"
-          value={educationEntry.endDate}
+          value={formData.endDate}
           onChange={handleInputChange}
           className="border p-2"
-          disabled={educationEntry.currentlyStudying}
+          disabled={formData.currentlyStudying}
         />
         <label className="flex items-center gap-2">
           <input
             type="checkbox"
             name="currentlyStudying"
-            checked={educationEntry.currentlyStudying}
+            checked={formData.currentlyStudying}
             onChange={handleInputChange}
           />
           I currently study here
@@ -88,7 +77,7 @@ const EducationForm = ({ formData, setFormData }) => {
       <div className="mt-4">
         <textarea
           name="description"
-          value={educationEntry.description}
+          value={formData.description}
           onChange={handleInputChange}
           placeholder="Talk a little bit about your course of study."
           className="w-full border p-2"
