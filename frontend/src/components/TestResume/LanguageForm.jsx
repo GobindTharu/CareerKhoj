@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 const proficiencyLevels = [
   "Beginner",
   "Intermediate",
@@ -8,37 +6,33 @@ const proficiencyLevels = [
   "Native",
 ];
 
-const LanguageForm = ({ onChange }) => {
-  const [languages, setLanguages] = useState([
-    { language: "", proficiency: "" },
-  ]);
-
+const LanguageForm = ({ formData, setFormData, onChange }) => {
   const handleChange = (index, field, value) => {
-    const updated = [...languages];
-    updated[index][field] = value;
-    setLanguages(updated);
+    const updated = [...formData];
+    updated[index][field] = value;  
+    setFormData(updated);
     if (onChange) onChange(updated.filter((l) => l.language.trim() !== ""));
   };
 
   const addLanguage = () => {
-    setLanguages([...languages, { language: "", proficiency: "" }]);
+    setFormData([...formData, { language: "", proficiency: "" }]);
   };
 
   const removeLanguage = (index) => {
-    const updated = languages.filter((_, i) => i !== index);
-    setLanguages(updated);
+    const updated = formData.filter((_, i) => i !== index);
+    setFormData(updated);
     if (onChange) onChange(updated.filter((l) => l.language.trim() !== ""));
   };
 
   return (
     <div className="max-w-3xl mx-auto p-4 bg-white rounded shadow">
       <h2 className="text-xl font-semibold mb-4">Languages</h2>
-      {languages.map((lang, idx) => (
+      {formData.map((lang, idx) => (
         <div
           key={idx}
           className="mb-5 border border-gray-300 rounded p-4 relative"
         >
-          {languages.length > 1 && (
+          {formData.length > 1 && (
             <button
               type="button"
               onClick={() => removeLanguage(idx)}

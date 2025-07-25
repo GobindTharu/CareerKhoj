@@ -138,7 +138,7 @@ router.get("/application-status", async (req, res) => {
 
 router.get("/applicants", async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit) || 5;
+    const limit = parseInt(req.query.limit) || 10;
 
     const applicants = await ApplicationTable.find()
       .populate({ path: "applicant" })
@@ -154,53 +154,50 @@ router.get("/applicants", async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-})
+});
 
-// // Admin Control
+// Admin Control
 
+// GET all jobs
+router.get("/admin/all-jobs", async (req, res) => {
+  try {
+    const jobs = await JobTable.find().populate("company");
+    res.json(jobs);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-// // GET all jobs
-// router.get("/admin/all-jobs", async (req, res) => {
-//   try {
-//     const jobs = await JobTable.find().populate("company");
-//     res.json(jobs);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// });
+// GET all users
+router.get("/admin/all-user", async (req, res) => {
+  try {
+    const users = await UserTable.find();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-// // GET all users
-// router.get("/admin/all-user", async (req, res) => {
-//   try {
-//     const users = await UserTable.find();
-//     res.json(users);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// });
+// GET all companies
+router.get("/admin/all-company", async (req, res) => {
+  try {
+    const companies = await CompanyTable.find();
+    res.json(companies);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-// // GET all companies
-// router.get("/admin/all-company", async (req, res) => {
-//   try {
-//     const companies = await CompanyTable.find();
-//     res.json(companies);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// });
-
-// // GET all applications (with job and applicant details)
-// router.get("/admin/all-applicants", async (req, res) => {
-//   try {
-//     const applications = await ApplicationTable.find()
-//       .populate("job")
-//       .populate("applicant");
-//     res.json(applications);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// });
-
-;
+// GET all applications (with job and applicant details)
+router.get("/admin/all-applicants", async (req, res) => {
+  try {
+    const applications = await ApplicationTable.find()
+      .populate("job")
+      .populate("applicant");
+    res.json(applications);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 export { router as dashboardRoutes };

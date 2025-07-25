@@ -1,31 +1,34 @@
-import React, { useState } from "react";
-
-const SkillsForm = ({ onChange }) => {
-  const [skills, setSkills] = useState([""]);
-
+const SkillsForm = ({ formData, setFormData, onChange }) => {
+  // Handle skill change
   const handleSkillChange = (index, value) => {
-    const updated = [...skills];
+    const updated = [...formData];
     updated[index] = value;
-    setSkills(updated);
+    setFormData(updated);
+
+    // Send non-empty formData to parent
     if (onChange) onChange(updated.filter((s) => s.trim() !== ""));
   };
 
+  // Add new skill
   const addSkill = () => {
-    setSkills([...skills, ""]);
+    setFormData([...formData, ""]);
   };
 
+  // Remove a skill
   const removeSkill = (index) => {
-    const updated = skills.filter((_, i) => i !== index);
-    setSkills(updated);
+    const updated = formData.filter((_, i) => i !== index);
+    setFormData(updated);
+
+    // Update parent with filtered formData
     if (onChange) onChange(updated.filter((s) => s.trim() !== ""));
   };
 
   return (
     <div>
       <h2 className="text-2xl font-bold text-blue-700 mb-2">Skills</h2>
-      <p className="text-gray-500 mb-6">List your skills and strengths.</p>
+      <p className="text-gray-500 mb-6">List your formData and strengths.</p>
 
-      {skills.map((skill, idx) => (
+      {formData.map((skill, idx) => (
         <div key={idx} className="mb-4 relative">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input
@@ -36,7 +39,9 @@ const SkillsForm = ({ onChange }) => {
               className="border p-2 focus:outline-none w-full"
             />
           </div>
-          {skills.length > 1 && (
+
+          {/* Remove button */}
+          {formData.length > 1 && (
             <button
               type="button"
               onClick={() => removeSkill(idx)}
@@ -49,6 +54,7 @@ const SkillsForm = ({ onChange }) => {
         </div>
       ))}
 
+      {/* Add Skill Button */}
       <button
         type="button"
         onClick={addSkill}
