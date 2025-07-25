@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-
 import ClassicTemplate from "./ClassicTemplate";
 import ProfessionalTemplate from "./ProfessionalTemplate";
 import ModernTemplate from "./ModernTemplate";
