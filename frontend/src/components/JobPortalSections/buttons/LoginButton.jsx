@@ -6,7 +6,7 @@ export const LoginButton = () => {
   return (
     <button
       onClick={() => navigate("/login")}
-       className="h-8 w-36 flex justify-center gap-3 items-center text-white rounded-xl bg-gradient-to-r  from-indigo-700 to-purple-600 hover:bg-gray-500 ease-soft-spring duration-400 transition-all"
+      className="px-5 py-2 font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700 hover:shadow-md transition duration-300"
     >
       Login / Register
     </button>

@@ -1,17 +1,36 @@
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import ResumePreview from "./ResumePreview";
 
-const ResumeDownloadPage = ({ formData }) => {
+import ClassicTemplate from "./ClassicTemplate";
+import ProfessionalTemplate from "./ProfessionalTemplate";
+import ModernTemplate from "./ModernTemplate";
+import MinimalTemplate from "./MinimalTemplate";
+
+const ResumeDownloadPage = ({ formData, selectedTemplate }) => {
   const resumeRef = useRef();
 
   const handlePrint = useReactToPrint({
-    contentRef: resumeRef, // NEW API
+    content: () => resumeRef.current,
     documentTitle: "resume",
   });
 
+  const renderSelectedTemplate = () => {
+    switch (selectedTemplate) {
+      case "classic":
+        return <ClassicTemplate ref={resumeRef} formData={formData} />;
+      case "professional":
+        return <ProfessionalTemplate ref={resumeRef} formData={formData} />;
+      case "modern":
+        return <ModernTemplate ref={resumeRef} formData={formData} />;
+      case "minimal":
+        return <MinimalTemplate ref={resumeRef} formData={formData} />;
+      default:
+        return <ClassicTemplate ref={resumeRef} formData={formData} />;
+    }
+  };
+
   return (
-    <div className="p-4">
+    <div className="p-4 w-full">
       <div className="w-full text-end">
         <button
           onClick={handlePrint}
@@ -21,7 +40,7 @@ const ResumeDownloadPage = ({ formData }) => {
         </button>
       </div>
 
-      <ResumePreview ref={resumeRef} formData={formData} />
+      {renderSelectedTemplate()}
     </div>
   );
 };

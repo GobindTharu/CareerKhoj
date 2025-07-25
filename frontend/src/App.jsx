@@ -28,6 +28,7 @@ import ResumeBuilder from "./components/TestResume/TextResume";
 import Admin from "./Admin/main/Admin";
 import JobsPage from "./components/JobPortalSections/components/AllJobs";
 import AdminProtectedRoute from "./Admin/main/AdminProtected.";
+import ResumeTemplateWrapper from "./components/TestResume/ResumeTemplateWrapper";
 
 function App() {
   return (
@@ -60,6 +61,12 @@ function App() {
         <Route path="/resume-template/5" element={<ResumeTemplate5 />} />
 
         <Route path="/simple-form" element={<ResumeFormWrapper />} />
+
+         <Route path="/resume-builder" element={<ResumeBuilder />} />
+      <Route path="/resume-template/:Classic" element={<ResumeTemplateWrapper/>} />
+      <Route path="/resume-template/:Professional" element={<ResumeTemplateWrapper/>} />
+      <Route path="/resume-template/:Modern" element={<ResumeTemplateWrapper/>} />
+      <Route path="/resume-template/:Minimal" element={<ResumeTemplateWrapper/>} />
 
         {/* Recruiter Routes */}
         <Route
