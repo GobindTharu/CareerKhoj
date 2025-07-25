@@ -72,7 +72,7 @@ const HeroSection = () => {
           <img
             src="/heroImage.png"
             alt="Hero Graphic"
-            className="max-w-2xl h-screen  object-contain text-end"
+            className="max-w-2xl h-screen  object-contain"
           />
         </div>
       </div>

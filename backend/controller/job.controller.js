@@ -156,7 +156,7 @@ router.get("/jobs/search", async (req, res) => {
 });
 
 // jobseeker hob by id
-router.get("/job/detail/:id", isAuthenticated, async (req, res) => {
+router.get("/job/detail/:id", async (req, res) => {
   try {
     const jobId = req.params.id;
 

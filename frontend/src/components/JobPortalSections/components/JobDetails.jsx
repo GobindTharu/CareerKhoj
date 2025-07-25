@@ -229,11 +229,10 @@ const JobDetails = () => {
               <ul className="space-y-4 text-sm">
                 {allJob.slice(0, 9).map((job, idx) => (
                   <li key={idx}>
-                    <strong className="text-blue-700">{job.title}</strong>
+                    <strong className="text-blue-700">{job?.title}</strong>
                     <p className="text-gray-500">
-                      {job.company} <br />
-                      {job.views} views <br />
-                      Deadline {job.deadline}
+                      {job?.company?.name} <br />
+                      Deadline {job?.deadline?.split("T")[0]}
                     </p>
                   </li>
                 ))}

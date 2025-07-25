@@ -36,7 +36,7 @@ const JobsPage = () => {
     <>
       <NavBar />
 
-      <div className="max-w-7xl mx-auto px-4 py-10">
+      <div className="max-w-7xl mx-auto px-4  pt-32">
         <h2 className="text-2xl font-bold mb-4">
           Search Results for: <span className="text-green-600">{keyword}</span>
         </h2>
