@@ -20,7 +20,7 @@ const Footer = () => {
           <ul className="space-y-3 text-gray-700">
             {[
               { href: "/about-us", label: "About Us" },
-              { href: "/career", label: "Career" },
+              { href: "/", label: "Career" },
             ].map(({ href, label }) => (
               <li key={label}>
                 <a
@@ -44,35 +44,7 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="border-t border-gray-200 bg-white px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-5 shadow-sm">
         {/* Social Icons */}
-        <div className="flex items-center space-x-4">
-          <span className="font-medium text-gray-700">Connect With Us:</span>
-          {[{
-            icon: <FaFacebook />,
-            href: "#",
-            color: "hover:text-blue-600",
-          },{
-            icon: <FaLinkedin />,
-            href: "#",
-            color: "hover:text-blue-700",
-          },{
-            icon: <FaTwitter />,
-            href: "#",
-            color: "hover:text-blue-400",
-          },{
-            icon: <FaInstagram />,
-            href: "#",
-            color: "hover:text-pink-500",
-          }].map(({ icon, href, color }, i) => (
-            <a
-              key={i}
-              href={href}
-              className={`text-gray-500 transition-transform transform hover:scale-110 ${color} text-xl`}
-              aria-label="Social link"
-            >
-              {icon}
-            </a>
-          ))}
-        </div>
+      
 
         {/* Copyright */}
         <p className="text-gray-500 text-sm text-center flex-1 md:text-center">
