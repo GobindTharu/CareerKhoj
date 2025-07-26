@@ -71,7 +71,9 @@ const ApplicantsTable = () => {
                 <td className="border border-gray-300 px-4 py-2">
                   {item.applicant?.profile?.resume ? (
                     <a
-                      href={item.applicant.profile.resume}
+                      href={`https://docs.google.com/gview?url=${encodeURIComponent(
+                        item.applicant.profile.resume
+                      )}&embedded=true`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 underline"
@@ -82,6 +84,7 @@ const ApplicantsTable = () => {
                     <span>NA</span>
                   )}
                 </td>
+
                 <td className="border border-gray-300 px-4 py-2">
                   {item?.applicant?.createdAt?.split("T")[0]}
                 </td>

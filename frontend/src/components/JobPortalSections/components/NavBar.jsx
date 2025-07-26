@@ -15,10 +15,7 @@ const NavBar = (props) => {
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
 
-  const adminMenu = [
-    { name: "All User", link: "/admin/allUser/" },
-    { name: "All Jobs", link: "/amin/jobs" },
-  ];
+  const adminMenu = [{ name: ".", link: "/" }];
   [];
   const recruiterMenu = [
     { name: "Company", link: "/recruiter/companies" },

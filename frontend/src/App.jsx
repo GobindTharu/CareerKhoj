@@ -7,6 +7,10 @@ import CompanyUpdateForm from "./Admin/Components/CompanyUpdateForm";
 import PostJob from "./Admin/Components/PostJob";
 import ProtectedRoute from "./Admin/Components/ProtectedRoute";
 import RecruiterJobs from "./Admin/Components/RecruiterJobs";
+import Admin from "./Admin/main/Admin";
+import AdminProtectedRoute from "./Admin/main/AdminProtected.";
+import AllAdminJobs from "./Admin/main/AllData";
+import JobsPage from "./components/JobPortalSections/components/AllJobs";
 import JobDetails from "./components/JobPortalSections/components/JobDetails";
 import ProfileUpdateForm from "./components/JobPortalSections/components/ProfileUpdateForm";
 import ProfileView from "./components/JobPortalSections/components/ProfileView";
@@ -18,18 +22,14 @@ import ResumeTemplate2 from "./components/ResumeSections/ResumeTemplates/ResumeT
 import ResumeTemplate3 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate3";
 import ResumeTemplate4 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate4";
 import ResumeTemplate5 from "./components/ResumeSections/ResumeTemplates/ResumeTemplate5";
+import ResumeTemplateWrapper from "./components/TestResume/ResumeTemplateWrapper";
+import ResumeBuilder from "./components/TestResume/TextResume";
 import AboutPage from "./Pages/AboutUs";
 import Login from "./Pages/Auth/Login";
 import SignUp from "./Pages/Auth/SignUp";
 import BuildResume from "./Pages/BuildResume";
 import HomePage from "./Pages/Home";
 import Jobs from "./Pages/Jobs";
-import ResumeBuilder from "./components/TestResume/TextResume";
-import Admin from "./Admin/main/Admin";
-import JobsPage from "./components/JobPortalSections/components/AllJobs";
-import AdminProtectedRoute from "./Admin/main/AdminProtected.";
-import ResumeTemplateWrapper from "./components/TestResume/ResumeTemplateWrapper";
-import AdminJobs from "./Admin/main/AdminJobs";
 
 function App() {
   return (
@@ -141,9 +141,9 @@ function App() {
         <Route
           path="/admin/jobs"
           element={
-            <AdminProtectedRoute>
-              <AdminJobs />
-            </AdminProtectedRoute>
+            // <AdminProtectedRoute>
+            <AllAdminJobs />
+            // </AdminProtectedRoute>
           }
         />
       </Routes>

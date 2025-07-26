@@ -41,7 +41,9 @@ router.get("/company/get", isAuthenticated, async (req, res) => {
   try {
     const userId = req.id;
     userId;
-    const companies = await CompanyTable.find({ userId: userId });
+    const companies = await CompanyTable.find({ userId: userId }).sort({
+      createdAt: -1,
+    });
     if (!companies) {
       return res
         .status(404)
