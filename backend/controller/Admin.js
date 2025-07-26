@@ -159,7 +159,7 @@ router.get("/applicants", async (req, res) => {
 // Admin Control
 
 // GET all jobs
-router.get("/admin/all-jobs", async (req, res) => {
+router.get("/admin/jobs", async (req, res) => {
   try {
     const jobs = await JobTable.find().populate("company");
     res.json(jobs);

@@ -29,6 +29,7 @@ import Admin from "./Admin/main/Admin";
 import JobsPage from "./components/JobPortalSections/components/AllJobs";
 import AdminProtectedRoute from "./Admin/main/AdminProtected.";
 import ResumeTemplateWrapper from "./components/TestResume/ResumeTemplateWrapper";
+import AdminJobs from "./Admin/main/AdminJobs";
 
 function App() {
   return (
@@ -134,6 +135,14 @@ function App() {
           element={
             <AdminProtectedRoute>
               <Admin />
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/jobs"
+          element={
+            <AdminProtectedRoute>
+              <AdminJobs />
             </AdminProtectedRoute>
           }
         />
