@@ -1,10 +1,6 @@
-import { useSelector } from "react-redux";
-import useGetAllUsers from "../../hooks/useGetAllUsers";
 
-const TableView = () => {
-  const allUser = useSelector((state) => state?.user?.allUser);
-  console.log(allUser);
-  useGetAllUsers();
+const AllUserTables = ({allUser}) => {
+  
 
   return (
     <div>
@@ -18,8 +14,8 @@ const TableView = () => {
           </tr>
         </thead>
         <tbody>
-          {allUser.map((u) => (
-            <tr key={u._id}>
+          {allUser.map((u, index) => (
+            <tr key={index}>
               <td>{u.name}</td>
               <td>{u.email}</td>
               <td>{u.role}</td>
@@ -31,4 +27,4 @@ const TableView = () => {
   );
 };
 
-export default TableView;
+export default AllUserTables;

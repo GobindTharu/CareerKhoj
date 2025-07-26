@@ -8,12 +8,12 @@ const useGetAllUsers = () => {
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
-        const res = await axiosInstance.get("/admin/all-user", {
+        const res = await axiosInstance.get("/admin/all-user/get", {
           withCredentials: true,
         });
 
         if (res.data.success) {
-          dispatch(setAllUser(res.data.user));
+          dispatch(setAllUser(res.data.users));
         }
       } catch (error) {
         console.log(error);

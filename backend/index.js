@@ -44,7 +44,7 @@ app.use(userController);
 app.use(companyController);
 app.use(jobController);
 app.use(applicationController);
-app.use(isAuthenticated, dashboardRoutes);
+app.use(dashboardRoutes);
 
 //?Network
 const Port = process.env.PORT || 5000;

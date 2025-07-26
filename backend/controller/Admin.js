@@ -2,11 +2,13 @@ import express from "express";
 import { JobTable } from "../models/job.models.js";
 import { CompanyTable } from "../models/company.models.js";
 import { ApplicationTable } from "../models/application.models.js";
+import { isAuthenticated } from "../middleware/user.middleware.js";
+import { UserTable } from "../models/user.model.js";
 
 const router = express.Router();
 
 // Dashboard statistics
-router.get("/stats", async (req, res) => {
+router.get("/stats", isAuthenticated, async (req, res) => {
   try {
     // Total counts
     const totalJobs = await JobTable.countDocuments();
@@ -85,7 +87,7 @@ router.get("/stats", async (req, res) => {
 });
 
 // Applications trend (last 30 days)
-router.get("/applications-trend", async (req, res) => {
+router.get("/applications-trend", isAuthenticated, async (req, res) => {
   try {
     // Get days param (default 7)
     const days = parseInt(req.query.days) || 7;
@@ -118,7 +120,7 @@ router.get("/applications-trend", async (req, res) => {
 });
 
 // Application status distribution
-router.get("/application-status", async (req, res) => {
+router.get("/application-status", isAuthenticated, async (req, res) => {
   try {
     const accepted = await ApplicationTable.countDocuments({
       status: "accepted",
@@ -136,7 +138,7 @@ router.get("/application-status", async (req, res) => {
   }
 });
 
-router.get("/applicants", async (req, res) => {
+router.get("/applicants", isAuthenticated, async (req, res) => {
   try {
     const limit = parseInt(req.query.limit) || 10;
 

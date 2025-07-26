@@ -8,7 +8,7 @@ const Sidebar = () => {
 
   const menuItems = [
     { name: "Dashboard", path: "/", icon: <FiHome /> },
-    { name: "Jobs", path: "/admin/jobs", icon: <FiBriefcase /> },
+    { name: "Users", path: "/admin/all-user/list", icon: <FiBriefcase /> },
     // { name: "Companies", path: "/admin/companies", icon: <FaBuilding /> },
     // { name: "Applicants", path: "/admin/applicants", icon: <FiUsers /> },
   ];

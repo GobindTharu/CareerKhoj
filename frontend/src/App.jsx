@@ -30,6 +30,7 @@ import SignUp from "./Pages/Auth/SignUp";
 import BuildResume from "./Pages/BuildResume";
 import HomePage from "./Pages/Home";
 import Jobs from "./Pages/Jobs";
+import AllUsers from "./Admin/main/AllData";
 
 function App() {
   return (
@@ -143,6 +144,14 @@ function App() {
           element={
             // <AdminProtectedRoute>
             <AllAdminJobs />
+            // </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/all-user/list"
+          element={
+            // <AdminProtectedRoute>
+            <AllUsers />
             // </AdminProtectedRoute>
           }
         />

@@ -70,7 +70,9 @@ const LoginForm = () => {
           <h1 className="text-3xl font-bold text-indigo-700 font-sans tracking-wide">
             CareerKhoj
           </h1>
-          <p className="text-sm text-gray-500 mt-1">Welcome back! Please login</p>
+          <p className="text-sm text-gray-500 mt-1">
+            Welcome back! Please login
+          </p>
         </div>
 
         {/* Email */}
@@ -127,10 +129,13 @@ const LoginForm = () => {
 
         {/* Links */}
         <div className="flex justify-between text-sm text-gray-600 mt-4">
-          <a href="/forget-password" className="hover:underline">
+          {/* <a href="/forget-password" className="hover:underline">
             Forgot password?
-          </a>
-          <a href="/signup" className="text-indigo-600 hover:underline font-medium">
+          </a> */}
+          <a
+            href="/signup"
+            className="text-indigo-600 hover:underline font-medium"
+          >
             Don't have an account?
           </a>
         </div>

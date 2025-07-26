@@ -159,11 +159,13 @@ const SignupForm = () => {
             onChange={handleChange}
             className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
           >
-            <option value="admin">Admin</option>
+            {/* <option value="admin">Admin</option> */}
             <option value="recruiter">Recruiter</option>
             <option value="jobseeker">Jobseeker</option>
           </select>
-          {errors.role && <p className="text-sm text-red-500 mt-1">{errors.role}</p>}
+          {errors.role && (
+            <p className="text-sm text-red-500 mt-1">{errors.role}</p>
+          )}
         </div>
 
         {/* Terms & Conditions */}
