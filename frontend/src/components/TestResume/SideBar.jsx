@@ -1,11 +1,11 @@
 import React from "react";
 const sections = [
   "About",
-  "Education",
   "Experience",
+  "Education",
   "Trainings",
   "Projects",
-  "Language",
+  // "Language",
   "Skills",
 ];
 

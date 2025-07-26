@@ -29,6 +29,7 @@ import Admin from "./Admin/main/Admin";
 import JobsPage from "./components/JobPortalSections/components/AllJobs";
 import AdminProtectedRoute from "./Admin/main/AdminProtected.";
 import ResumeTemplateWrapper from "./components/TestResume/ResumeTemplateWrapper";
+import AdminJobs from "./Admin/main/AdminJobs";
 
 function App() {
   return (
@@ -62,11 +63,23 @@ function App() {
 
         <Route path="/simple-form" element={<ResumeFormWrapper />} />
 
-         <Route path="/resume-builder" element={<ResumeBuilder />} />
-      <Route path="/resume-template/:Classic" element={<ResumeTemplateWrapper/>} />
-      <Route path="/resume-template/:Professional" element={<ResumeTemplateWrapper/>} />
-      <Route path="/resume-template/:Modern" element={<ResumeTemplateWrapper/>} />
-      <Route path="/resume-template/:Minimal" element={<ResumeTemplateWrapper/>} />
+        <Route path="/resume-builder" element={<ResumeBuilder />} />
+        <Route
+          path="/resume-template/:Classic"
+          element={<ResumeTemplateWrapper />}
+        />
+        <Route
+          path="/resume-template/:Professional"
+          element={<ResumeTemplateWrapper />}
+        />
+        <Route
+          path="/resume-template/:Modern"
+          element={<ResumeTemplateWrapper />}
+        />
+        <Route
+          path="/resume-template/:Minimal"
+          element={<ResumeTemplateWrapper />}
+        />
 
         {/* Recruiter Routes */}
         <Route
@@ -122,6 +135,14 @@ function App() {
           element={
             <AdminProtectedRoute>
               <Admin />
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/jobs"
+          element={
+            <AdminProtectedRoute>
+              <AdminJobs />
             </AdminProtectedRoute>
           }
         />

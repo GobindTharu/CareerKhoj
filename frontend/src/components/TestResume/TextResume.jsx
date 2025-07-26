@@ -1,22 +1,19 @@
-import React, { useState } from "react";
-import Sidebar from "./SideBar";
-import ResumeDownloadPage from "./Resumedownload";
+import { useState } from "react";
+import NavBar from "../JobPortalSections/components/NavBar";
 import AboutForm from "./AboutForm";
 import EducationForm from "./EducationForm";
 import ExperienceForm from "./ExperienceForm";
+// import LanguageForm from "./LanguageForm";
+import ResumeDownloadPage from "./Resumedownload";
+import Sidebar from "./SideBar";
 import TrainingForm from "./TrainingForm";
-import LanguageForm from "./LanguageForm";
-import NavBar from "../JobPortalSections/components/NavBar";
+import ProjectsForm from "./ProjectsForm";
+import SkillsForm from "./SkilsForm";
 
 const ResumeBuilder = () => {
   const [formData, setFormData] = useState({});
   console.log(formData);
   const [currentSection, setCurrentSection] = useState("About");
-  const [selectedTemplate, setSelectedTemplate] = useState("classic");
-
-  const handleTemplateChange = (e) => {
-    setSelectedTemplate(e.target.value); // ❌ Do NOT navigate
-  };
 
   const renderSection = () => {
     switch (currentSection) {
@@ -32,8 +29,8 @@ const ResumeBuilder = () => {
         return <ProjectsForm formData={formData} setFormData={setFormData} />;
       case "Trainings":
         return <TrainingForm formData={formData} setFormData={setFormData} />;
-      case "Language":
-        return <LanguageForm formData={formData} setFormData={setFormData} />;
+      // case "Language":
+      //   return <LanguageForm formData={formData} setFormData={setFormData} />;
       default:
         return <AboutForm formData={formData} setFormData={setFormData} />;
     }
@@ -54,26 +51,7 @@ const ResumeBuilder = () => {
           </section>
 
           <div className="flex flex-col w-full px-4 pt-8">
-            <div className="flex justify-end mb-4">
-              <label className="mr-2 text-sm font-medium text-gray-700">
-                Select Template:
-              </label>
-              <select
-                onChange={handleTemplateChange}
-                value={selectedTemplate}
-                className="border border-gray-300 rounded px-3 py-1 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              >
-                <option value="classic">Classic</option>
-                <option value="professional">Professional</option>
-                <option value="modern">Modern</option>
-                <option value="minimal">Minimal</option>
-              </select>
-            </div>
-
-            <ResumeDownloadPage
-              formData={formData}
-              selectedTemplate={selectedTemplate}
-            />
+            <ResumeDownloadPage formData={formData} />
           </div>
         </div>
       </main>

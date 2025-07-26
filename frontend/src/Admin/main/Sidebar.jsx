@@ -9,9 +9,8 @@ const Sidebar = () => {
   const menuItems = [
     { name: "Dashboard", path: "/", icon: <FiHome /> },
     { name: "Jobs", path: "/admin/jobs", icon: <FiBriefcase /> },
-    { name: "Applicants", path: "/admin/applicants", icon: <FiUsers /> },
     { name: "Companies", path: "/admin/companies", icon: <FaBuilding /> },
-    { name: "Reports", path: "/admin/reports", icon: <FiBarChart2 /> },
+    { name: "Applicants", path: "/admin/applicants", icon: <FiUsers /> },
   ];
 
   return (
