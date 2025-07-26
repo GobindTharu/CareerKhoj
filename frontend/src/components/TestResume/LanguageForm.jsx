@@ -27,7 +27,7 @@ const LanguageForm = ({ formData, setFormData, onChange }) => {
   return (
     <div className="max-w-3xl mx-auto p-4 bg-white rounded shadow">
       <h2 className="text-xl font-semibold mb-4">Languages</h2>
-      {formData.map((lang, idx) => (
+      {formData?.map((lang, idx) => (
         <div
           key={idx}
           className="mb-5 border border-gray-300 rounded p-4 relative"

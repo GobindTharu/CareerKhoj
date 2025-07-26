@@ -62,11 +62,23 @@ function App() {
 
         <Route path="/simple-form" element={<ResumeFormWrapper />} />
 
-         <Route path="/resume-builder" element={<ResumeBuilder />} />
-      <Route path="/resume-template/:Classic" element={<ResumeTemplateWrapper/>} />
-      <Route path="/resume-template/:Professional" element={<ResumeTemplateWrapper/>} />
-      <Route path="/resume-template/:Modern" element={<ResumeTemplateWrapper/>} />
-      <Route path="/resume-template/:Minimal" element={<ResumeTemplateWrapper/>} />
+        <Route path="/resume-builder" element={<ResumeBuilder />} />
+        <Route
+          path="/resume-template/:Classic"
+          element={<ResumeTemplateWrapper />}
+        />
+        <Route
+          path="/resume-template/:Professional"
+          element={<ResumeTemplateWrapper />}
+        />
+        <Route
+          path="/resume-template/:Modern"
+          element={<ResumeTemplateWrapper />}
+        />
+        <Route
+          path="/resume-template/:Minimal"
+          element={<ResumeTemplateWrapper />}
+        />
 
         {/* Recruiter Routes */}
         <Route

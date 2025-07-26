@@ -1,28 +1,40 @@
-const ProjectsForm = ({ formData, setFormData, onChange }) => {
-  // Handle field change
-  const handleChange = (index, field, value) => {
-    const updated = [...formData];
-    updated[index][field] = value;
-    setFormData(updated);
+import React from "react";
 
-    // Send only valid projects to parent
-    if (onChange) onChange(updated.filter((p) => p.title.trim() !== ""));
+const ProjectsForm = ({ formData, setFormData }) => {
+  // Ensure projects array exists in formData
+  const projects = formData.projects || [
+    { title: "", description: "", technologies: "", projectUrl: "" },
+  ];
+
+  // Handle field change for specific project
+  const handleChange = (index, field, value) => {
+    const updatedProjects = [...projects];
+    updatedProjects[index][field] = value;
+
+    setFormData({
+      ...formData,
+      projects: updatedProjects,
+    });
   };
 
   // Add new project
   const addProject = () => {
-    const updated = [
+    setFormData({
       ...formData,
-      { title: "", description: "", technologies: "", projectUrl: "" },
-    ];
-    setFormData(updated);
+      projects: [
+        ...projects,
+        { title: "", description: "", technologies: "", projectUrl: "" },
+      ],
+    });
   };
 
   // Remove project
   const removeProject = (index) => {
-    const updated = formData.filter((_, i) => i !== index);
-    setFormData(updated);
-    if (onChange) onChange(updated.filter((p) => p.title.trim() !== ""));
+    const updatedProjects = projects.filter((_, i) => i !== index);
+    setFormData({
+      ...formData,
+      projects: updatedProjects,
+    });
   };
 
   return (
@@ -30,10 +42,10 @@ const ProjectsForm = ({ formData, setFormData, onChange }) => {
       <h2 className="text-2xl font-bold text-blue-700 mb-2">Projects</h2>
       <p className="text-gray-500 mb-6">Add details of your projects below.</p>
 
-      {formData.map((project, idx) => (
+      {projects.map((project, idx) => (
         <div key={idx} className="mb-8 relative">
           {/* Remove button */}
-          {formData.length > 1 && (
+          {projects.length > 1 && (
             <button
               type="button"
               onClick={() => removeProject(idx)}
@@ -48,18 +60,16 @@ const ProjectsForm = ({ formData, setFormData, onChange }) => {
             {/* Project Title */}
             <input
               type="text"
-              name={`title-${idx}`}
               placeholder="Project Title *"
               value={project.title}
               onChange={(e) => handleChange(idx, "title", e.target.value)}
-              required
               className="border p-2 focus:outline-none w-full"
+              required
             />
 
             {/* Technologies Used */}
             <input
               type="text"
-              name={`technologies-${idx}`}
               placeholder="Technologies Used (e.g., React, Node.js)"
               value={project.technologies}
               onChange={(e) =>
@@ -70,7 +80,6 @@ const ProjectsForm = ({ formData, setFormData, onChange }) => {
 
             {/* Project Description */}
             <textarea
-              name={`description-${idx}`}
               placeholder="Project Description"
               value={project.description}
               onChange={(e) => handleChange(idx, "description", e.target.value)}
@@ -81,7 +90,6 @@ const ProjectsForm = ({ formData, setFormData, onChange }) => {
             {/* Project URL */}
             <input
               type="url"
-              name={`projectUrl-${idx}`}
               placeholder="Project URL"
               value={project.projectUrl}
               onChange={(e) => handleChange(idx, "projectUrl", e.target.value)}

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
-const TrainingForm = ({ onChange }) => {
-  const [trainings, setTrainings] = useState([
+const TrainingForm = ({ formData, setFormData }) => {
+  // Ensure trainings array exists in formData
+  const trainings = formData.trainings || [
     {
       title: "",
       organization: "",
@@ -10,49 +11,54 @@ const TrainingForm = ({ onChange }) => {
       description: "",
       certificate: null,
     },
-  ]);
+  ];
 
-  const handleInputChange = (index, e) => {
+  const updateTraining = (index, e) => {
     const { name, value, files } = e.target;
     const updatedTrainings = [...trainings];
+
     if (name === "certificate") {
       updatedTrainings[index][name] = files[0] || null;
     } else {
       updatedTrainings[index][name] = value;
     }
-    setTrainings(updatedTrainings);
-    if (onChange) onChange(updatedTrainings);
+
+    setFormData({ ...formData, trainings: updatedTrainings });
   };
 
   const addTraining = () => {
-    setTrainings([
-      ...trainings,
-      {
-        title: "",
-        organization: "",
-        startDate: "",
-        endDate: "",
-        description: "",
-        certificate: null,
-      },
-    ]);
+    setFormData({
+      ...formData,
+      trainings: [
+        ...trainings,
+        {
+          title: "",
+          organization: "",
+          startDate: "",
+          endDate: "",
+          description: "",
+          certificate: null,
+        },
+      ],
+    });
   };
 
   const removeTraining = (index) => {
     const updatedTrainings = trainings.filter((_, i) => i !== index);
-    setTrainings(updatedTrainings);
-    if (onChange) onChange(updatedTrainings);
+    setFormData({ ...formData, trainings: updatedTrainings });
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-4 bg-white rounded shadow">
-      <h2 className="text-xl font-semibold mb-4">Training & Certifications</h2>
+    <div className="w-full rounded ">
+      <h2 className="text-2xl font-bold text-blue-700 mb-2">
+        Training & Certifications
+      </h2>
+      <p className="text-gray-500 mb-6">
+        Add your trainings or certifications.
+      </p>
 
       {trainings.map((training, idx) => (
-        <div
-          key={idx}
-          className="mb-6 border border-gray-300 p-4 rounded relative"
-        >
+        <div key={idx} className="mb-6   rounded relative">
           {trainings.length > 1 && (
             <button
               type="button"
@@ -65,129 +71,59 @@ const TrainingForm = ({ onChange }) => {
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label
-                className="block text-sm font-medium mb-1"
-                htmlFor={`title-${idx}`}
-              >
-                Training Title<span className="text-red-500">*</span>
-              </label>
-              <input
-                id={`title-${idx}`}
-                name="title"
-                type="text"
-                value={training.title}
-                onChange={(e) => handleInputChange(idx, e)}
-                required
-                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="e.g., React Bootcamp"
-              />
-            </div>
-
-            <div>
-              <label
-                className="block text-sm font-medium mb-1"
-                htmlFor={`organization-${idx}`}
-              >
-                Organization<span className="text-red-500">*</span>
-              </label>
-              <input
-                id={`organization-${idx}`}
-                name="organization"
-                type="text"
-                value={training.organization}
-                onChange={(e) => handleInputChange(idx, e)}
-                required
-                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="e.g., Coursera"
-              />
-            </div>
-
-            <div>
-              <label
-                className="block text-sm font-medium mb-1"
-                htmlFor={`startDate-${idx}`}
-              >
-                Start Date<span className="text-red-500">*</span>
-              </label>
-              <input
-                id={`startDate-${idx}`}
-                name="startDate"
-                type="month"
-                value={training.startDate}
-                onChange={(e) => handleInputChange(idx, e)}
-                required
-                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-            </div>
-
-            <div>
-              <label
-                className="block text-sm font-medium mb-1"
-                htmlFor={`endDate-${idx}`}
-              >
-                End Date
-              </label>
-              <input
-                id={`endDate-${idx}`}
-                name="endDate"
-                type="month"
-                value={training.endDate}
-                onChange={(e) => handleInputChange(idx, e)}
-                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="Leave blank if ongoing"
-              />
-            </div>
-          </div>
-
-          <div className="mt-4">
-            <label
-              className="block text-sm font-medium mb-1"
-              htmlFor={`description-${idx}`}
-            >
-              Description
-            </label>
-            <textarea
-              id={`description-${idx}`}
-              name="description"
-              value={training.description}
-              onChange={(e) => handleInputChange(idx, e)}
-              rows={3}
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Briefly describe the training or skills gained"
-            />
-          </div>
-
-          <div className="mt-4">
-            <label
-              className="block text-sm font-medium mb-1"
-              htmlFor={`certificate-${idx}`}
-            >
-              Upload Certificate (optional)
-            </label>
             <input
-              id={`certificate-${idx}`}
-              name="certificate"
-              type="file"
-              accept="image/*,application/pdf"
-              onChange={(e) => handleInputChange(idx, e)}
-              className="w-full"
+              type="text"
+              name="title"
+              placeholder="Training Title"
+              value={training.title}
+              onChange={(e) => updateTraining(idx, e)}
+              className="border-b p-2 focus:outline-none"
             />
-            {training.certificate && (
-              <p className="mt-1 text-sm text-gray-600">
-                Selected file: {training.certificate.name}
-              </p>
-            )}
+
+            <input
+              type="text"
+              name="organization"
+              placeholder="Organization"
+              value={training.organization}
+              onChange={(e) => updateTraining(idx, e)}
+              className="border-b p-2 focus:outline-none"
+            />
+
+            <input
+              type="month"
+              name="startDate"
+              value={training.startDate}
+              onChange={(e) => updateTraining(idx, e)}
+              className="border-b p-2 focus:outline-none"
+            />
+
+            <input
+              type="month"
+              name="endDate"
+              value={training.endDate}
+              onChange={(e) => updateTraining(idx, e)}
+              className="border-b p-2 focus:outline-none"
+              placeholder="Leave blank if ongoing"
+            />
           </div>
+
+          <textarea
+            name="description"
+            value={training.description}
+            onChange={(e) => updateTraining(idx, e)}
+            placeholder="Briefly describe the training or skills gained"
+            className="w-full border p-2 mt-4"
+            rows={3}
+          />
         </div>
       ))}
 
       <button
         type="button"
         onClick={addTraining}
-        className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded transition"
+        className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-2 py-2 rounded transition"
       >
-        + Add Another Training
+        + Add Training
       </button>
     </div>
   );

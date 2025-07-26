@@ -1,47 +1,52 @@
-const SkillsForm = ({ formData, setFormData, onChange }) => {
+import React from "react";
+
+const SkillsForm = ({ formData, setFormData }) => {
+  // Ensure skills exists as an array
+  const skills = Array.isArray(formData.skills) ? formData.skills : [""];
+
   // Handle skill change
   const handleSkillChange = (index, value) => {
-    const updated = [...formData];
-    updated[index] = value;
-    setFormData(updated);
-
-    // Send non-empty formData to parent
-    if (onChange) onChange(updated.filter((s) => s.trim() !== ""));
+    const updatedSkills = [...skills];
+    updatedSkills[index] = value; // directly store string
+    setFormData({
+      ...formData,
+      skills: updatedSkills,
+    });
   };
 
   // Add new skill
   const addSkill = () => {
-    setFormData([...formData, ""]);
+    setFormData({
+      ...formData,
+      skills: [...skills, ""],
+    });
   };
 
-  // Remove a skill
+  // Remove skill
   const removeSkill = (index) => {
-    const updated = formData.filter((_, i) => i !== index);
-    setFormData(updated);
-
-    // Update parent with filtered formData
-    if (onChange) onChange(updated.filter((s) => s.trim() !== ""));
+    const updatedSkills = skills.filter((_, i) => i !== index);
+    setFormData({
+      ...formData,
+      skills: updatedSkills,
+    });
   };
 
   return (
     <div>
       <h2 className="text-2xl font-bold text-blue-700 mb-2">Skills</h2>
-      <p className="text-gray-500 mb-6">List your formData and strengths.</p>
+      <p className="text-gray-500 mb-6">List your skills individually.</p>
 
-      {formData.map((skill, idx) => (
+      {skills.map((skill, idx) => (
         <div key={idx} className="mb-4 relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input
-              type="text"
-              placeholder="Enter a skill (e.g., React, Node.js)"
-              value={skill}
-              onChange={(e) => handleSkillChange(idx, e.target.value)}
-              className="border p-2 focus:outline-none w-full"
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="Enter a skill (e.g., React)"
+            value={skill}
+            onChange={(e) => handleSkillChange(idx, e.target.value)}
+            className="border p-2 focus:outline-none w-full"
+          />
 
-          {/* Remove button */}
-          {formData.length > 1 && (
+          {skills.length > 1 && (
             <button
               type="button"
               onClick={() => removeSkill(idx)}
@@ -54,7 +59,6 @@ const SkillsForm = ({ formData, setFormData, onChange }) => {
         </div>
       ))}
 
-      {/* Add Skill Button */}
       <button
         type="button"
         onClick={addSkill}
