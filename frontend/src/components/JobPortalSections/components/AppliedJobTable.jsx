@@ -4,8 +4,6 @@ import { useSelector } from "react-redux";
 const AppliedJobTable = () => {
   const allAppliedJobs = useSelector((state) => state.job?.allAppliedJobs);
 
-
-
   return (
     <div className="overflow-x-auto w-full">
       <table className="min-w-full border border-gray-200 rounded-md shadow-sm">
@@ -21,14 +19,14 @@ const AppliedJobTable = () => {
           </tr>
         </thead>
         <tbody>
-          {allAppliedJobs.length <= 0 ? (
+          {allAppliedJobs?.length <= 0 ? (
             <tr>
               <td colSpan="4" className="text-center py-6 text-gray-500">
                 You haven't applied to any job yet.
               </td>
             </tr>
           ) : (
-            allAppliedJobs.map((appliedJob) => (
+            allAppliedJobs?.map((appliedJob) => (
               <tr
                 key={appliedJob._id}
                 className="hover:bg-gray-50 transition-colors"
