@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import { getDaysLeftToApply, getPostedDaysAgo } from "./Job";
 import NavBar from "./NavBar";
 import { ProtectedButtonToApply } from "./ProtectedButtonToApply";
+import SEO from "../../../SEO/SEO";
 
 const JobDetails = () => {
   const singleJob = useSelector((state) => state.job.singleJob);
@@ -74,9 +75,56 @@ const JobDetails = () => {
     };
     fetchSingleJob();
   }, [jobId, dispatch, user?._id]);
+  const jobUrl = `https://careerkhoj.balgobindchaudhary.com.np/job/${singleJob?._id}`;
 
   return (
     <>
+      {/* Dynamic SEO for this job page */}
+      <SEO
+        title={`Apply for ${singleJob?.title} at ${singleJob?.company?.name}`}
+        description={`Apply now for ${singleJob?.title} at ${
+          singleJob?.company?.name
+        } located in ${singleJob?.location}. ${singleJob?.description?.slice(
+          0,
+          150
+        )}...`}
+        url={jobUrl}
+        image={singleJob?.company?.logo || "/company.png"}
+        type="article"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "JobPosting",
+          title: singleJob?.title,
+          description: singleJob?.description,
+          datePosted: singleJob?.createdAt,
+          validThrough: singleJob?.deadline,
+          employmentType: singleJob?.jobType,
+          hiringOrganization: {
+            "@type": "Organization",
+            name: singleJob?.company?.name,
+            logo: singleJob?.company?.logo || "/company.png",
+            sameAs: jobUrl,
+          },
+          jobLocation: {
+            "@type": "Place",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: singleJob?.location,
+              addressCountry: "NP",
+            },
+          },
+          baseSalary: {
+            "@type": "MonetaryAmount",
+            currency: "NPR",
+            value: {
+              "@type": "QuantitativeValue",
+              value: singleJob?.salary || 0,
+              unitText: "MONTH",
+            },
+          },
+        }}
+      />
+
       <NavBar />
       <div className="p-4 md:p-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column (Main Job Details) */}

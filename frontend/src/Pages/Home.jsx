@@ -11,6 +11,7 @@ import useGetAllJobs from "../hooks/useGetAllJobs";
 import { useNavigate } from "react-router-dom";
 import FeatureSection from "../components/JobPortalSections/components/Responsve";
 import CustomizePage from "../components/JobPortalSections/components/Customization";
+import SEO from "../SEO/SEO";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -36,14 +37,23 @@ export default function HomePage() {
 
   return (
     <>
-      <head>
-        <title>CareerKhoj</title>
-        <meta name="CareerKhoj" content="" />
-        <link rel="canonical" href={`https://careerkhoj.com/jobs/`} />
-        <meta property="og:title" content={` CareerKhoj`} />
-        <meta property="og:description" content="careerkhoj" />
-        <meta property="og:image" content="careerkhoj" />
-      </head>
+      <SEO
+        title="Nepal’s Leading Job Portal for Job Seekers & Employers"
+        description="Find your dream job or hire skilled professionals in Nepal with CareerKhoj. Browse verified job listings, post jobs, and explore career opportunities today."
+        url="https://careerkhoj.balgobindchaudhary.com.np/"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "CareerKhoj",
+          url: "https://careerkhoj.balgobindchaudhary.com.np",
+          potentialAction: {
+            "@type": "SearchAction",
+            target:
+              "https://careerkhoj.balgobindchaudhary.com.np/jobs?search={search_term_string}",
+            "query-input": "required name=search_term_string",
+          },
+        }}
+      />
       <NavBar />
       <HeroSection />
       <HomeResumeLink />
