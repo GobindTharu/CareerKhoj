@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+
 
 /**
  * Professional SEO Component for CareerKhoj
@@ -67,7 +67,7 @@ const SEO = ({
   const combinedJsonLd = jsonLd ? [...baseJsonLd, jsonLd] : baseJsonLd;
 
   return (
-    <Helmet>
+    <head>
       {/* Basic Meta */}
       <title>{seo.title}</title>
       <meta name="description" content={seo.description} />
@@ -95,7 +95,7 @@ const SEO = ({
       <script type="application/ld+json">
         {JSON.stringify(combinedJsonLd)}
       </script>
-    </Helmet>
+    </head>
   );
 };
 
